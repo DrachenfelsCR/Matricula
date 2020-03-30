@@ -21,9 +21,40 @@ usuario::usuario(string id, string nombre, string clave, string rol)
 
 string usuario::getClave()
 {
-	return clave;
+	return this->clave;
 }
 
 usuario::~usuario()
 {
+
+}
+
+void usuario::setId(string id)
+{
+	this->id = id;
+}
+void usuario::setNombre(string nombre)
+{
+	this->nombre = nombre;
+}
+void usuario::setClave(string clave)
+{
+	this->clave = clave;
+}
+string usuario::getId()
+{
+	return this->id;
+}
+string usuario::getNombre()
+{
+	return this->nombre;
+}
+
+bool usuario::getEstado()
+{
+	return this->estado;
+}
+string usuario::getRol()
+{
+	return this->rol;
 }

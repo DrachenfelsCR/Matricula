@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="usuario-estudiante.h" />
     <ClInclude Include="usuario.h" />
   </ItemGroup>
   <ItemGroup>
