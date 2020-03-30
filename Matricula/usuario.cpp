@@ -19,6 +19,11 @@ usuario::usuario(string id, string nombre, string clave, string rol)
 }
 
 
+string usuario::getClave()
+{
+	return clave;
+}
+
 usuario::~usuario()
 {
 }
