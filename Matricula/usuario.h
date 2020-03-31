@@ -1,4 +1,7 @@
 #include <iostream>
+#include <sstream>
+#ifndef USUARIO_H
+#define USUARIO_H
 
 using namespace std;
 class usuario
@@ -12,18 +15,21 @@ protected:
 
 public:
 	usuario();
-	usuario(string, string, string, string);
-	void setId();
-	void setNombre();
-	void setClave();
-	void setEstado();
+	usuario(string, string, string);
+	void setId(string);
+	void setNombre(string);
+	void setClave(string);
 	string getId();
 	string getNombre();
 	string getClave();
 	bool getEstado();
 	string getRol();
+	string toString();
 	~usuario();
 
 
 };
+#endif // !USUARIO_H
+
+
 
