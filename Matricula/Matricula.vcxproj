@@ -138,10 +138,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="admin.h" />
+    <ClInclude Include="carrera.h" />
+    <ClInclude Include="ciclo_lectivo.h" />
+    <ClInclude Include="curso.h" />
+    <ClInclude Include="estudiante.h" />
+    <ClInclude Include="mantenimiento.h" />
+    <ClInclude Include="nota.h" />
+    <ClInclude Include="profesor.h" />
+    <ClInclude Include="registro.h" />
     <ClInclude Include="usuario.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="admin.cpp" />
+    <ClCompile Include="carrera.cpp" />
+    <ClCompile Include="ciclo_lectivo.cpp" />
+    <ClCompile Include="curso.cpp" />
+    <ClCompile Include="estudiante.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mantenimiento.cpp" />
+    <ClCompile Include="nota.cpp" />
+    <ClCompile Include="profesor.cpp" />
+    <ClCompile Include="registro.cpp" />
     <ClCompile Include="usuario.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
