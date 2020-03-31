@@ -5,14 +5,14 @@
 class estudiante : public usuario
 {
 
-private:
+protected:
 	int telefono;
 	string escuela;
 	int codigo_carrera;
 	string carrera;
 	//Pendiente agregar lista de cursos
 public:
-	estudiante(string, string, string, string, int, string, int, string);
+	estudiante(string, string, string, int, string, int, string);
 	~estudiante();
 	void setTelefono(int);
 	void setEscuela(string);

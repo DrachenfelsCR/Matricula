@@ -9,7 +9,7 @@ usuario::usuario()
 	this->rol = "";
 }
 
-usuario::usuario(string id, string nombre, string clave, string rol)
+usuario::usuario(string id, string nombre, string clave)
 {
 	this->id = id;
 	this->nombre = nombre;

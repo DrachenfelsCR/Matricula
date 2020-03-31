@@ -6,7 +6,7 @@
 using namespace std;
 class usuario
 {
-private:
+protected:
 	string id;
 	string nombre;
 	string clave;
@@ -15,7 +15,7 @@ private:
 
 public:
 	usuario();
-	usuario(string, string, string, string);
+	usuario(string, string, string);
 	void setId(string);
 	void setNombre(string);
 	void setClave(string);
