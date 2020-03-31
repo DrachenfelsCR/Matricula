@@ -143,11 +143,14 @@
     <ClInclude Include="ciclo_lectivo.h" />
     <ClInclude Include="curso.h" />
     <ClInclude Include="estudiante.h" />
+    <ClInclude Include="lista.h" />
     <ClInclude Include="mantenimiento.h" />
+    <ClInclude Include="nodo.h" />
     <ClInclude Include="nota.h" />
     <ClInclude Include="profesor.h" />
     <ClInclude Include="registro.h" />
     <ClInclude Include="usuario.h" />
+    <ClInclude Include="utiles.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="admin.cpp" />
@@ -161,6 +164,7 @@
     <ClCompile Include="profesor.cpp" />
     <ClCompile Include="registro.cpp" />
     <ClCompile Include="usuario.cpp" />
+    <ClCompile Include="utiles.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

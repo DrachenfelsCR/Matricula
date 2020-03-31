@@ -1,0 +1,168 @@
+#include "utiles.h"
+
+#include "Utiles.h"
+#include <string>
+#include <cctype>
+#include <algorithm>
+
+void imprimirCadena(string cadena) {
+	cout << cadena << endl;;
+}
+string leerCadena() {
+	string x;
+	cout << "\t";
+	getline(cin, x);
+	return x;
+}
+
+string leerCadenaNoVacia() {
+	string x;
+	cout << "\t";
+	getline(cin, x);
+	while (x.empty() || (x[0] == ' ')) {
+		cout << "Ingrese algo.." << endl;
+		getline(cin, x);
+	}
+	return x;
+}
+
+string leerCadenaNoGetLine() {
+	string x;
+	cout << "\t";
+	cin >> x;
+	cin.clear();
+	cin.ignore(1024, '\n');
+	while (x.empty() || (x[0] == ' ')) {
+		cout << "Ingrese algo.." << endl;
+		cin >> x;
+		cin.clear();
+		cin.ignore(1024, '\n');
+	}
+	return x;
+}
+
+
+int leerEntero() {
+	int n;
+	while (true) {
+		cout << "\t";
+		if (cin >> n) {
+			cin.clear();
+			cin.ignore(1024, '\n');
+			return n;
+		}
+		else {
+			cerr << "\t Valor incorrecto.. " << endl;
+			cin.clear();
+			cin.ignore(1024, '\n');
+		}
+	}
+
+}
+char leerCaracter() {
+	string line;
+	char x;
+	while (getline(cin, line) && (line.length() == 0 || line.length() > 1))
+		cout << "Ingrese solo un caracter..." << endl;
+	x = line[0];
+
+	while ((isalpha(x) == 0)) {
+		cout << "Dato invalido" << endl;
+		while (getline(cin, line) && (line.length() == 0 || line.length() > 1))
+			cout << "Ingrese solo un caracter..." << endl;
+		x = line[0];
+	}
+	return x;
+}
+
+int leerSeleccion(int mayor) {
+	int entrada = 0;
+	while (true) {
+		cout << "\t";
+		if (cin >> entrada) {
+
+			if (entrada <= mayor && entrada != 0) {
+				cin.clear();
+				cin.ignore(1024, '\n');
+				return entrada;
+			}
+			else {
+				cerr << "\t Valor incorrecto.. digite un numero entre 1 y " << mayor << endl;
+				cin.clear();
+				cin.ignore(1024, '\n');
+			}
+		}
+		else {
+			cerr << "\t Valor incorrecto.. digite un numero entre 1 y " << mayor << endl;
+			cin.clear();
+			cin.ignore(1024, '\n');
+		}
+	}
+}
+
+int numeroCodigo(string codigo) {
+	string numero = "";
+	int n = 0;
+	int i;
+	char caracter = ' ';
+	int limite = (codigo.length());
+	for (i = 2; i < limite; i++) {
+		caracter = codigo[i];
+		numero = numero + caracter;
+		caracter = ' ';
+
+	}
+
+	n = stoi(numero);
+	return n;
+}
+void limpiaPantalla() {
+	system("cls");
+}
+string menuInicio() {
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|                    Menu Principal                            |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Seguridad y administracion de roles                         |" << endl;
+	s << "\t|2.Mantenimiento General a Nivel de Registro                   |" << endl;
+	s << "\t|3.Mantenimiento por Escuela                                   |" << endl;
+	s << "\t|4.Matricula e Historiales                                     |" << endl;
+	s << "\t|5.Registro de Actas                                           |" << endl;
+	s << "\t|6.Salir                                                       |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}
+
+string menuEscuelas()
+{
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|                Mantenimiento por Escuelas                    |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Consulta de Plan de Estudios Vigente por Carrrera           |" << endl;
+	s << "\t|2.Creacion de Grupos                                          |" << endl;
+	s << "\t|3.Consulta General de Matricula                               |" << endl;
+	s << "\t|4.Ingreso de Profesores                                       |" << endl;
+	s << "\t|5.Mostrar Profesores                                          |" << endl;
+	s << "\t|6.Regresar al Menu Principal                                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}
+
+string menuMatricula()
+{
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|                Matricula e Historiales                       |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Proceso de Matricula                                        |" << endl;
+	s << "\t|2.Consulta de matricula por Estudiante                        |" << endl;
+	s << "\t|3.Historial Academico por Estudiante                          |" << endl;
+	s << "\t|4.Regresar al Menu Principal                                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}

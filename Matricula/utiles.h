@@ -1,0 +1,25 @@
+#ifndef UTILES_H
+#define UTILES_H
+#include<iostream>
+#include<string>
+#include<sstream>
+#include <wchar.h>
+#include <locale.h>
+using namespace std;
+
+void imprimirCadena(string);
+void limpiaPantalla();
+int leerEntero();
+char leerCaracter();
+int leerSeleccion(int);
+int letraCodigo(string);
+void limpiaPantalla();
+string leerCadena();
+string leerCadenaNoVacia();
+string leerCadenaNoGetLine();
+string menuInicio();
+string menuEscuelas();
+string menuMatricula();
+
+
+#endif // !UTILES_H
