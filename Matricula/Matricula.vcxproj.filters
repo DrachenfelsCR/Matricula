@@ -18,12 +18,15 @@
     <ClInclude Include="usuario.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="usuario-estudiante.h">
+    <ClInclude Include="estudiante.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="usuario.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="estudiante.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

@@ -58,3 +58,18 @@ string usuario::getRol()
 {
 	return this->rol;
 }
+
+string usuario::toString()
+{
+	stringstream s;
+	s << "ID: " << this->id << endl;
+	s << "Nombre: " << this->nombre << endl;
+	if (this->estado)
+	{
+		s << "Estado: " << "Activo" << endl;;
+	}
+	else
+		s << "Estado: " << "Desactivado" << endl;
+	s << "Tipo de usuario: " << this->rol;
+	return s.str();
+}

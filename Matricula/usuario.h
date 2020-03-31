@@ -1,4 +1,7 @@
 #include <iostream>
+#include <sstream>
+#ifndef USUARIO_H
+#define USUARIO_H
 
 using namespace std;
 class usuario
@@ -21,8 +24,12 @@ public:
 	string getClave();
 	bool getEstado();
 	string getRol();
+	string toString();
 	~usuario();
 
 
 };
+#endif // !USUARIO_H
+
+
 
