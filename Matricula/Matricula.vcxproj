@@ -138,10 +138,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="admin.h" />
+    <ClInclude Include="estudiante.h" />
+    <ClInclude Include="mantenimiento.h" />
+    <ClInclude Include="profesor.h" />
+    <ClInclude Include="registro.h" />
     <ClInclude Include="usuario.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="usuario.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
