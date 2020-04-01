@@ -1,114 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="admin.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="carrera.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="ciclo_lectivo.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="curso.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="curso_estudiante.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="estudiante.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="grupo.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="mantenimiento.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="nota.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="plan_estudios.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="profesor.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="registro.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="sistema.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="usuario.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="utiles.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
+    <ClCompile Include="utiles.cpp" />
+    <ClCompile Include="admin.cpp" />
+    <ClCompile Include="carrera.cpp" />
+    <ClCompile Include="ciclo_lectivo.cpp" />
+    <ClCompile Include="curso.cpp" />
+    <ClCompile Include="curso_estudiante.cpp" />
+    <ClCompile Include="estudiante.cpp" />
+    <ClCompile Include="grupo.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mantenimiento.cpp" />
+    <ClCompile Include="nota.cpp" />
+    <ClCompile Include="plan_estudios.cpp" />
+    <ClCompile Include="profesor.cpp" />
+    <ClCompile Include="registro.cpp" />
+    <ClCompile Include="sistema.cpp" />
+    <ClCompile Include="usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="admin.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="carrera.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="curso.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="ciclo_lectivo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="curso_estudiante.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="estudiante.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="grupo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="lista.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="mantenimiento.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="nodo.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="nota.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="plan_estudios.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="profesor.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="registro.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="sistema.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="usuario.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="utiles.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{c6e8115b-5563-4c65-a656-c22e42a5b03b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{cc992970-3cfe-4dc9-8a39-302ca61b2f95}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="admin.h" />
+    <ClInclude Include="carrera.h" />
+    <ClInclude Include="ciclo_lectivo.h" />
+    <ClInclude Include="curso.h" />
+    <ClInclude Include="curso_estudiante.h" />
+    <ClInclude Include="estudiante.h" />
+    <ClInclude Include="grupo.h" />
+    <ClInclude Include="lista.h" />
+    <ClInclude Include="mantenimiento.h" />
+    <ClInclude Include="nodo.h" />
+    <ClInclude Include="nota.h" />
+    <ClInclude Include="plan_estudios.h" />
+    <ClInclude Include="profesor.h" />
+    <ClInclude Include="registro.h" />
+    <ClInclude Include="sistema.h" />
+    <ClInclude Include="usuario.h" />
+    <ClInclude Include="utiles.h" />
   </ItemGroup>
 </Project>
