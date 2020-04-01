@@ -14,7 +14,7 @@ public:
 	plan_estudios();
 	void setNombreCarrera(string);
 	void insertarCurso(curso*);
-	void eliminarCurso(curso*);
+	//void eliminarCurso(curso*);
 	string toString();
 	// falta implementacion
 	~plan_estudios();

@@ -100,7 +100,7 @@ int leerSeleccion(int mayor) {
 	}
 }
 
-int numeroCodigo(string codigo) {
+/*int numeroCodigo(string codigo) {
 	string numero = "";
 	int n = 0;
 	int i;
@@ -115,7 +115,7 @@ int numeroCodigo(string codigo) {
 
 	n = stoi(numero);
 	return n;
-}
+}*/
 void limpiaPantalla() {
 	system("cls");
 }

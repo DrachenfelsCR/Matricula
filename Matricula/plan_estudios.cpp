@@ -18,7 +18,7 @@ void plan_estudios::insertarCurso(curso* cur)
 {
 	this->l1->insertarInicio(cur);
 }
-void plan_estudios::eliminarCurso(curso* cur)
+/*void plan_estudios::eliminarCurso(curso* cur)
 {
 	this->l1->eliminarEspecifico(cur);
-}
+}*/
