@@ -18,8 +18,12 @@ string leerCadena();
 string leerCadenaNoVacia();
 string leerCadenaNoGetLine();
 string menuInicio();
+string menuSeguridad();
 string menuEscuelas();
 string menuMatricula();
+string menuMantenimiento();
+string menuRegistro();
+
 
 
 #endif // !UTILES_H

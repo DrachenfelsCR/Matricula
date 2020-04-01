@@ -135,6 +135,20 @@ string menuInicio() {
 	return s.str();
 }
 
+string menuSeguridad()
+{
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|             Seguridad y Adminstracion Roles                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Crear Usuario                                               |" << endl;
+	s << "\t|2.Mostrar Usuarios                                            |" << endl;
+	s << "\t|3.Regresar al Menu Principal                                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}
+
 string menuEscuelas()
 {
 	stringstream s;
@@ -166,3 +180,37 @@ string menuMatricula()
 	s << "\t|______________________________________________________________|" << endl;
 	return s.str();
 }
+
+string menuMantenimiento()
+{
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|         Menu Mantenimiento General a Nivel de Registro       |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Ver Ciclos Lectivos                                         |" << endl;
+	s << "\t|2.Ingresar Ciclos Lectivos                                    |" << endl;
+	s << "\t|3.Ingreso de Nuevas Carreras                                  |" << endl;
+	s << "\t|4.Ingresar Cursos                                             |" << endl;
+	s << "\t|5.Empadronamiento de Estudiantes                              |" << endl;
+	s << "\t|6.Mostrar Estudiantes Empadronados por Carrera                |" << endl;
+	s << "\t|7.Regresar al Menu Principal                                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}
+
+string menuRegistro()
+{
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|                  Registro de Actas                           |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	s << "\t|1.Ingresar Notas                                              |" << endl;
+	s << "\t|2.Visualizar Notas                                            |" << endl;
+	s << "\t|3.Regresar al Menu Principal                                  |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	return s.str();
+}
+
+

@@ -149,6 +149,7 @@
     <ClInclude Include="nota.h" />
     <ClInclude Include="profesor.h" />
     <ClInclude Include="registro.h" />
+    <ClInclude Include="sistema.h" />
     <ClInclude Include="usuario.h" />
     <ClInclude Include="utiles.h" />
   </ItemGroup>
@@ -163,6 +164,7 @@
     <ClCompile Include="nota.cpp" />
     <ClCompile Include="profesor.cpp" />
     <ClCompile Include="registro.cpp" />
+    <ClCompile Include="sistema.cpp" />
     <ClCompile Include="usuario.cpp" />
     <ClCompile Include="utiles.cpp" />
   </ItemGroup>
