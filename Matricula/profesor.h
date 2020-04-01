@@ -1,14 +1,14 @@
 #ifndef PROFESOR_H
 #define PROFESOR_H
 #include "usuario.h"
-
+#include "lista.h"
 class profesor : public usuario
 {
 protected:
 	int telefono;
 	string escuela;
 	string gradoAcademico;
-	//listas grupos pendiente
+//  lista grupos
 public:
 	profesor(string, string, string, int, string, string);
 	void setTelefono(int);
