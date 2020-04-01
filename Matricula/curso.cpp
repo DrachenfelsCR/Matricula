@@ -8,6 +8,7 @@ curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int cr
 	this->creditos = creditos;
 	this->horas_semanales = horas;
 	this->estado = true;
+	this->l1 = new lista<string>;
 }
 void curso::setCodigo(string codigo_curso)
 {
@@ -59,6 +60,10 @@ int curso::getHoras()
 bool curso::getEstado()
 {
 	return this->estado;
+}
+void curso::insertarRequisito(string* req)
+{
+	this->l1->insertarInicio(req);
 }
 
 curso::~curso()

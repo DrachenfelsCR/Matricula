@@ -1,6 +1,7 @@
 #ifndef CURSO_H
 #define CURSO_H
 #include <iostream>
+#include "lista.h"
 using namespace std;
 class curso
 {
@@ -11,6 +12,7 @@ private:
 	int creditos;
 	int horas_semanales;
 	bool estado;
+	lista<string>* l1;
 	//lista string requisitos pendiente
 public:
 	curso(string, string, string, int, int);
@@ -26,6 +28,7 @@ public:
 	int getCreditos();
 	int getHoras();
 	bool getEstado();
+	void insertarRequisito(string*);
 	~curso();
 
 
