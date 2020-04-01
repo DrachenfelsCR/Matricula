@@ -2,7 +2,7 @@
 #define CARRERA_h
 #include <iostream>
 #include <sstream>
-
+#include "plan_estudios.h"
 using namespace std;
 
 class carrera
@@ -13,7 +13,7 @@ private:
 	string grado;
 	bool estado;
 	string facultad;
-	//pendiente lista cursos
+	plan_estudios plan_carrera;
 
 public:
 	carrera(int, string, string, string);
@@ -23,11 +23,13 @@ public:
 	void desactivarCarrera();
 	void setFacultad(string);
 	void setNombreCarrera(string);
+	void setPlan(plan_estudios);
 	int getCodigo();
 	string getNombre();
 	string getGrado();
 	bool getEstado();
 	string getFacultad();
+	plan_estudios getPlan();
 	~carrera();
 
 

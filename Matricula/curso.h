@@ -13,7 +13,6 @@ private:
 	int horas_semanales;
 	bool estado;
 	lista<string>* l1;
-	//lista string requisitos pendiente
 public:
 	curso(string, string, string, int, int);
 	void setCodigo(string);

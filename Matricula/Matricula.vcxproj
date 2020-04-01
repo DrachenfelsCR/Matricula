@@ -147,6 +147,7 @@
     <ClInclude Include="mantenimiento.h" />
     <ClInclude Include="nodo.h" />
     <ClInclude Include="nota.h" />
+    <ClInclude Include="plan_estudios.h" />
     <ClInclude Include="profesor.h" />
     <ClInclude Include="registro.h" />
     <ClInclude Include="usuario.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mantenimiento.cpp" />
     <ClCompile Include="nota.cpp" />
+    <ClCompile Include="plan_estudios.cpp" />
     <ClCompile Include="profesor.cpp" />
     <ClCompile Include="registro.cpp" />
     <ClCompile Include="usuario.cpp" />

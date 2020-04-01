@@ -52,6 +52,16 @@ string carrera::getFacultad()
 {
 	return this->facultad;
 }
+
+void carrera::setPlan(plan_estudios plan)
+{
+	this->plan_carrera = plan;
+}
+
+plan_estudios carrera::getPlan()
+{
+	return this->plan_carrera;
+}
 carrera::~carrera()
 {
 }
