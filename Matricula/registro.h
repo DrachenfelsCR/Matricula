@@ -5,7 +5,7 @@
 class registro : public usuario
 {
 public:
-	registro(string, string, string);
+	registro(string, string, string, string);
 	~registro();
 
 };

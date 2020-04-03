@@ -15,19 +15,22 @@ class usuario
 {
 protected:
 	string id;
-	string nombre;
+	string nombre_usuario;
+	string nombre_completo;
 	string clave;
 	bool estado;
 	string rol;
 
 public:
 	usuario();
-	usuario(string, string, string);
+	usuario(string, string, string, string);
 	void setId(string);
-	void setNombre(string);
+	void setUserName(string);
+	void setNombreCompleto(string);
 	void setClave(string);
 	string getId();
-	string getNombre();
+	string getNombreCompleto();
+	string getNombreUsuario();
 	string getClave();
 	bool getEstado();
 	string getRol();

@@ -1,6 +1,6 @@
 #include "estudiante.h"
 
-estudiante::estudiante(string id, string nombre, string clave, int tel, string escuela, int codigo, string carrera) : usuario(id, nombre, clave)
+estudiante::estudiante(string id, string nombre_usuario, string nombre_completo, string clave, int tel, string escuela, int codigo, string carrera) : usuario(id, nombre_usuario, nombre_completo, clave)
 {
 	this->telefono = tel;
 	this->escuela = escuela;

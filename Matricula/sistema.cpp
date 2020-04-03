@@ -8,7 +8,7 @@ sistema::sistema()
 void sistema::Principal()
 {
 	lista_global = new lista<admin>;
-	admin* administrador = new admin("admin","admin","admin101");
+	admin* administrador = new admin("admin","admin","admin","admin101");
 	lista_global->insertarInicio(administrador);
 
 	opc = 0;

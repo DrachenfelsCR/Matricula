@@ -5,7 +5,7 @@
 class mantenimiento : public usuario
 {
 public:
-	mantenimiento(string, string, string);
+	mantenimiento(string, string, string, string);
 	~mantenimiento();
 
 };

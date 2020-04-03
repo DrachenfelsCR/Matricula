@@ -5,7 +5,7 @@
 class admin: public usuario
 {
 public:
-	admin(string, string, string);
+	admin(string, string, string, string);
 	~admin();
 };
 

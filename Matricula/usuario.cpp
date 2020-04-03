@@ -3,16 +3,18 @@
 usuario::usuario()
 {
 	this->id = "";
-	this->nombre = "";
+	this->nombre_completo = "";
+	this->nombre_usuario = "";
 	this->clave = "";
 	this->estado = true;
 	this->rol = "";
 }
 
-usuario::usuario(string id, string nombre, string clave)
+usuario::usuario(string id, string nombre_usuario, string nombre_completo,string clave)
 {
 	this->id = id;
-	this->nombre = nombre;
+	this->nombre_usuario = nombre_usuario;
+	this->nombre_completo = nombre_completo;
 	this->clave = clave;
 	this->estado = true;
 	this->rol = "";
@@ -33,9 +35,14 @@ void usuario::setId(string id)
 {
 	this->id = id;
 }
-void usuario::setNombre(string nombre)
+void usuario::setUserName(string nombre_usuario)
 {
-	this->nombre = nombre;
+	this->nombre_usuario;
+}
+
+void usuario::setNombreCompleto(string nombre_completo)
+{
+	this->nombre_completo;
 }
 void usuario::setClave(string clave)
 {
@@ -45,11 +52,14 @@ string usuario::getId()
 {
 	return this->id;
 }
-string usuario::getNombre()
+string usuario::getNombreCompleto()
 {
-	return this->nombre;
+	return this->nombre_completo;
 }
-
+string usuario::getNombreUsuario()
+{
+	return this->nombre_usuario;
+}
 bool usuario::getEstado()
 {
 	return this->estado;
@@ -62,14 +72,15 @@ string usuario::getRol()
 string usuario::toString()
 {
 	stringstream s;
-	s << "ID: " << this->id << endl;
-	s << "Nombre: " << this->nombre << endl;
+	s << "ID: " << this->id << "   ";
+	s << "Nombre Completo: " << this->nombre_completo << "   ";
+	s << "Nombre usuario: " << this->nombre_usuario << "   ";
 	if (this->estado)
 	{
-		s << "Estado: " << "Activo" << endl;;
+		s << "Estado: " << "Activo" << "   ";
 	}
 	else
-		s << "Estado: " << "Desactivado" << endl;
+		s << "Estado: " << "Desactivado" << "   ";
 	s << "Tipo de usuario: " << this->rol;
 	return s.str();
 }
