@@ -3,14 +3,17 @@
 sistema::sistema()
 {
 	opc = 0;
+	//----------AGREGADO ADMIN ESTANDAR---------------------
+	lista_global = new lista<usuario>;
+	admin* administrador = new admin("admin", "admin", "admin", "admin101");
+	lista_global->insertarInicio(administrador);
+	//------------------------------------------
 }
 
 void sistema::Principal()
 {
-	lista_global = new lista<admin>;
-	admin* administrador = new admin("admin","admin","admin","admin101");
-	lista_global->insertarInicio(administrador);
-
+	ManejoLogeo();
+	limpiaPantalla();
 	opc = 0;
 	int can = 1;
 	imprimirCadena(menuInicio());
@@ -67,6 +70,30 @@ void sistema::controlSistema()
 		break;
 	}
 
+}
+void sistema::ManejoLogeo()
+{
+	string user_aux;
+	string password;
+	imprimirCadena(LoginMenu());
+	imprimirCadena("	Digite el nombre de su usuario");
+	user_aux = leerCadena();
+	imprimirCadena("	Digite su contrasena");
+	password = leerCadena();
+	try
+	{
+		if (lista_global->buscarCredenciales(user_aux, password) == false)
+		{
+			throw 0;
+		}
+	}
+	catch (...)
+	{
+		imprimirCadena("	Credenciales invalidos..");
+		cin.get();
+		limpiaPantalla();
+		Principal();
+	}
 }
 
 void sistema::ManejoSeguridadYAdministracion()

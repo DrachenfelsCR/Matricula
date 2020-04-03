@@ -35,6 +35,7 @@ public:
 	bool getEstado();
 	string getRol();
 	string toString();
+	//bool operator == (usuario&);
 	~usuario();
 
 

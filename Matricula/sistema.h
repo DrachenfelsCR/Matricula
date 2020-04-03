@@ -26,7 +26,8 @@ public:
 	void ManejoDeEscuelas();
 	void ManejoDeMatricula();
 	void ManejoDeRegistro();
-	lista<admin>* lista_global;
+	void ManejoLogeo();
+	lista<usuario>* lista_global;
 
 
 
