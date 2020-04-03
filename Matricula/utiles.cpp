@@ -100,7 +100,7 @@ int leerSeleccion(int mayor) {
 	}
 }
 
-/*int numeroCodigo(string codigo) {
+int numeroCodigo(string codigo) {
 	string numero = "";
 	int n = 0;
 	int i;
@@ -115,7 +115,7 @@ int leerSeleccion(int mayor) {
 
 	n = stoi(numero);
 	return n;
-}*/
+}
 void limpiaPantalla() {
 	system("cls");
 }
@@ -213,4 +213,12 @@ string menuRegistro()
 	return s.str();
 }
 
-
+string LoginMenu() {
+	stringstream s;
+	s << endl;
+	s << "\t ______________________________________________________________" << endl;
+	s << "\t|                    Login de usuario al sistema               |" << endl;
+	s << "\t|______________________________________________________________|" << endl;
+	
+	return s.str();
+}

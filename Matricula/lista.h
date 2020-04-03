@@ -4,9 +4,9 @@
 template<class T>
 class lista
 {
-private:
+protected:
 	nodo<T>* primero;
-	nodo <T>* actual;
+	int size;
 public:
 	lista();
 	bool esVacia();
@@ -22,8 +22,8 @@ public:
 
 template <class T>
 lista<T>::lista() {
-	this->primero = nullptr;
-	this->actual = nullptr;
+	primero = NULL;
+	size = 0;
 }
 
 template<class T>
@@ -33,13 +33,16 @@ bool lista<T>::esVacia() {
 
 template<class T>
 void lista<T>::insertarInicio(T* dato) {
+	nodo<T>* actual;
 	actual = new nodo<T>(dato);
 	actual->setSig(primero);
 	primero = actual;
+	size++;
 }
 
 template <class T>
 void lista<T>::insertarFinal(T* dato) {
+	nodo<T>* actual;
 	actual = primero;
 	if (esVacia()) {
 		insertarInicio(dato);
@@ -55,6 +58,7 @@ void lista<T>::insertarFinal(T* dato) {
 
 template<class T>
 void lista<T>::eliminarInicio() {
+	nodo<T>* actual;
 	actual = primero;
 	if (primero == NULL)
 	{
@@ -71,6 +75,7 @@ void lista<T>::eliminarInicio() {
 template<class T>
 bool lista<T>::buscar(T* aux)
 {
+	nodo<T>* actual;
 	actual = primero;
 	while (actual)
 	{
@@ -82,7 +87,23 @@ bool lista<T>::buscar(T* aux)
 	}
 	return false;
 }
-
+template<class T>
+string lista<T>::toString()
+{
+	stringstream s;
+	if (primero != NULL )
+	{
+		nodo<T>* actual;
+		actual = primero;
+		while(actual != NULL)
+		{
+			s << actual->getInfo()->toString() << endl;
+			s << "-------------------------" << endl;
+			actual = actual->getSig();
+		}
+	}
+	return s.str();
+}
 
 
 

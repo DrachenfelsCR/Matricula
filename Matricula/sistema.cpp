@@ -7,6 +7,10 @@ sistema::sistema()
 
 void sistema::Principal()
 {
+	lista_global = new lista<admin>;
+	admin* administrador = new admin("admin","admin","admin101");
+	lista_global->insertarInicio(administrador);
+
 	opc = 0;
 	int can = 1;
 	imprimirCadena(menuInicio());
@@ -73,12 +77,14 @@ void sistema::ManejoSeguridadYAdministracion()
 	int cont = 1;
 	do
 	{
-		leerSeleccion(3);
+		opc = leerSeleccion(3);
 		switch (opc)
 		{
 		case 1:
 			break;
 		case 2:
+			limpiaPantalla();
+			imprimirCadena(lista_global->toString());
 			break;
 		case 3:
 			Principal();
