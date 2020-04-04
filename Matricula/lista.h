@@ -13,7 +13,7 @@ public:
 	void insertarInicio(T*);
 	void insertarFinal(T*);
 	string toString();
-	bool buscarCredenciales(string,string);
+	T* buscarCredenciales(string,string);
 	bool buscar(T* aux);
 	void eliminarInicio();
 	bool eliminarEspecifico(T*);
@@ -92,19 +92,19 @@ bool lista<T>::buscar(T* aux)
 
 
 template<class T>
-bool lista<T>::buscarCredenciales(string usuario, string pass)
+T* lista<T>::buscarCredenciales(string usuario, string pass)
 {
 	nodo<T>* actual;
 	actual = primero;
 	while (actual)
 	{
-		if (((*actual->getInfo()).getClave() == pass) && (*actual->getInfo()).getNombreUsuario() == (usuario))
+		if (((actual->getInfo())->getClave() == pass) && (actual->getInfo())->getNombreUsuario() == (usuario))
 		{
-			return true;
+			return actual->getInfo();
 		}
 		actual = actual->getSig();
 	}
-	return false;
+	return nullptr;
 }
 template<class T>
 string lista<T>::toString()

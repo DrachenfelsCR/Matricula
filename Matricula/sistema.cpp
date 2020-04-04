@@ -82,7 +82,7 @@ void sistema::ManejoLogeo()
 	password = leerCadena();
 	try
 	{
-		if (lista_global->buscarCredenciales(user_aux, password) == false)
+		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
 		{
 			throw 0;
 		}
