@@ -108,6 +108,7 @@ void sistema::ManejoSeguridadYAdministracion()
 		switch (opc)
 		{
 		case 1:
+			agregarUsuario(lista_global);
 			break;
 		case 2:
 			limpiaPantalla();
@@ -237,6 +238,7 @@ void sistema::ManejoDeRegistro()
 		switch (opc)
 		{
 		case 1:
+			
 			break;
 		case 2:
 			break;
@@ -251,4 +253,64 @@ void sistema::ManejoDeRegistro()
 		if (cont == 2) { Principal(); }
 
 	} while (cont == 1);
+}
+
+void sistema::agregarUsuario(lista<usuario>* list)
+{
+	string id, nombre_usuario, nombre_completo, clave;
+	int opc;
+	imprimirCadena("Ingrese ID del usuario: ");
+	id = leerCadena();
+	imprimirCadena("Ingrese nombre completo del usuario: ");
+	nombre_completo = leerCadena();
+	imprimirCadena("Ingrese nickname o nombre de usuario: ");
+	nombre_usuario = leerCadena();
+	imprimirCadena("Digite la clave de acceso para el nuevo usuario: ");
+	clave =leerCadena();
+	while ((stringSix(clave) == false) || (stringUpperCase(clave) == false))
+	{
+		imprimirCadena("Por favor, utilice una combinacion de al menos una mayuscula y sea de un largo de 6 caracteres minimos");
+		clave = leerCadena();
+	}
+	limpiaPantalla();
+	imprimirCadena("Elija el rol del usuario");
+	imprimirCadena("1-Usuario-Administrador");
+	imprimirCadena("2-Usuario-Mantenimiento");
+	imprimirCadena("3-Usuario-Registro");
+	imprimirCadena("4-Usuario-Estudiante");
+	imprimirCadena("5-Usuario-Profesor");
+	opc = leerSeleccion(5);
+	if (opc == 1)
+	{
+		admin* n_admin = new admin(id, nombre_usuario, nombre_completo, clave);
+		list->insertarInicio(n_admin);
+		imprimirCadena("Nuevo administrador creado..");
+	}
+	else if (opc == 2)
+	{
+		mantenimiento* n_mantenimiento = new mantenimiento(id, nombre_usuario, nombre_completo, clave);
+		list->insertarInicio(n_mantenimiento);
+		imprimirCadena("Nuevo usuario de mantenimiento creado..");
+	}
+	else if (opc == 3)
+	{
+		registro* n_registro = new registro(id, nombre_usuario, nombre_completo, clave);
+		list->insertarInicio(n_registro);
+		imprimirCadena("Nuevo usuario de registro creado..");
+	}
+	else if (opc == 4)
+	{
+		estudiante* n_estudiante = new estudiante(id, nombre_usuario, nombre_completo, clave);
+		list->insertarInicio(n_estudiante);
+		imprimirCadena("Nuevo estudiante creado..");
+	}
+	else if (opc == 5)
+	{
+		profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
+		list->insertarInicio(n_profesor);
+		imprimirCadena("Nuevo profesor creado..");
+	}
+		
+	
+	
 }

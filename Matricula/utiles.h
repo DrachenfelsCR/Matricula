@@ -24,6 +24,8 @@ string menuMatricula();
 string menuMantenimiento();
 string menuRegistro();
 string LoginMenu();
+bool stringSix(string);
+bool stringUpperCase(string);
 
 
 #endif // !UTILES_H

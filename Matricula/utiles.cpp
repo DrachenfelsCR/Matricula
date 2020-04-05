@@ -116,6 +116,26 @@ int numeroCodigo(string codigo) {
 	n = stoi(numero);
 	return n;
 }
+
+bool stringSix(string text)
+{
+	if (text.length() < 6)
+	{
+		return false;
+	}
+	return true;
+}
+bool stringUpperCase(string text)
+{
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (isupper(text[i]))
+		{
+			return true;
+		}
+	}
+	return false;
+}
 void limpiaPantalla() {
 	system("cls");
 }

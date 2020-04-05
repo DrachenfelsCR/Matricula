@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 #include "plan_estudios.h"
+#include "lista.h"
+#include "estudiante.h"
 using namespace std;
 
 class carrera
@@ -14,7 +16,7 @@ private:
 	bool estado;
 	string facultad;
 	plan_estudios plan_carrera;
-
+	lista<estudiante>* l1;
 public:
 	carrera(int, string, string, string);
 	void setCodigo(int);
@@ -30,6 +32,7 @@ public:
 	bool getEstado();
 	string getFacultad();
 	plan_estudios getPlan();
+	lista<estudiante>* getPadron();
 	~carrera();
 
 

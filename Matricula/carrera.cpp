@@ -7,6 +7,7 @@ carrera::carrera(int codigo_carrera, string grado, string nombre_carrera, string
 	this->grado = grado;
 	this->nombre_carrera = nombre_carrera;
 	this->facultad = facultad;
+	this->l1 = new lista<estudiante>;
 }
 void carrera::setCodigo(int codigo_carrera)
 {
@@ -61,6 +62,10 @@ void carrera::setPlan(plan_estudios plan)
 plan_estudios carrera::getPlan()
 {
 	return this->plan_carrera;
+}
+lista<estudiante>* carrera::getPadron()
+{
+	return this->l1;
 }
 carrera::~carrera()
 {

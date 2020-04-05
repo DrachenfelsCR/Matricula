@@ -10,7 +10,7 @@ protected:
 	string gradoAcademico;
 //  lista grupos
 public:
-	profesor(string, string, string, string, int, string, string);
+	profesor(string, string, string, string);
 	void setTelefono(int);
 	void setEscuela(string);
 	void setGradoA(string);

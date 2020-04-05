@@ -28,7 +28,7 @@ public:
 	void ManejoDeRegistro();
 	void ManejoLogeo();
 	lista<usuario>* lista_global;
-
+	void agregarUsuario(lista<usuario>*);
 
 
 

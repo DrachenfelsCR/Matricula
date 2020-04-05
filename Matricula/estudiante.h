@@ -12,7 +12,7 @@ protected:
 	string carrera;
 	//Pendiente agregar lista de cursos
 public:
-	estudiante(string, string, string, string, int, string, int, string);
+	estudiante(string, string, string, string);
 	~estudiante();
 	void setTelefono(int);
 	void setEscuela(string);

@@ -1,10 +1,7 @@
 #include "profesor.h"
 
-profesor::profesor(string id, string nombre_usuario, string nombre_completo, string clave, int tel, string escuela, string grado) : usuario(id, nombre_usuario, nombre_completo, clave)
+profesor::profesor(string id, string nombre_usuario, string nombre_completo, string clave) : usuario(id, nombre_usuario, nombre_completo, clave)
 {
-	this->telefono = tel;
-	this->escuela = escuela;
-	this->gradoAcademico = grado;
 	usuario::rol = "usuario-profesor";
 }
 
