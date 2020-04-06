@@ -32,6 +32,7 @@ bool lista<T>::esVacia() {
 	return (primero == NULL);
 }
 
+
 template<class T>
 void lista<T>::insertarInicio(T* dato) {
 	nodo<T>* actual;
@@ -56,6 +57,7 @@ void lista<T>::insertarFinal(T* dato) {
 		actual->setSig(new nodo<T>(dato));
 	}
 }
+
 
 template<class T>
 void lista<T>::eliminarInicio() {

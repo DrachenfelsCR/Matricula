@@ -9,6 +9,7 @@
 #include "estudiante.h"
 #include "registro.h"
 #include "ciclo_lectivo.h"
+#include "carrera.h"
 using namespace std;
 
 class sistema {
@@ -18,7 +19,6 @@ private:
 	int opc;
 	string* logged_user;
 	lista<ciclo_lectivo>* global_ciclos;
-
 public:
 	sistema();
 	void Principal();
