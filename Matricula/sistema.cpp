@@ -8,15 +8,24 @@ sistema::sistema()
 	admin* administrador = new admin("admin", "admin", "admin", "admin101");
 	lista_global->insertarInicio(administrador);
 	//------------------------------------------
+	this->logged_user = nullptr;
+	this->global_ciclos = new lista<ciclo_lectivo>;
 }
 
 void sistema::Principal()
 {
-	ManejoLogeo();
+	if (logged_user == nullptr)
+	{
+		ManejoLogeo();
+		limpiaPantalla();
+	}
+	else
 	limpiaPantalla();
 	opc = 0;
 	int can = 1;
 	imprimirCadena(menuInicio());
+	cout << "	[ Logeado como: " << *logged_user << " ] " << endl << endl;;
+	imprimirCadena("	Digite el numero de la opcion que desea acceder:");
 	do {
 		opc = leerSeleccion(6);
 		switch (opc)
@@ -86,6 +95,10 @@ void sistema::ManejoLogeo()
 		{
 			throw 0;
 		}
+		else
+		{
+			this->logged_user = new string(user_aux);
+		}
 	}
 	catch (...)
 	{
@@ -128,18 +141,23 @@ void sistema::ManejoSeguridadYAdministracion()
 
 void sistema::ManejoDeMantenimiento()
 {
+
 	limpiaPantalla();
 	imprimirCadena(menuMantenimiento());
 	opc = 0;
 	int cont = 1;
 	do
 	{
-		leerSeleccion(7);
+		opc = leerSeleccion(7);
 		switch (opc)
 		{
 		case 1:
+			imprimirCadena(this->global_ciclos->toString());	
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 2:
+			agregarCiclo();
 			break;
 		case 3:
 			break;
@@ -309,8 +327,32 @@ void sistema::agregarUsuario(lista<usuario>* list)
 		profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
 		list->insertarInicio(n_profesor);
 		imprimirCadena("Nuevo profesor creado..");
-	}
-		
-	
-	
+	}	
+}
+
+void sistema::agregarCiclo()
+{
+	int anio, numCiclo, dia, mes;
+	imprimirCadena("Digite el anio del ciclo: ");
+	anio = leerEntero();
+	imprimirCadena("Digite numeracion( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
+	numCiclo = leerSeleccion(3);
+	ciclo_lectivo* cicloAct = new ciclo_lectivo(anio, numCiclo);
+	imprimirCadena("Ingrese la fecha de inicio: ");
+	imprimirCadena(" Digite dia de inicio(numero entero): ");
+	dia = leerEntero();
+	imprimirCadena(" Digite mes de inicio(numero entero): ");
+	mes = leerSeleccion(12);
+	cicloAct->setFechaInicio(dia, mes, anio);
+	//-------------------------------------------------------
+	imprimirCadena("-------------------------------------------------");
+	imprimirCadena("Ingrese la fecha de finalizacion: ");
+	imprimirCadena(" Digite dia de finalizacion(numero entero): ");
+	dia = leerEntero();
+	imprimirCadena(" Digite mes de finalizacion(numero entero): ");
+	mes = leerSeleccion(12);
+	cicloAct->setFechaFinal(dia, mes, anio);
+	this->global_ciclos->insertarFinal(cicloAct);
+	imprimirCadena("<Enter>");
+	cin.get();
 }

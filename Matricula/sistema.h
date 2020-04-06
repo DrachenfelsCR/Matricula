@@ -8,6 +8,7 @@
 #include "profesor.h"
 #include "estudiante.h"
 #include "registro.h"
+#include "ciclo_lectivo.h"
 using namespace std;
 
 class sistema {
@@ -15,7 +16,8 @@ class sistema {
 
 private:
 	int opc;
-
+	string* logged_user;
+	lista<ciclo_lectivo>* global_ciclos;
 
 public:
 	sistema();
@@ -27,9 +29,10 @@ public:
 	void ManejoDeMatricula();
 	void ManejoDeRegistro();
 	void ManejoLogeo();
+	//------Funciones secundarias-----------
 	lista<usuario>* lista_global;
 	void agregarUsuario(lista<usuario>*);
-
+	void agregarCiclo();
 
 
 
