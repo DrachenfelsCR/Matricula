@@ -18,6 +18,10 @@ void plan_estudios::insertarCurso(curso* cur)
 {
 	this->l1->insertarInicio(cur);
 }
+string plan_estudios::toString()
+{
+	return string();
+}
 /*void plan_estudios::eliminarCurso(curso* cur)
 {
 	this->l1->eliminarEspecifico(cur);

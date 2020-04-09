@@ -15,8 +15,10 @@ public:
 	string toString();
 	T* buscarCredenciales(string,string);
 	bool buscar(T* aux);
+	bool buscarElemento(int);
 	void eliminarInicio();
 	bool eliminarEspecifico(T*);
+	T* buscarCodigoCarrera(int );
 	~lista();
 };
 //------------------------------------
@@ -76,6 +78,22 @@ void lista<T>::eliminarInicio() {
 }
 
 template<class T>
+T* lista<T>::buscarCodigoCarrera(int cod)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if ((actual->getInfo())->getCodigo() == cod)
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return NULL;
+}
+
+template<class T>
 bool lista<T>::buscar(T* aux)
 {
 	nodo<T>* actual;
@@ -89,6 +107,23 @@ bool lista<T>::buscar(T* aux)
 		actual = actual->getSig();
 	}
 	return false;
+}
+
+template<class T>
+ bool lista<T>::buscarElemento(int dato)
+{
+	 nodo<T>* aux;
+	 aux = primero;
+	 while (aux)
+	 {
+		 if ((aux->getInfo())->getCodigo() == dato )
+		 {
+			 return true;
+
+		 }
+		 aux = aux->getSig();
+	 }
+	 return false;
 }
 
 

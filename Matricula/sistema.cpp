@@ -162,9 +162,14 @@ void sistema::ManejoDeMantenimiento()
 			agregarCiclo();
 			break;
 		case 3:
+			agregarCarrera();
 			
 			break;
 		case 4:
+			limpiaPantalla();
+			agregarCurso();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 5:
 			break;
@@ -383,4 +388,33 @@ void sistema::agregarCarrera()
 	career->setFacultad(facultad);
 //------------------------------------------------------------
 	global_carrera->insertarInicio(career);
+}
+
+void sistema::agregarCurso()
+{
+	string codigo;
+	string nombre;
+	string tipocurso;
+	int creditos;
+	int horasSemanales;
+	
+	imprimirCadena("Ingrese el codigo de la carrera");
+	int a = leerEntero();
+	if (global_carrera->buscarElemento(a))
+	{
+		global_carrera->buscarCodigoCarrera(a);
+		imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
+		imprimirCadena("Ingrese el codigo del curso");
+		codigo = leerEntero();
+		imprimirCadena("Ingrese el nombre del Curso");
+		nombre = leerCadena();
+		imprimirCadena("Ingrese el Tipo de Curso(LAB,CUR,SEM,PRA,TEST)");
+		tipocurso = leerCadena();
+		imprimirCadena("Ingrese la Cantidad de Creditos");
+		creditos = leerSeleccion(4);
+
+	}
+	else {
+		imprimirCadena("Error al digitar carrera o el numero de carrera no existe");
+	}
 }

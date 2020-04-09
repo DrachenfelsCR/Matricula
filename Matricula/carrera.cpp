@@ -76,6 +76,12 @@ string carrera::getEscuela()
 {
 	return this->escuela;
 }
+string carrera::toString()
+{
+	stringstream s;
+	s << nombre_carrera <<":"<< endl;
+	return s.str();
+}
 carrera::~carrera()
 {
 }

@@ -36,7 +36,7 @@ public:
 	void agregarUsuario(lista<usuario>*);
 	void agregarCiclo();
 	void agregarCarrera();
-
+	void agregarCurso();
 };
 
 
