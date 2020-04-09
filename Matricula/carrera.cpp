@@ -67,6 +67,15 @@ lista<estudiante>* carrera::getPadron()
 {
 	return this->l1;
 }
+void carrera::setEscuela(string escuela)
+{
+	this->escuela = escuela;
+}
+
+string carrera::getEscuela()
+{
+	return this->escuela;
+}
 carrera::~carrera()
 {
 }

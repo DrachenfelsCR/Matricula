@@ -19,7 +19,9 @@ private:
 	int opc;
 	string* logged_user;
 	lista<ciclo_lectivo>* global_ciclos;
+	lista<carrera>* global_carrera;
 public:
+	//--------------------------------------
 	sistema();
 	void Principal();
 	void controlSistema();
@@ -33,8 +35,7 @@ public:
 	lista<usuario>* lista_global;
 	void agregarUsuario(lista<usuario>*);
 	void agregarCiclo();
-
-
+	void agregarCarrera();
 
 };
 

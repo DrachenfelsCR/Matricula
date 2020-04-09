@@ -17,6 +17,7 @@ private:
 	string facultad;
 	plan_estudios plan_carrera;
 	lista<estudiante>* l1;
+	string escuela;
 public:
 	carrera(int, string, string, string);
 	void setCodigo(int);
@@ -34,7 +35,8 @@ public:
 	plan_estudios getPlan();
 	lista<estudiante>* getPadron();
 	~carrera();
-
+	void setEscuela(string);
+	string getEscuela();
 
 };
 

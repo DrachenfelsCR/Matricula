@@ -10,6 +10,7 @@ sistema::sistema()
 	//------------------------------------------
 	this->logged_user = nullptr;
 	this->global_ciclos = new lista<ciclo_lectivo>;
+	this->global_carrera = new lista<carrera>;
 }
 
 void sistema::Principal()
@@ -112,11 +113,12 @@ void sistema::ManejoLogeo()
 void sistema::ManejoSeguridadYAdministracion()
 {
 	limpiaPantalla();
-	imprimirCadena(menuSeguridad());
+	
 	opc = 0;
 	int cont = 1;
 	do
 	{
+		imprimirCadena(menuSeguridad());
 		opc = leerSeleccion(3);
 		switch (opc)
 		{
@@ -131,7 +133,7 @@ void sistema::ManejoSeguridadYAdministracion()
 			Principal();
 			break;
 		}
-		imprimirCadena("\t Digite 1 para seguir en manejo de seguridad y admistracion o 2 para volver al menu principal: ");
+		imprimirCadena("\t [Digite 1 para seguir en manejo de seguridad y admistracion] o [2 para volver al menu principal]: ");
 		cont = leerSeleccion(2);
 		limpiaPantalla();
 		if (cont == 2) { Principal(); }
@@ -143,11 +145,11 @@ void sistema::ManejoDeMantenimiento()
 {
 
 	limpiaPantalla();
-	imprimirCadena(menuMantenimiento());
 	opc = 0;
 	int cont = 1;
 	do
 	{
+		imprimirCadena(menuMantenimiento());
 		opc = leerSeleccion(7);
 		switch (opc)
 		{
@@ -160,6 +162,7 @@ void sistema::ManejoDeMantenimiento()
 			agregarCiclo();
 			break;
 		case 3:
+			
 			break;
 		case 4:
 			break;
@@ -172,7 +175,7 @@ void sistema::ManejoDeMantenimiento()
 			break;
 
 		}
-		imprimirCadena("\t Digite 1 para seguir en manejo de Mantenimiento General o 2 para volver al menu principal: ");
+		imprimirCadena("\t [Digite 1 para seguir en manejo de Mantenimiento General] o [2 para volver al menu principal]: ");
 		cont = leerSeleccion(2);
 		limpiaPantalla();
 		if (cont == 2) { Principal(); }
@@ -183,11 +186,11 @@ void sistema::ManejoDeMantenimiento()
 void sistema::ManejoDeEscuelas()
 {
 	limpiaPantalla();
-	imprimirCadena(menuEscuelas());
 	opc = 0;
 	int cont = 1;
 	do
 	{
+		imprimirCadena(menuEscuelas());
 		leerSeleccion(6);
 		switch (opc)
 		{
@@ -206,7 +209,7 @@ void sistema::ManejoDeEscuelas()
 			break;
 
 		}
-		imprimirCadena("\t Digite 1 para seguir en manejo de Mantenimiento Por Escuelas o 2 para volver al menu principal: ");
+		imprimirCadena("\t[Digite 1 para seguir en manejo de Mantenimiento Por Escuelas] o [2 para volver al menu principal]: ");
 		cont = leerSeleccion(2);
 		limpiaPantalla();
 		if (cont == 2) { Principal(); }
@@ -217,11 +220,11 @@ void sistema::ManejoDeEscuelas()
 void sistema::ManejoDeMatricula()
 {
 	limpiaPantalla();
-	imprimirCadena(menuMatricula());
 	opc = 0;
 	int cont = 1;
 	do
 	{
+		imprimirCadena(menuMatricula());
 		leerSeleccion(4);
 		switch (opc)
 		{
@@ -236,7 +239,7 @@ void sistema::ManejoDeMatricula()
 			break;
 
 		}
-		imprimirCadena("\t Digite 1 para seguir en manejo de Matricula o 2 para volver al menu principal: ");
+		imprimirCadena("\t [Digite 1 para seguir en manejo de Matricula] o [2 para volver al menu principal]:");
 		cont = leerSeleccion(2);
 		limpiaPantalla();
 		if (cont == 2) { Principal(); }
@@ -247,11 +250,11 @@ void sistema::ManejoDeMatricula()
 void sistema::ManejoDeRegistro()
 {
 	limpiaPantalla();
-	imprimirCadena(menuRegistro());
 	opc = 0;
 	int cont = 1;
 	do
 	{
+		imprimirCadena(menuRegistro());
 		leerSeleccion(3);
 		switch (opc)
 		{
@@ -355,4 +358,29 @@ void sistema::agregarCiclo()
 	this->global_ciclos->insertarFinal(cicloAct);
 	imprimirCadena("<Enter>");
 	cin.get();
+}
+
+void sistema::agregarCarrera()
+{
+	int codigo_carrera;
+	string grado;
+	string nombre_carrera;
+	string facultad;
+	string escuela;
+//------------------------------------------------------------
+	imprimirCadena("Ingrese codigo de carrera: ");
+	codigo_carrera = leerEntero();
+	imprimirCadena("Ingrese nombre de carrera: ");
+	nombre_carrera = leerCadena();
+	imprimirCadena("Grado: ");
+	grado = leerCadena();
+	carrera* career = new carrera(codigo_carrera, grado, nombre_carrera, facultad);
+	imprimirCadena("Ingrese Escuela: ");
+	escuela = leerCadena();
+	career->setEscuela(escuela);
+	imprimirCadena("Ingrese Facultad: ");
+	facultad = leerCadena();
+	career->setFacultad(facultad);
+//------------------------------------------------------------
+	global_carrera->insertarInicio(career);
 }
