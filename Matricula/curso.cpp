@@ -1,5 +1,10 @@
 #include "curso.h"
 
+curso::curso()
+{
+
+}
+
 curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int creditos, int horas)
 {
 	this->codigo_curso = codigo_curso;
@@ -64,6 +69,17 @@ bool curso::getEstado()
 void curso::insertarRequisito(string* req)
 {
 	this->l1->insertarInicio(req);
+}
+
+string curso::toString()
+{
+	stringstream s;
+	s << codigo_curso << endl;
+	s << nombre_curso << endl;
+	s << horas_semanales << endl;
+	s << creditos << endl;
+	s << tipo_curso << endl;
+	return s.str();
 }
 
 curso::~curso()

@@ -20,6 +20,8 @@ private:
 	string* logged_user;
 	lista<ciclo_lectivo>* global_ciclos;
 	lista<carrera>* global_carrera;
+	lista<estudiante>* global_estudiantes;
+	lista<curso>* global_cursos;
 public:
 	//--------------------------------------
 	sistema();
@@ -37,6 +39,8 @@ public:
 	void agregarCiclo();
 	void agregarCarrera();
 	void agregarCurso();
+	void agregarEstudiante();
+	void MostrarEmpadronados();
 };
 
 

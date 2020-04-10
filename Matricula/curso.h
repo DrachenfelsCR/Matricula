@@ -14,6 +14,7 @@ private:
 	bool estado;
 	lista<string>* l1;
 public:
+	curso();
 	curso(string, string, string, int, int);
 	void setCodigo(string);
 	void setNombre(string);
@@ -28,6 +29,7 @@ public:
 	int getHoras();
 	bool getEstado();
 	void insertarRequisito(string*);
+	string toString();
 	~curso();
 
 
