@@ -481,3 +481,14 @@ void sistema::MostrarEmpadronados()
 		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
 	}
 }
+
+void sistema::ConsultaPlan()
+{
+	imprimirCadena("Digite el plan de estudios: ");
+	int a = leerEntero();
+	if (global_carrera->buscarElemento(a))
+	{
+		carrera* aux = global_carrera->buscarCodigoCarrera(a);
+		imprimirCadena(aux->getPlan().toString());
+	}
+}

@@ -147,7 +147,7 @@ template<class T>
 string lista<T>::toString()
 {
 	stringstream s;
-	if (primero != NULL )
+	if (primero != NULL)
 	{
 		nodo<T>* actual;
 		actual = primero;
