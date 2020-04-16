@@ -3,7 +3,7 @@
 plan_estudios::plan_estudios()
 {
 	this->nombre_carrera = "";
-	this->l1 = nullptr;
+	this->l1 = new lista<curso>;
 }
 
 plan_estudios::~plan_estudios()

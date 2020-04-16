@@ -85,13 +85,13 @@ void sistema::controlSistema()
 }
 void sistema::ManejoLogeo()
 {
-	string user_aux;
-	string password;
-	imprimirCadena(LoginMenu());
+	string user_aux = "admin";
+	string password = "admin101";
+	/*imprimirCadena(LoginMenu());
 	imprimirCadena("	Digite el nombre de su usuario");
 	user_aux = leerCadena();
 	imprimirCadena("	Digite su contrasena");
-	password = leerCadena();
+	password = leerCadena();*/
 	try
 	{
 		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
@@ -178,6 +178,7 @@ void sistema::ManejoDeMantenimiento()
 			break;
 		case 5:
 			limpiaPantalla();
+			imprimirCadena(this->global_carrera->toString());
 			agregarEstudiante();
 			imprimirCadena("<Enter>");
 			cin.get();
@@ -415,8 +416,8 @@ void sistema::agregarCurso()
 	int a = leerEntero();
 	if (global_carrera->buscarElemento(a))
 	{
-		global_carrera->buscarCodigoCarrera(a);
-		imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
+		carrera* aux = global_carrera->buscarCodigoCarrera(a);
+		imprimirCadena(aux->toString());
 		imprimirCadena("Ingrese el codigo del curso");
 		codigo = leerCadena();
 		imprimirCadena("Ingrese el nombre del Curso");
@@ -430,7 +431,7 @@ void sistema::agregarCurso()
 		curso* Cursos = new curso(codigo,nombre,tipocurso,creditos,horasSemanales);
 //-----------------------------------------------------------------------------------------
 		global_cursos->insertarInicio(Cursos);
-
+		aux->getPlan().insertarCurso(Cursos);
 
 	}
 	else {

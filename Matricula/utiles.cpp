@@ -176,7 +176,7 @@ string menuEscuelas()
 	s << "\t ______________________________________________________________" << endl;
 	s << "\t|                Mantenimiento por Escuelas                    |" << endl;
 	s << "\t|______________________________________________________________|" << endl;
-	s << "\t|1.Consulta de Plan de Estudios Vigente por Carrrera           |" << endl;
+	s << "\t|1.Consulta de Plan de Estudios Vigente por Carrera           |" << endl;
 	s << "\t|2.Creacion de Grupos                                          |" << endl;
 	s << "\t|3.Consulta General de Matricula                               |" << endl;
 	s << "\t|4.Ingreso de Profesores                                       |" << endl;
