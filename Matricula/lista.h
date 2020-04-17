@@ -24,6 +24,8 @@ public:
 	bool buscarCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
 	T* buscarId(string);
+	T* buscarNRC(int);
+	string toStringGrupo();
 	~lista();
 };
 //------------------------------------
@@ -246,8 +248,39 @@ T* lista<T>::getUltimo() {
 	}
 }
 
+template<class T>
+T* lista<T>::buscarNRC(int NRC)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if ((actual->getInfo())->getNRC() == NRC)
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return nullptr;
+}
 
-
+template<class T>
+string lista<T>::toStringGrupo()
+{
+	stringstream s;
+	if (primero != NULL)
+	{
+		nodo<T>* actual;
+		actual = primero;
+		while (actual != NULL)
+		{
+			s << (actual->getInfo())->toString3() << endl;
+			s << "-------------------------" << endl;
+			actual = actual->getSig();
+		}
+	}
+	return s.str();
+}
 
 
 

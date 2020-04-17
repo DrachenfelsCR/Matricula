@@ -25,6 +25,7 @@ public:
 	string getCarrera();
 	string toString();
 	string toString2();
+	string toString3();
 };
 
 #endif // !ESTUDIANTE_H

@@ -108,3 +108,9 @@ ciclo_lectivo* grupo::getCiclo()
 	return this->ciclo;
 }
 
+string grupo::toStringEstudiantes()
+{
+	stringstream s;
+	s << this->lista_E->toStringGrupo() << endl;
+	return s.str();
+}

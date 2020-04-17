@@ -45,11 +45,12 @@ public:
 	int getNumeroGrupo();
 	string getCodigo();
 	string toString();
+	string toStringEstudiantes();
 	string getNombre();
 	int getCreditos();
 	string getID();
 	ciclo_lectivo* getCiclo();
-	
+	lista<estudiante>* getEstudiantes();
 	~grupo();
 
 

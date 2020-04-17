@@ -2,7 +2,12 @@
 
 curso::curso()
 {
-
+	this->codigo_curso = "";
+	this->tipo_curso = "";
+	this->creditos = 0;
+	this->horas_semanales = 0;
+	this->estado = true;
+	this->l1 = new lista<string>;
 }
 
 curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int creditos, int horas)
