@@ -2,7 +2,7 @@
 #define ESTUDIANTE_H
 #include "usuario.h"
 #include "curso.h"
-
+#include "curso_estudiante.h"
 class estudiante : public usuario
 {
 
@@ -11,7 +11,7 @@ protected:
 	string escuela;
 	int codigo_carrera;
 	string carrera;
-	lista<curso>* l1;
+	lista<curso_estudiante>* l1;
 public:
 	estudiante(string, string, string, string,int,int);
 	~estudiante();
@@ -22,6 +22,7 @@ public:
 	int getTelefono();
 	string getEscuela();
 	int getCodigo();
+	string getCarrera();
 	string toString();
 	string toString2();
 };

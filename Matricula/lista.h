@@ -12,6 +12,7 @@ public:
 	bool esVacia();
 	void insertarInicio(T*);
 	void insertarFinal(T*);
+	T* getUltimo();
 	string toString();
 	T* buscarCredenciales(string,string);
 	bool buscar(T* aux);
@@ -227,6 +228,22 @@ T* lista<T>::buscarId(string id )
 		actual = actual->getSig();
 	}
 	return nullptr;
+}
+
+template <class T>
+T* lista<T>::getUltimo() {
+	nodo<T>* actual;
+	actual = primero;
+	if (esVacia()) {
+		return nullptr;
+	}
+	else {
+		while (actual->getSig() != NULL)
+		{
+			actual = actual->getSig();
+		}
+		return actual->getInfo();
+	}
 }
 
 

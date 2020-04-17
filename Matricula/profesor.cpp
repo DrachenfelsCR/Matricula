@@ -17,6 +17,11 @@ void profesor::setGradoA(string grado)
 {
 	this->gradoAcademico = grado;
 }
+
+void profesor::setCarrera(string carrera)
+{
+	this->carrera = carrera;
+}
 int profesor::getTelefono()
 {
 	return this->telefono;
@@ -33,6 +38,12 @@ string profesor::getGradoA()
 {
 	return this->gradoAcademico;
 }
+
+string profesor::getCarrera()
+{
+	return this->carrera;
+}
+
 string profesor::toString()
 {
 	stringstream s;

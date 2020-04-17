@@ -94,6 +94,7 @@ void sistema::ManejoLogeo()
 	user_aux = leerCadena();
 	imprimirCadena("	Digite su contrasena");
 	password = leerCadena();*/
+	usuarioLogeado = lista_global->buscarCredenciales(user_aux, password);
 	try
 	{
 		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
@@ -229,6 +230,7 @@ void sistema::ManejoDeEscuelas()
 			agregarProfesores();
 			break;
 		case 5:
+			MostrarProfesores();
 			break;
 		case 6:
 			Principal();
@@ -567,30 +569,121 @@ void sistema::ConsultaPlan()
 
 void sistema::agregarProfesores()
 {
+	profesor* docente;
 	string id;
+	carrera* aux = nullptr;
 	try
 	{
 		imprimirCadena("Digite el codigo carrera: ");
 		int a = leerEntero();
-		if (global_carrera->buscarElemento(a))
+		if (!(global_carrera->buscarElemento(a)))
 		{
-			carrera* aux = global_carrera->buscarCodigoCarrera(a);
-			imprimirCadena(aux->toString());
+			throw a;
 		}
+		else
+		aux = global_carrera->buscarCodigoCarrera(a);
+		imprimirCadena(aux->toString());
 		imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
 		id = leerCadena();
-		if (global_profesores->buscarId(id) == nullptr)
+		docente = global_profesores->buscarId(id);
+		if (docente == nullptr)
 		{
 			throw id;
 		}
 		else
-			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(global_profesores->buscarId(id));
+		{
+			docente->setCarrera(aux->getNombre());
+			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(docente);
+			imprimirCadena("Digite el grado academico del profesor: ");
+			imprimirCadena("(1-Lic, 2-Maestria, 3-Doctorado)");
+			int seleccion = leerSeleccion(4);
+			switch (seleccion)
+			{
+			case 1:
+				docente->setGradoA("Licenciatura");
+				break;
+			case 2:
+				docente->setGradoA("Maestria");
+				break;
+			case 3:
+				docente->setGradoA("Doctorado");
+				break;
+			default:
+				break;
+			}
 			imprimirCadena("Profesor asignado correctamente a carrera");
+		}
 	}
-	catch (string id)
+	catch (...)
 	{
 		cout << "La cedula " << id << "no existe en el sistema, intente de nuevo.." << endl;
 	}
 	
 
+}
+
+void sistema::MostrarProfesores()
+{
+	imprimirCadena("Digite el codigo de la carrera que desea mostrar");
+	int code = leerEntero();
+	carrera* nier = global_carrera->buscarCodigoCarrera(code);
+	if (nier == NULL)
+	{
+		imprimirCadena("El codigo ingresado es incorrecto");
+	}
+	else
+	{
+		imprimirCadena(nier->toString());
+		imprimirCadena(nier->getProfesores()->toString());
+	}
+}
+
+void sistema::procesoMatricula()
+{
+	string id;
+	estudiante* aux = nullptr;
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	string carr;
+	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+	{
+		id = this->usuarioLogeado->getId();
+		aux = global_estudiantes->buscarId(id);
+		carr = aux->getCarrera();
+	}
+	imprimirCadena("El periodo lectivo actual es: ");
+	if (actual == nullptr)
+	{
+		imprimirCadena("No hay ciclos lectivos agregados por lo cual no se puede matricular ningun curso..");
+	}
+	else
+	{
+		cout << "Ciclo: " << actual->getCiclo() << endl;
+		cout << "Annio: " << actual->getAnio() << endl;
+		imprimirCadena("----------------------------");
+		imprimirCadena("	Informe Matricula	");
+		cout << "Carrera: " << carr << endl;
+		cout << "Estudiante: " << aux->getNombreCompleto() << endl;
+
+	}
+}
+
+void sistema::ingresoDeNotas()
+{
+	string id;
+	profesor* docente = nullptr;
+	if (this->usuarioLogeado->getRol() == "usuario-profesor")
+	{
+		id = this->usuarioLogeado->getId();
+		docente = global_profesores->buscarId(id);
+	}
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	if (actual == nullptr)
+	{
+		imprimirCadena("No hay ciclos lectivos agregados por lo cual no se pueden ingresar notas..");
+	}
+	else
+	{
+		cout << "Profesor: " << docente->getNombreCompleto();
+		imprimirCadena("Sus cursos para este periodo son: ");
+	}
 }
