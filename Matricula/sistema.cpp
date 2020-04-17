@@ -15,6 +15,7 @@ sistema::sistema()
 	this->global_estudiantes = new lista<estudiante>;
 	this->global_profesores = new lista<profesor>;
 	this->global_Grupos = new lista<grupo>;
+	//me le cago
 }
 
 void sistema::Principal()
@@ -97,7 +98,7 @@ void sistema::ManejoLogeo()
 	usuarioLogeado = lista_global->buscarCredenciales(user_aux, password);
 	try
 	{
-		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
+		if (usuarioLogeado == nullptr)
 		{
 			throw 0;
 		}
