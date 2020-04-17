@@ -7,6 +7,7 @@ sistema::sistema()
 	lista_global = new lista<usuario>;
 	admin* administrador = new admin("admin", "admin", "admin", "admin101");
 	lista_global->insertarInicio(administrador);
+	this->usuarioLogeado = nullptr;
 	//------------------------------------------
 	this->logged_user = nullptr;
 	this->global_ciclos = new lista<ciclo_lectivo>;
@@ -97,7 +98,7 @@ void sistema::ManejoLogeo()
 	usuarioLogeado = lista_global->buscarCredenciales(user_aux, password);
 	try
 	{
-		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
+		if (usuarioLogeado == nullptr)
 		{
 			throw 0;
 		}
@@ -453,7 +454,7 @@ void sistema::agregarEstudiante() {
 	string id;
 	string nombre;
 	int telefono;
-	int codigo;
+	//int codigo;
 	imprimirCadena("Ingrese cedula del nuevo Estudiante");
 	id = leerCadena();
 	imprimirCadena("Ingrese el nombre");
@@ -670,6 +671,7 @@ void sistema::procesoMatricula()
 void sistema::ingresoDeNotas()
 {
 	string id;
+	int NRC;
 	profesor* docente = nullptr;
 	if (this->usuarioLogeado->getRol() == "usuario-profesor")
 	{
@@ -685,5 +687,9 @@ void sistema::ingresoDeNotas()
 	{
 		cout << "Profesor: " << docente->getNombreCompleto();
 		imprimirCadena("Sus cursos para este periodo son: ");
+		docente->getGrupo()->toString();
+		imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
+		NRC = leerEntero();
+		docente->getGrupo()->buscarNRC(NRC)->toStringEstudiantes();
 	}
 }

@@ -58,7 +58,12 @@ string estudiante::toString2()
 	s << "El Estudiante" << getNombreCompleto() << " fue empadronado en : " << endl;
 	return s.str();
 }
-
+string estudiante::toString3()
+{
+	stringstream s;
+	s << getId() << "  " <<getNombreCompleto()<< endl;
+	return s.str();
+}
 string estudiante::getCarrera()
 {
 	return this->carrera;
