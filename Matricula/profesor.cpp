@@ -2,6 +2,7 @@
 
 profesor::profesor(string id, string nombre_usuario, string nombre_completo, string clave) : usuario(id, nombre_usuario, nombre_completo, clave)
 {
+	this->group = new lista<grupo>;
 	usuario::rol = "usuario-profesor";
 }
 

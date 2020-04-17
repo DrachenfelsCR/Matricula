@@ -497,7 +497,7 @@ void sistema::agregarGrupo()
 	}
 	imprimirCadena("Digite El  Anio");
 	int anno = leerEntero();
-	imprimirCadena("Digite El ciclo ");
+	imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
 	int ciclo = leerEntero();
 	while (!(global_ciclos->buscarCicloElectivo(anno,ciclo)))
 	{
