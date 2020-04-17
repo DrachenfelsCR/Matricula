@@ -41,6 +41,7 @@ public:
 	void agregarCurso();
 	void agregarEstudiante();
 	void MostrarEmpadronados();
+	void creacionGrupos();
 };
 
 

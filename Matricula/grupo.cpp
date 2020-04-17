@@ -1,11 +1,15 @@
 #include "grupo.h"
 
-grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor)
+grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal)
 {
 	this->lista_E = nullptr;
 	this->lista_N = nullptr;
 	this->ciclo = nullptr;
 	this->NRC = NRC;
+	this->horaInicio = horaIncio;
+	this->horaFinal = horaFinal;
+	this->cupo = cupo;
+	this->numeroGrupo = numeroGrupo;
 	this->codigo_curso = codigo_curso;
 	this->nombre_curso = nombre_curso;
 	this->id_profesor = id_profesor;
@@ -15,7 +19,10 @@ grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, st
 grupo::~grupo()
 { 
 }
-
+void grupo::setCupo(int cupo)
+{
+	this->cupo = cupo;
+}
 void grupo::setNRC(int NRC)
 {
 	this->NRC = NRC;
@@ -24,9 +31,21 @@ void grupo::setCodigo(string codigo_curso)
 {
 	this->codigo_curso = codigo_curso;
 }
+void grupo::setNumeroGrupo(int numeroGrupo)
+{
+	this->numeroGrupo = numeroGrupo;
+}
 void grupo::setNombre(string nombre_curso)
 {
 	this->nombre_curso = nombre_curso;
+}
+void grupo::setHoraInicio(string horaInicio)
+{
+	this->horaInicio = horaInicio;
+}
+void grupo::setHoraFinal(string horaFinal)
+{
+	this->horaFinal = horaFinal;
 }
 void grupo::setCreditos(int creditos)
 {
@@ -40,6 +59,21 @@ void grupo::setCiclo(ciclo_lectivo* ciclo)
 {
 	this->ciclo = ciclo;
 }
+int grupo::getCupo() {
+	return cupo;
+}
+int grupo::getHoraInicio()
+{
+	return horaInicio;
+}
+int grupo::getHoraFinal()
+{
+	return horaFinal;
+}
+int grupo::getNumeroGrupo()
+{
+	return numeroGrupo;
+}
 int grupo::getNRC()
 {
 	return this->NRC;
@@ -48,6 +82,7 @@ string grupo::getCodigo()
 {
 	return this->codigo_curso;
 }
+
 string grupo::getNombre()
 {
 	return this->nombre_curso;

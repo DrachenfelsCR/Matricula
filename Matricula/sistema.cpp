@@ -210,12 +210,16 @@ void sistema::ManejoDeEscuelas()
 	do
 	{
 		imprimirCadena(menuEscuelas());
-		leerSeleccion(6);
+		opc=leerSeleccion(6);
 		switch (opc)
 		{
 		case 1:
 			break;
 		case 2:
+			limpiaPantalla();
+			creacionGrupos();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 3:
 			break;
@@ -479,5 +483,30 @@ void sistema::MostrarEmpadronados()
 	else
 	{
 		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
+	}
+}
+
+void sistema::creacionGrupos()
+{
+	int codigoNRC;
+	int numeroGrupo;
+	imprimirCadena("Digite el numero de carrera");
+	int a = leerEntero();
+
+
+	while (!(global_carrera->buscarElemento(a))) {
+
+		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
+		cin.get();
+		limpiaPantalla();
+	}
+
+	imprimirCadena("Ingrese el NRC");
+	codigoNRC = leerEntero();
+	imprimirCadena("Ingrese el numero del grupo");
+	numeroGrupo = leerEntero();
+	while (lista_global)
+	{
+
 	}
 }
