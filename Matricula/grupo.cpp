@@ -114,3 +114,7 @@ string grupo::toStringEstudiantes()
 	s << this->lista_E->toStringGrupo() << endl;
 	return s.str();
 }
+lista<nota>* grupo::getListaNotas()
+{
+	return this->lista_N;
+}

@@ -671,8 +671,10 @@ void sistema::procesoMatricula()
 void sistema::ingresoDeNotas()
 {
 	string id;
+	string idEst;
 	int NRC;
 	profesor* docente = nullptr;
+	grupo* elgrupo = nullptr;
 	if (this->usuarioLogeado->getRol() == "usuario-profesor")
 	{
 		id = this->usuarioLogeado->getId();
@@ -690,6 +692,21 @@ void sistema::ingresoDeNotas()
 		docente->getGrupo()->toString();
 		imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
 		NRC = leerEntero();
-		docente->getGrupo()->buscarNRC(NRC)->toStringEstudiantes();
+		elgrupo = docente->getGrupo()->buscarNRC(NRC);
+		if (elgrupo == nullptr)
+		{
+			imprimirCadena("Digito un NRC que no se encuentra en el sistema..");
+		}
+		else
+		{
+			elgrupo->toStringEstudiantes();
+			imprimirCadena("Digite el id del estudiante que desea ingresar su nota: ");
+			idEst = leerCadena();
+				elgrupo->getListaNotas()->buscarId(leerCadena());
+
+		}
+		
+
+
 	}
 }

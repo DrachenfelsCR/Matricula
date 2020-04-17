@@ -64,6 +64,7 @@ string estudiante::toString3()
 	s << getId() << "  " <<getNombreCompleto()<< endl;
 	return s.str();
 }
+
 string estudiante::getCarrera()
 {
 	return this->carrera;

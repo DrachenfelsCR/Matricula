@@ -1,9 +1,10 @@
 #include "nota.h"
 
-nota::nota(float nota, string id)
+nota::nota(float nota, string id, string nombre)
 {
 	this->calificacion = nota;
 	this->id = id;
+	this->nombre = nombre;
 }
 
 void nota::setNota(float nota)

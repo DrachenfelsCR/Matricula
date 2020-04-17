@@ -18,9 +18,7 @@ private:
 	string horaInicio;
 	string horaFinal;
 	string id_profesor;
-	
 	ciclo_lectivo* ciclo;
-
 	int cupo;
 	string horarioDia;
 
@@ -51,6 +49,7 @@ public:
 	string getID();
 	ciclo_lectivo* getCiclo();
 	lista<estudiante>* getEstudiantes();
+	lista<nota>* getListaNotas();
 	~grupo();
 
 
