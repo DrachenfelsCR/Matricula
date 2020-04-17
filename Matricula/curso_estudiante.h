@@ -20,7 +20,7 @@ public:
 	float getNota();
 	curso_estudiante(string, string, int, float);
 	~curso_estudiante();
-
+	//
 };
 
 
