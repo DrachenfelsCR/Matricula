@@ -62,11 +62,11 @@ void grupo::setCiclo(ciclo_lectivo* ciclo)
 int grupo::getCupo() {
 	return cupo;
 }
-int grupo::getHoraInicio()
+string grupo::getHoraInicio()
 {
 	return horaInicio;
 }
-int grupo::getHoraFinal()
+string grupo::getHoraFinal()
 {
 	return horaFinal;
 }
@@ -81,6 +81,14 @@ int grupo::getNRC()
 string grupo::getCodigo()
 {
 	return this->codigo_curso;
+}
+
+string grupo::toString()
+{
+	stringstream s;
+		s << " Curso" << " NCR" << "Grupo" << "Cupo" << "Horario" << endl;
+		s << codigo_curso << NRC << numeroGrupo << cupo << horaInicio << horaFinal << endl;
+		return s.str();
 }
 
 string grupo::getNombre()
@@ -99,3 +107,4 @@ ciclo_lectivo* grupo::getCiclo()
 {
 	return this->ciclo;
 }
+

@@ -14,6 +14,7 @@ sistema::sistema()
 	this->global_cursos=new lista<curso>;
 	this->global_estudiantes = new lista<estudiante>;
 	this->global_profesores = new lista<profesor>;
+	this->global_Grupos = new lista<grupo>;
 }
 
 void sistema::Principal()
@@ -217,6 +218,10 @@ void sistema::ManejoDeEscuelas()
 		case 1:
 			break;
 		case 2:
+			limpiaPantalla();
+			agregarGrupo();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 3:
 			break;
@@ -469,6 +474,70 @@ void sistema::agregarEstudiante() {
 	{
 		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
 	}
+}
+
+void sistema::agregarGrupo()
+{
+	int NRC;
+	int cupo;
+	string dia;
+	string horaInicio;
+	string horaFinal;
+	int numeroGrupo;
+	imprimirCadena("Digite el numero De carrera");
+	int a = leerEntero();
+	while (!(global_carrera->buscarElemento(a)))
+	{
+		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
+		imprimirCadena("Digite el numero De carrera");
+		a = leerEntero();
+		
+	}
+	imprimirCadena("Digite El  Anio");
+	int anno = leerEntero();
+	imprimirCadena("Digite El ciclo ");
+	int ciclo = leerEntero();
+	while (!(global_ciclos->buscarCicloElectivo(anno,ciclo)))
+	{
+		imprimirCadena("Ingreso incorrectamente el ciclo y annio lectivo o el ciclo ingresado no existe");
+		imprimirCadena("Digite El  Anio");
+		int anno = leerEntero();
+		imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
+		int ciclo = leerEntero();
+	}
+	imprimirCadena("Digite Codigo del Curso");
+	string codigo=leerCadena();
+
+	while (!(global_cursos->buscarCodigoCurso(codigo)))
+	{
+		imprimirCadena("Ingreso incorrectamente el numero del curso o el codigo ingresado no existe");
+		codigo = leerCadena();
+	}
+
+	imprimirCadena("Digite El NRC");
+	NRC = leerEntero();
+	imprimirCadena("Digite el numero del Grupo");
+	numeroGrupo = leerEntero();
+	imprimirCadena("Digite el numero de Cedula del profesor");
+	string id = leerCadena();
+	while (!(global_profesores->buscarID(id)))
+	{
+		imprimirCadena("Ingreso incorrectamente el numero de cedula del profesor o el profesor ingresado no existe");
+		id = leerCadena();
+
+	}
+	imprimirCadena("Digite el Numero de Cupos");
+	cupo = leerEntero();
+	imprimirCadena("Digite el Dia(ejmeplo:M-V)");
+	dia = leerCadena();
+	imprimirCadena("Digite la hora Inicio(ejemplo= 8:00 Formato 24hrs)");
+	horaInicio = leerCadena();
+	imprimirCadena("Digite la hora Inicio(ejemplo= 10:00 Formato 24hrs)");
+	horaFinal = leerCadena();
+	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal);
+	global_Grupos->insertarInicio(Grupote);
+	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
+	imprimirCadena("Grupo Creado Existosamente");
 }
 
 void sistema::MostrarEmpadronados()

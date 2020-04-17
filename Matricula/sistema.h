@@ -10,6 +10,7 @@
 #include "registro.h"
 #include "ciclo_lectivo.h"
 #include "carrera.h"
+#include "grupo.h"
 using namespace std;
 
 class sistema {
@@ -23,6 +24,7 @@ private:
 	lista<estudiante>* global_estudiantes;
 	lista<curso>* global_cursos;
 	lista<profesor>* global_profesores;
+	lista<grupo>* global_Grupos;
 public:
 	//--------------------------------------
 	sistema();
@@ -41,6 +43,7 @@ public:
 	void agregarCarrera();
 	void agregarCurso();
 	void agregarEstudiante();
+	void agregarGrupo();
 	void MostrarEmpadronados();
 	void ConsultaPlan();
 	void agregarProfesores();
