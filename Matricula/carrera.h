@@ -5,6 +5,7 @@
 #include "plan_estudios.h"
 #include "lista.h"
 #include "estudiante.h"
+#include "profesor.h"
 using namespace std;
 
 class carrera
@@ -18,6 +19,7 @@ private:
 	plan_estudios plan_carrera;
 	lista<estudiante>* l1;
 	string escuela;
+	lista<profesor>* l2;
 public:
 	carrera(int, string, string, string);
 	void setCodigo(int);
@@ -34,6 +36,7 @@ public:
 	string getFacultad();
 	plan_estudios getPlan();
 	lista<estudiante>* getPadron();
+	lista<profesor>* getProfesores();
 	~carrera();
 	void setEscuela(string);
 	string getEscuela();

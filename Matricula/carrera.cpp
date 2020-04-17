@@ -8,6 +8,7 @@ carrera::carrera(int codigo_carrera, string grado, string nombre_carrera, string
 	this->nombre_carrera = nombre_carrera;
 	this->facultad = facultad;
 	this->l1 = new lista<estudiante>;
+	this->l2 = new lista<profesor>;
 }
 void carrera::setCodigo(int codigo_carrera)
 {
@@ -83,8 +84,14 @@ string carrera::toString()
 	s << escuela << endl;
 	return s.str();
 }
+
+lista<profesor>* carrera::getProfesores()
+{
+	return this->l2;
+}
 carrera::~carrera()
 {
 }
+
 
 

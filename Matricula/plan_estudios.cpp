@@ -20,7 +20,9 @@ void plan_estudios::insertarCurso(curso* cur)
 }
 string plan_estudios::toString()
 {
-	return string();
+	stringstream s;
+	s << this->l1->toString();
+	return s.str();
 }
 /*void plan_estudios::eliminarCurso(curso* cur)
 {
