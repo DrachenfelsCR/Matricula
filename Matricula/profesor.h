@@ -9,17 +9,19 @@ protected:
 	int telefono;
 	string escuela;
 	string gradoAcademico;
-	lista<grupo>* group;
+//  lista grupos
 public:
 	profesor(string, string, string, string);
 	void setTelefono(int);
 	void setEscuela(string);
 	void setGradoA(string);
+	void setCarrera(string);
 	int getTelefono();
 	lista<grupo>*getGrupo();
 	string getEscuela();
 	string getGradoA();
 	string toString();
+	string getCarrera();
 	~profesor();
 
 
