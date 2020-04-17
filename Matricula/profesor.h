@@ -9,6 +9,7 @@ protected:
 	int telefono;
 	string escuela;
 	string gradoAcademico;
+	string carrera;
 	lista<grupo>* group;
 public:
 	profesor(string, string, string, string);
