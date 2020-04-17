@@ -9,15 +9,18 @@ protected:
 	string escuela;
 	string gradoAcademico;
 //  lista grupos
+	string carrera;
 public:
 	profesor(string, string, string, string);
 	void setTelefono(int);
 	void setEscuela(string);
 	void setGradoA(string);
+	void setCarrera(string);
 	int getTelefono();
 	string getEscuela();
 	string getGradoA();
 	string toString();
+	string getCarrera();
 	~profesor();
 
 

@@ -38,8 +38,8 @@ public:
 	void setCiclo(ciclo_lectivo*);
 	int getNRC();
 	int getCupo();
-	int getHoraInicio();
-	int getHoraFinal();
+	string getHoraInicio();
+	string getHoraFinal();
 	int getNumeroGrupo();
 	string getCodigo();
 	

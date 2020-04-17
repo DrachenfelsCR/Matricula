@@ -44,6 +44,7 @@ public:
 	void MostrarEmpadronados();
 	void ConsultaPlan();
 	void agregarProfesores();
+	void MostrarProfesores();
 };
 
 

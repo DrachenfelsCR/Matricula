@@ -62,11 +62,11 @@ void grupo::setCiclo(ciclo_lectivo* ciclo)
 int grupo::getCupo() {
 	return cupo;
 }
-int grupo::getHoraInicio()
+string grupo::getHoraInicio()
 {
 	return horaInicio;
 }
-int grupo::getHoraFinal()
+string grupo::getHoraFinal()
 {
 	return horaFinal;
 }
