@@ -45,6 +45,7 @@ string  ciclo_lectivo::getFechaFinal()
 {
 	return this->fechaFinal;
 }
+
 string  ciclo_lectivo::toString()
 {
 	stringstream s;

@@ -83,6 +83,14 @@ string grupo::getCodigo()
 	return this->codigo_curso;
 }
 
+string grupo::toString()
+{
+	stringstream s;
+		s << " Curso" << " NCR" << "Grupo" << "Cupo" << "Horario" << endl;
+		s << codigo_curso << NRC << numeroGrupo << cupo << horaInicio << horaFinal << endl;
+		return s.str();
+}
+
 string grupo::getNombre()
 {
 	return this->nombre_curso;
@@ -99,3 +107,4 @@ ciclo_lectivo* grupo::getCiclo()
 {
 	return this->ciclo;
 }
+

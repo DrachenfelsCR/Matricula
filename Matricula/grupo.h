@@ -18,13 +18,15 @@ private:
 	string horaInicio;
 	string horaFinal;
 	string id_profesor;
+	
 	ciclo_lectivo* ciclo;
+
 	int cupo;
 	string horarioDia;
 
 public:
 	grupo(int, string, string, int, string,int,int,string,string);
-	//LISTA
+	
 	//LISTA
 	void setNRC(int);
 	void setCupo(int);
@@ -42,11 +44,12 @@ public:
 	string getHoraFinal();
 	int getNumeroGrupo();
 	string getCodigo();
-	
+	string toString();
 	string getNombre();
 	int getCreditos();
 	string getID();
 	ciclo_lectivo* getCiclo();
+	
 	~grupo();
 
 

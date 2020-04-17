@@ -26,6 +26,10 @@ int profesor::getTelefono()
 {
 	return this->telefono;
 }
+lista<grupo>* profesor::getGrupo()
+{
+	return group;
+}
 string profesor::getEscuela() 
 {
 	return this->escuela;
