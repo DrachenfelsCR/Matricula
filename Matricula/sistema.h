@@ -22,6 +22,7 @@ private:
 	lista<carrera>* global_carrera;
 	lista<estudiante>* global_estudiantes;
 	lista<curso>* global_cursos;
+	lista<profesor>* global_profesores;
 public:
 	//--------------------------------------
 	sistema();
@@ -42,6 +43,7 @@ public:
 	void agregarEstudiante();
 	void MostrarEmpadronados();
 	void ConsultaPlan();
+	void agregarProfesores();
 };
 
 

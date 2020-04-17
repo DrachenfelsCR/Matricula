@@ -19,6 +19,7 @@ public:
 	void eliminarInicio();
 	bool eliminarEspecifico(T*);
 	T* buscarCodigoCarrera(int );
+	T* buscarId(string);
 	~lista();
 };
 //------------------------------------
@@ -161,7 +162,21 @@ string lista<T>::toString()
 	return s.str();
 }
 
-
+template<class T>
+T* lista<T>::buscarId(string id )
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if (((actual->getInfo())->getId() == id) )
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return nullptr;
+}
 
 
 

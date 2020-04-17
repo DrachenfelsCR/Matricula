@@ -13,6 +13,7 @@ sistema::sistema()
 	this->global_carrera = new lista<carrera>;
 	this->global_cursos=new lista<curso>;
 	this->global_estudiantes = new lista<estudiante>;
+	this->global_profesores = new lista<profesor>;
 }
 
 void sistema::Principal()
@@ -210,7 +211,7 @@ void sistema::ManejoDeEscuelas()
 	do
 	{
 		imprimirCadena(menuEscuelas());
-		leerSeleccion(6);
+		opc = leerSeleccion(6);
 		switch (opc)
 		{
 		case 1:
@@ -220,6 +221,7 @@ void sistema::ManejoDeEscuelas()
 		case 3:
 			break;
 		case 4:
+			agregarProfesores();
 			break;
 		case 5:
 			break;
@@ -244,7 +246,7 @@ void sistema::ManejoDeMatricula()
 	do
 	{
 		imprimirCadena(menuMatricula());
-		leerSeleccion(4);
+		opc = leerSeleccion(4);
 		switch (opc)
 		{
 		case 1:
@@ -274,7 +276,7 @@ void sistema::ManejoDeRegistro()
 	do
 	{
 		imprimirCadena(menuRegistro());
-		leerSeleccion(3);
+		opc = leerSeleccion(3);
 		switch (opc)
 		{
 		case 1:
@@ -348,6 +350,7 @@ void sistema::agregarUsuario(lista<usuario>* list)
 	{
 		profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
 		list->insertarInicio(n_profesor);
+		global_profesores->insertarFinal(n_profesor);
 		imprimirCadena("Nuevo profesor creado..");
 	}	
 }
@@ -491,4 +494,34 @@ void sistema::ConsultaPlan()
 		carrera* aux = global_carrera->buscarCodigoCarrera(a);
 		imprimirCadena(aux->getPlan().toString());
 	}
+}
+
+void sistema::agregarProfesores()
+{
+	string id;
+	try
+	{
+		imprimirCadena("Digite el codigo carrera: ");
+		int a = leerEntero();
+		if (global_carrera->buscarElemento(a))
+		{
+			carrera* aux = global_carrera->buscarCodigoCarrera(a);
+			imprimirCadena(aux->toString());
+		}
+		imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
+		id = leerCadena();
+		if (global_profesores->buscarId(id) == nullptr)
+		{
+			throw id;
+		}
+		else
+			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(global_profesores->buscarId(id));
+			imprimirCadena("Profesor asignado correctamente a carrera");
+	}
+	catch (string id)
+	{
+		cout << "La cedula " << id << "no existe en el sistema, intente de nuevo.." << endl;
+	}
+	
+
 }
