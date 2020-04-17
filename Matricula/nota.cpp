@@ -22,7 +22,7 @@ float nota::getNota()
 	return this->calificacion;
 }
 
-string nota::getID()
+string nota::getId()
 {
 	return this->id;
 }
