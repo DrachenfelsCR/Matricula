@@ -597,3 +597,24 @@ void sistema::procesoMatricula()
 
 	}
 }
+
+void sistema::ingresoDeNotas()
+{
+	string id;
+	profesor* docente = nullptr;
+	if (this->usuarioLogeado->getRol() == "usuario-profesor")
+	{
+		id = this->usuarioLogeado->getId();
+		docente = global_profesores->buscarId(id);
+	}
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	if (actual == nullptr)
+	{
+		imprimirCadena("No hay ciclos lectivos agregados por lo cual no se pueden ingresar notas..");
+	}
+	else
+	{
+		cout << "Profesor: " << docente->getNombreCompleto();
+		imprimirCadena("Sus cursos para este periodo son: ");
+	}
+}

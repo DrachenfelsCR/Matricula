@@ -8,7 +8,6 @@ protected:
 	int telefono;
 	string escuela;
 	string gradoAcademico;
-//  lista grupos
 	string carrera;
 public:
 	profesor(string, string, string, string);

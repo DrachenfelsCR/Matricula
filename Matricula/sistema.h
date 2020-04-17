@@ -47,6 +47,7 @@ public:
 	void agregarProfesores();
 	void MostrarProfesores();
 	void procesoMatricula();
+	void ingresoDeNotas();
 };
 
 

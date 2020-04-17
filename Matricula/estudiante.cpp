@@ -5,6 +5,7 @@ estudiante::estudiante(string id, string nombre_usuario, string nombre_completo,
 	usuario::rol = "usuario-estudiante";
 	this->telefono = telefono;
 	this->codigo_carrera = codigo_carrera;
+	this->l1 = new lista<curso_estudiante>;
 }
 
 estudiante::~estudiante()
