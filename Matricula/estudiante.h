@@ -22,6 +22,7 @@ public:
 	int getTelefono();
 	string getEscuela();
 	int getCodigo();
+	string getCarrera();
 	string toString();
 	string toString2();
 };

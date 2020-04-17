@@ -93,6 +93,7 @@ void sistema::ManejoLogeo()
 	user_aux = leerCadena();
 	imprimirCadena("	Digite su contrasena");
 	password = leerCadena();*/
+	usuarioLogeado = lista_global->buscarCredenciales(user_aux, password);
 	try
 	{
 		if (lista_global->buscarCredenciales(user_aux, password) == nullptr)
@@ -565,5 +566,34 @@ void sistema::MostrarProfesores()
 	{
 		imprimirCadena(nier->toString());
 		imprimirCadena(nier->getProfesores()->toString());
+	}
+}
+
+void sistema::procesoMatricula()
+{
+	string id;
+	estudiante* aux = nullptr;
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	string carr;
+	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+	{
+		id = this->usuarioLogeado->getId();
+		aux = global_estudiantes->buscarId(id);
+		carr = aux->getCarrera();
+	}
+	imprimirCadena("El periodo lectivo actual es: ");
+	if (actual == nullptr)
+	{
+		imprimirCadena("No hay ciclos lectivos agregados por lo cual no se puede matricular ningun curso..");
+	}
+	else
+	{
+		cout << "Ciclo: " << actual->getCiclo() << endl;
+		cout << "Annio: " << actual->getAnio() << endl;
+		imprimirCadena("----------------------------");
+		imprimirCadena("	Informe Matricula	");
+		cout << "Carrera: " << carr << endl;
+		cout << "Estudiante: " << aux->getNombreCompleto() << endl;
+
 	}
 }

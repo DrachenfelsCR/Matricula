@@ -18,6 +18,7 @@ class sistema {
 private:
 	int opc;
 	string* logged_user;
+	usuario* usuarioLogeado;
 	lista<ciclo_lectivo>* global_ciclos;
 	lista<carrera>* global_carrera;
 	lista<estudiante>* global_estudiantes;
@@ -45,6 +46,7 @@ public:
 	void ConsultaPlan();
 	void agregarProfesores();
 	void MostrarProfesores();
+	void procesoMatricula();
 };
 
 
