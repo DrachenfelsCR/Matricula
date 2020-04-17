@@ -18,7 +18,10 @@ public:
 	bool buscar(T* aux);
 	bool buscarElemento(int);
 	void eliminarInicio();
+	bool buscarCicloElectivo(int,int);
 	bool eliminarEspecifico(T*);
+	bool buscarID(string);
+	bool buscarCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
 	T* buscarId(string);
 	~lista();
@@ -77,6 +80,54 @@ void lista<T>::eliminarInicio() {
 		primero = primero->getSig();
 		delete actual;
 	}
+}
+
+template<class T>
+bool lista<T>::buscarCicloElectivo(int an, int ciclo)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if ((actual->getInfo())->getAnio()== an && (actual->getInfo())->getCiclo()== ciclo)
+		{
+			return true;
+		}
+		actual = actual->getSig();
+	}
+	return false;
+}
+
+template<class T>
+ bool lista<T>::buscarID(string ID)
+{
+	 nodo<T>* actual;
+	 actual = primero;
+	 while (actual)
+	 {
+		 if ((actual->getInfo())->getId() ==ID )
+		 {
+			 return true;
+		 }
+		 actual = actual->getSig();
+	 }
+	 return false;
+}
+
+template<class T>
+ bool lista<T>::buscarCodigoCurso(string curso)
+{
+	 nodo<T>* actual;
+	 actual = primero;
+	 while (actual)
+	 {
+		 if ((actual->getInfo())->getCodigo() == curso)
+		 {
+			 return true;
+		 }
+		 actual = actual->getSig();
+	 }
+	 return false;
 }
 
 template<class T>
@@ -201,3 +252,4 @@ T* lista<T>::getUltimo() {
 
 
 #endif // !LISTA_H
+//
