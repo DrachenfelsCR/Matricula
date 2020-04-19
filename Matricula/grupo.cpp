@@ -1,9 +1,9 @@
 #include "grupo.h"
 
-grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal)
+grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal,int codigo)
 {
-	this->lista_E = nullptr;
-	this->lista_N = nullptr;
+	this->lista_E = new lista<estudiante>;
+	this->lista_N = new lista<nota>;
 	this->ciclo = nullptr;
 	this->NRC = NRC;
 	this->horaInicio = horaIncio;
@@ -14,6 +14,7 @@ grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, st
 	this->nombre_curso = nombre_curso;
 	this->id_profesor = id_profesor;
 	this->creditos = creditos;
+	this->codigo_carrera = codigo;
 }
 
 grupo::~grupo()
@@ -82,6 +83,10 @@ string grupo::getCodigo()
 {
 	return this->codigo_curso;
 }
+int grupo::getCodCarrera()
+{
+	return this->codigo_carrera;
+}
 
 string grupo::toString()
 {
@@ -113,4 +118,20 @@ string grupo::toStringEstudiantes()
 	stringstream s;
 	s << this->lista_E->toStringGrupo() << endl;
 	return s.str();
+}
+
+string grupo::toStringPorCiclo(ciclo_lectivo*)
+{
+	stringstream s;
+	s << this->lista_E->toStringGrupo() << endl;
+	return s.str();
+}
+lista<nota>* grupo::getListaNotas()
+{
+	return this->lista_N;
+}
+
+lista<estudiante>* grupo::getEstudiantes()
+{
+	return this->lista_E;
 }

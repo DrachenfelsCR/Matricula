@@ -217,6 +217,8 @@ void sistema::ManejoDeEscuelas()
 		switch (opc)
 		{
 		case 1:
+			limpiaPantalla();
+			consultaPlan();
 			break;
 		case 2:
 			limpiaPantalla();
@@ -225,6 +227,7 @@ void sistema::ManejoDeEscuelas()
 			cin.get();
 			break;
 		case 3:
+			consultaGeneralMatricula();
 			break;
 		case 4:
 			agregarProfesores();
@@ -499,7 +502,8 @@ void sistema::agregarGrupo()
 	int anno = leerEntero();
 	imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
 	int ciclo = leerEntero();
-	while (!(global_ciclos->buscarCicloElectivo(anno,ciclo)))
+	ciclo_lectivo* cicloAux = global_ciclos->buscarCicloElectivo2(anno, ciclo);
+	while (cicloAux == nullptr)
 	{
 		imprimirCadena("Ingreso incorrectamente el ciclo y annio lectivo o el ciclo ingresado no existe");
 		imprimirCadena("Digite El  Anio");
@@ -536,7 +540,8 @@ void sistema::agregarGrupo()
 	horaInicio = leerCadena();
 	imprimirCadena("Digite la hora Inicio(ejemplo= 10:00 Formato 24hrs)");
 	horaFinal = leerCadena();
-	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal);
+	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal,a);
+	Grupote->setCiclo(cicloAux);
 	global_Grupos->insertarInicio(Grupote);
 	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
 	imprimirCadena("Grupo Creado Existosamente");
@@ -674,8 +679,10 @@ void sistema::procesoMatricula()
 void sistema::ingresoDeNotas()
 {
 	string id;
+	string idEst;
 	int NRC;
 	profesor* docente = nullptr;
+	grupo* elgrupo = nullptr;
 	if (this->usuarioLogeado->getRol() == "usuario-profesor")
 	{
 		id = this->usuarioLogeado->getId();
@@ -693,6 +700,129 @@ void sistema::ingresoDeNotas()
 		docente->getGrupo()->toString();
 		imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
 		NRC = leerEntero();
-		docente->getGrupo()->buscarNRC(NRC)->toStringEstudiantes();
+		elgrupo = docente->getGrupo()->buscarNRC(NRC);
+		if (elgrupo == nullptr)
+		{
+			imprimirCadena("Digito un NRC que no se encuentra en el sistema..");
+		}
+		else
+		{
+			elgrupo->toStringEstudiantes();
+			imprimirCadena("Digite el id del estudiante que desea ingresar su nota: ");
+			idEst = leerCadena();
+				elgrupo->getListaNotas()->buscarId(leerCadena());
+
+		}
+		
+
+
 	}
+}
+
+void sistema::consultaPlan()
+{
+	carrera* ca;
+	imprimirCadena("Digite el codigo de la carrera: ");
+	ca = global_carrera->buscarCodigoCarrera(leerEntero());
+	cout << "Carrera: " << ca->getNombre();
+	cout << "Tipo: " << ca->getGrado();
+	imprimirCadena("Plan de estudios: ");
+	ca->toStringPlan();
+}
+
+void sistema::consultaGeneralMatricula()
+{
+	int codigoBusqueda;
+	int ciclo;
+	int anio;
+	char a;
+	carrera* car;
+	imprimirCadena("Digite el codigo de la carrera: ");
+	codigoBusqueda = leerEntero();
+	try
+	{
+		car = global_carrera->buscarCodigoCarrera(codigoBusqueda);
+		if (car == nullptr)
+		{
+			throw codigoBusqueda;
+		}
+	imprimirCadena("Digite el numero de ciclo (1,2 o 3) ");
+	ciclo = leerSeleccion(4);
+	imprimirCadena("Digite el anio del ciclo (ejemplo: 2010, 2018..)");
+	anio = leerEntero();
+	grupo* grupoA = global_Grupos->buscarGrupo(codigoBusqueda, anio, ciclo);
+	grupo* grupoB;
+	if (grupoA == nullptr)
+	{
+		throw 'a';
+	}
+	imprimirCadena(global_Grupos->buscarGrupoString(codigoBusqueda, anio, ciclo));
+	imprimirCadena("Desea visualizar algun grupo?(1.Si , 2.No)..");
+	int selec = leerSeleccion(3);
+	if (selec == 1)
+	{
+		imprimirCadena("Digite el NRC del grupo que desea ver: ");
+		int NRC = leerEntero();
+		grupoB = global_Grupos->buscarNRC(NRC);
+		if (grupoB == nullptr)
+		{
+			throw false;
+		}
+		imprimirCadena(grupoB->toStringEstudiantes());
+	}
+	}
+	catch (int zcodigoBusqueda)
+	{
+		cout << "El codigo " << codigoBusqueda << " no se encuentra en el sistema ";
+	}
+	catch (char a)
+	{
+		cout << "No existen grupos creados";
+	}
+	catch (bool NRC)
+	{
+		cout << "El NRC " << NRC << " no se encuentra registrado";
+	}
+	
+}
+
+void sistema::procesodeMatricula()
+{
+	int NRC;
+	int opc = 1;
+	grupo* grupoAux;
+	try
+	{
+		while (opc == 1)
+		{
+			ciclo_lectivo* cicloActual = global_ciclos->getUltimo();
+			if (cicloActual == nullptr)
+			{
+				throw cicloActual;
+			}
+			if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+			{
+				estudiante* estAux = global_estudiantes->buscarId(usuarioLogeado->getId());
+				cout << "Usted se encuentra empadronado en la carrera: " << estAux->getCarrera();
+				imprimirCadena("Oferta para este ciclo:");
+				global_Grupos->toStringIteradorCiclo(cicloActual->getCiclo(), cicloActual->getAnio());
+				imprimirCadena("Digite el NRC del grupo en el cual desea matricularse:  ");
+				NRC = leerEntero();
+				grupoAux = global_Grupos->buscarNRC(NRC);
+				if (grupoAux == nullptr)
+				{
+					throw NRC;
+				}
+				grupoAux->getEstudiantes()->insertarFinal(estAux);
+				imprimirCadena("Matriculado. Desea matricular otro curso? (1.Si / 2.No)");
+				opc = leerSeleccion(3);
+			}
+		
+		}
+	}
+	catch (...)
+	{
+		imprimirCadena("No hay ciclos o grupos creados en el sistema o el NRC fue digitado incorrectamente");
+	}
+	
 }

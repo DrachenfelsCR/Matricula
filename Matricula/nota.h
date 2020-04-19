@@ -9,11 +9,12 @@ class nota
 private:
 	float calificacion;
 	string id;
+	string nombre;
 public:
-	nota(float, string);
+	nota(float, string, string);
 	~nota();
 	float getNota();
-	string getID();
+	string getId();
 	void setNota(float);
 	void setID(string);
 	

@@ -12,7 +12,7 @@ private:
 	int creditos;
 	int horas_semanales;
 	bool estado;
-	lista<string>* l1;
+	lista<string>* listaReq;
 public:
 	curso();
 	curso(string, string, string, int, int);
@@ -30,6 +30,7 @@ public:
 	bool getEstado();
 	void insertarRequisito(string*);
 	string toString();
+	string toString2();
 	~curso();
 
 

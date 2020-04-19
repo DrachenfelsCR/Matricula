@@ -93,5 +93,10 @@ carrera::~carrera()
 {
 }
 
-
+string carrera::toStringPlan()
+{
+	stringstream s;
+	s << this->plan_carrera.getListaCurso()->toStringIterador();
+	return s.str();
+}
 
