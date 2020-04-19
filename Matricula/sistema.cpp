@@ -732,6 +732,7 @@ void sistema::consultaGeneralMatricula()
 	int codigoBusqueda;
 	int ciclo;
 	int anio;
+	char a;
 	carrera* car;
 	imprimirCadena("Digite el codigo de la carrera: ");
 	codigoBusqueda = leerEntero();
@@ -750,7 +751,7 @@ void sistema::consultaGeneralMatricula()
 	grupo* grupoB;
 	if (grupoA == nullptr)
 	{
-		throw codigoBusqueda;
+		throw 'a';
 	}
 	imprimirCadena(global_Grupos->buscarGrupoString(codigoBusqueda, anio, ciclo));
 	imprimirCadena("Desea visualizar algun grupo?(1.Si , 2.No)..");
@@ -762,14 +763,22 @@ void sistema::consultaGeneralMatricula()
 		grupoB = global_Grupos->buscarNRC(NRC);
 		if (grupoB == nullptr)
 		{
-			throw NRC;
+			throw false;
 		}
 		imprimirCadena(grupoB->toStringEstudiantes());
 	}
 	}
-	catch (...)
+	catch (int zcodigoBusqueda)
 	{
-		cout << "El codigo de carrera, el ciclo o anio ingresados no existen";
+		cout << "El codigo " << codigoBusqueda << " no se encuentra en el sistema ";
+	}
+	catch (char a)
+	{
+		cout << "No existen grupos creados";
+	}
+	catch (bool NRC)
+	{
+		cout << "El NRC " << NRC << " no se encuentra registrado";
 	}
 	
 }

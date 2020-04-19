@@ -289,17 +289,14 @@ template<class T>
 string lista<T>::toStringGrupo()
 {
 	stringstream s;
-	if (primero != NULL)
-	{
-		nodo<T>* actual;
-		actual = primero;
-		while (actual != NULL)
+	nodo<T>* actual;
+	actual = primero;	
+		while (actual->getSig() != nullptr)
 		{
 			s << (actual->getInfo())->toString3() << endl;
 			s << "-------------------------" << endl;
 			actual = actual->getSig();
 		}
-	}
 	return s.str();
 }
 template<class T>

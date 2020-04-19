@@ -2,8 +2,8 @@
 
 grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal,int codigo)
 {
-	this->lista_E = nullptr;
-	this->lista_N = nullptr;
+	this->lista_E = new lista<estudiante>;
+	this->lista_N = new lista<nota>;
 	this->ciclo = nullptr;
 	this->NRC = NRC;
 	this->horaInicio = horaIncio;
