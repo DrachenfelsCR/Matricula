@@ -45,6 +45,7 @@ public:
 	void agregarCurso();
 	void agregarEstudiante();
 	void agregarGrupo();
+	void ConsultaGeneralMatricula();
 	void MostrarEmpadronados();
 	void ConsultaPlan();
 	void agregarProfesores();

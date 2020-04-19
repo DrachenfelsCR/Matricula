@@ -167,7 +167,6 @@ void sistema::ManejoDeMantenimiento()
 		case 2:
 			agregarCiclo();
 			imprimirCadena("<Enter>");
-			cin.get();
 			break;
 		case 3:
 			agregarCarrera();
@@ -541,6 +540,10 @@ void sistema::agregarGrupo()
 	global_Grupos->insertarInicio(Grupote);
 	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
 	imprimirCadena("Grupo Creado Existosamente");
+}
+
+void sistema::ConsultaGeneralMatricula()
+{
 }
 
 void sistema::MostrarEmpadronados()
