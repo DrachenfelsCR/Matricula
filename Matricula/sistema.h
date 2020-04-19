@@ -53,7 +53,9 @@ public:
 	void ingresoDeNotas();
 	void consultaPlan();
 	void consultaGeneralMatricula();
+	void procesodeMatricula();
 };
+
 
 
 

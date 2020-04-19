@@ -19,6 +19,7 @@ public:
 	bool buscarElemento(int);
 	void eliminarInicio();
 	bool buscarCicloElectivo(int,int);
+	T* buscarCicloElectivo2(int, int);
 	bool eliminarEspecifico(T*);
 	bool buscarID(string);
 	bool buscarCodigoCurso(string);
@@ -29,6 +30,7 @@ public:
 	string buscarGrupoString(int, int, int);
 	string toStringGrupo();
 	string toStringIterador();
+	string toStringIteradorCiclo(int,int);
 	~lista();
 };
 //------------------------------------
@@ -101,6 +103,22 @@ bool lista<T>::buscarCicloElectivo(int an, int ciclo)
 		actual = actual->getSig();
 	}
 	return false;
+}
+
+template<class T>
+T* lista<T>::buscarCicloElectivo2(int an, int ciclo)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if ((actual->getInfo())->getAnio() == an && (actual->getInfo())->getCiclo() == ciclo)
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return nullptr;
 }
 
 template<class T>
@@ -295,6 +313,23 @@ string lista<T>::toStringIterador()
 		if (actual->getInfo() != nullptr)
 		{
 			s << actual->getInfo() << endl;
+		}
+		actual = actual->getSig();
+	}
+	return s.str();
+}
+
+template<class T>
+string lista<T>::toStringIteradorCiclo(int ciclo, int anio)
+{
+	stringstream s;
+	nodo<T>* actual;
+	actual = primero;
+	while (actual->getSig() != nullptr)
+	{
+		if ((actual->getInfo())->getCiclo()->getCiclo() == ciclo && (actual->getInfo())->getCiclo()->getAnio() == anio)
+		{
+			s << (actual->getInfo())->toString() << endl;
 		}
 		actual = actual->getSig();
 	}

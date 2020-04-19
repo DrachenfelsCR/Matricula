@@ -22,7 +22,7 @@ public:
 	string getFechaFinal();
 	string toString();
 	~ciclo_lectivo();
-
+	bool operator ==(ciclo_lectivo*);
 
 
 };

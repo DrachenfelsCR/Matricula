@@ -119,7 +119,19 @@ string grupo::toStringEstudiantes()
 	s << this->lista_E->toStringGrupo() << endl;
 	return s.str();
 }
+
+string grupo::toStringPorCiclo(ciclo_lectivo*)
+{
+	stringstream s;
+	s << this->lista_E->toStringGrupo() << endl;
+	return s.str();
+}
 lista<nota>* grupo::getListaNotas()
 {
 	return this->lista_N;
+}
+
+lista<estudiante>* grupo::getEstudiantes()
+{
+	return this->lista_E;
 }

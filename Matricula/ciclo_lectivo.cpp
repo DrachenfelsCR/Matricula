@@ -55,6 +55,14 @@ string  ciclo_lectivo::toString()
 	s << "Anio: " << this->anio << endl;
 	return s.str();
 }
+bool ciclo_lectivo::operator ==(ciclo_lectivo* ciclo)
+{
+	if ((this->anio == ciclo->getAnio()) && (this->ciclo == ciclo->getAnio()) && (this->fechaFinal == ciclo->getFechaFinal()) && (this->fechaInicio == ciclo->getFechaInicio()))
+	{
+		return true;
+	}
+	return false;
+}
 
 ciclo_lectivo::~ciclo_lectivo()
 {

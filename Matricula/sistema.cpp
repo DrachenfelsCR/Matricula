@@ -503,7 +503,8 @@ void sistema::agregarGrupo()
 	int anno = leerEntero();
 	imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
 	int ciclo = leerEntero();
-	while (!(global_ciclos->buscarCicloElectivo(anno,ciclo)))
+	ciclo_lectivo* cicloAux = global_ciclos->buscarCicloElectivo2(anno, ciclo);
+	while (cicloAux == nullptr)
 	{
 		imprimirCadena("Ingreso incorrectamente el ciclo y annio lectivo o el ciclo ingresado no existe");
 		imprimirCadena("Digite El  Anio");
@@ -541,6 +542,7 @@ void sistema::agregarGrupo()
 	imprimirCadena("Digite la hora Inicio(ejemplo= 10:00 Formato 24hrs)");
 	horaFinal = leerCadena();
 	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal,a);
+	Grupote->setCiclo(cicloAux);
 	global_Grupos->insertarInicio(Grupote);
 	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
 	imprimirCadena("Grupo Creado Existosamente");
@@ -768,6 +770,47 @@ void sistema::consultaGeneralMatricula()
 	catch (...)
 	{
 		cout << "El codigo de carrera, el ciclo o anio ingresados no existen";
+	}
+	
+}
+
+void sistema::procesodeMatricula()
+{
+	int NRC;
+	int opc = 1;
+	grupo* grupoAux;
+	try
+	{
+		while (opc == 1)
+		{
+			ciclo_lectivo* cicloActual = global_ciclos->getUltimo();
+			if (cicloActual == nullptr)
+			{
+				throw cicloActual;
+			}
+			if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+			{
+				estudiante* estAux = global_estudiantes->buscarId(usuarioLogeado->getId());
+				cout << "Usted se encuentra empadronado en la carrera: " << estAux->getCarrera();
+				imprimirCadena("Oferta para este ciclo:");
+				global_Grupos->toStringIteradorCiclo(cicloActual->getCiclo(), cicloActual->getAnio());
+				imprimirCadena("Digite el NRC del grupo en el cual desea matricularse:  ");
+				NRC = leerEntero();
+				grupoAux = global_Grupos->buscarNRC(NRC);
+				if (grupoAux == nullptr)
+				{
+					throw NRC;
+				}
+				grupoAux->getEstudiantes()->insertarFinal(estAux);
+				imprimirCadena("Matriculado. Desea matricular otro curso? (1.Si / 2.No)");
+				opc = leerSeleccion(3);
+			}
+		
+		}
+	}
+	catch (...)
+	{
+		imprimirCadena("No hay ciclos o grupos creados en el sistema o el NRC fue digitado incorrectamente");
 	}
 	
 }
