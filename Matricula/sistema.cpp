@@ -218,6 +218,8 @@ void sistema::ManejoDeEscuelas()
 		switch (opc)
 		{
 		case 1:
+			limpiaPantalla();
+			consultaPlan();
 			break;
 		case 2:
 			limpiaPantalla();
@@ -226,6 +228,7 @@ void sistema::ManejoDeEscuelas()
 			cin.get();
 			break;
 		case 3:
+			consultaGeneralMatricula();
 			break;
 		case 4:
 			agregarProfesores();
@@ -537,7 +540,7 @@ void sistema::agregarGrupo()
 	horaInicio = leerCadena();
 	imprimirCadena("Digite la hora Inicio(ejemplo= 10:00 Formato 24hrs)");
 	horaFinal = leerCadena();
-	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal);
+	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal,a);
 	global_Grupos->insertarInicio(Grupote);
 	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
 	imprimirCadena("Grupo Creado Existosamente");
@@ -709,4 +712,62 @@ void sistema::ingresoDeNotas()
 
 
 	}
+}
+
+void sistema::consultaPlan()
+{
+	carrera* ca;
+	imprimirCadena("Digite el codigo de la carrera: ");
+	ca = global_carrera->buscarCodigoCarrera(leerEntero());
+	cout << "Carrera: " << ca->getNombre();
+	cout << "Tipo: " << ca->getGrado();
+	imprimirCadena("Plan de estudios: ");
+	ca->toStringPlan();
+}
+
+void sistema::consultaGeneralMatricula()
+{
+	int codigoBusqueda;
+	int ciclo;
+	int anio;
+	carrera* car;
+	imprimirCadena("Digite el codigo de la carrera: ");
+	codigoBusqueda = leerEntero();
+	try
+	{
+		car = global_carrera->buscarCodigoCarrera(codigoBusqueda);
+		if (car == nullptr)
+		{
+			throw codigoBusqueda;
+		}
+	imprimirCadena("Digite el numero de ciclo (1,2 o 3) ");
+	ciclo = leerSeleccion(4);
+	imprimirCadena("Digite el anio del ciclo (ejemplo: 2010, 2018..)");
+	anio = leerEntero();
+	grupo* grupoA = global_Grupos->buscarGrupo(codigoBusqueda, anio, ciclo);
+	grupo* grupoB;
+	if (grupoA == nullptr)
+	{
+		throw codigoBusqueda;
+	}
+	imprimirCadena(global_Grupos->buscarGrupoString(codigoBusqueda, anio, ciclo));
+	imprimirCadena("Desea visualizar algun grupo?(1.Si , 2.No)..");
+	int selec = leerSeleccion(3);
+	if (selec == 1)
+	{
+		imprimirCadena("Digite el NRC del grupo que desea ver: ");
+		int NRC = leerEntero();
+		grupoB = global_Grupos->buscarNRC(NRC);
+		if (grupoB == nullptr)
+		{
+			throw NRC;
+		}
+		imprimirCadena(grupoB->toStringEstudiantes());
+	}
+	}
+	catch (...)
+	{
+		cout << "El codigo de carrera, el ciclo o anio ingresados no existen";
+	}
+	
 }

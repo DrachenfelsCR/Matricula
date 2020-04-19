@@ -24,7 +24,7 @@ string plan_estudios::toString()
 	s << this->l1->toString();
 	return s.str();
 }
-/*void plan_estudios::eliminarCurso(curso* cur)
+lista<curso>* plan_estudios::getListaCurso()
 {
-	this->l1->eliminarEspecifico(cur);
-}*/
+	return this->l1;
+}

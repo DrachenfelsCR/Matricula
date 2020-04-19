@@ -51,6 +51,8 @@ public:
 	void MostrarProfesores();
 	void procesoMatricula();
 	void ingresoDeNotas();
+	void consultaPlan();
+	void consultaGeneralMatricula();
 };
 
 

@@ -41,7 +41,7 @@ public:
 	void setEscuela(string);
 	string getEscuela();
 	string toString();
-
+	string toStringPlan();
 };
 
 

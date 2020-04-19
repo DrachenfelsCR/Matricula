@@ -1,6 +1,6 @@
 #include "grupo.h"
 
-grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal)
+grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, string id_profesor, int cupo, int numeroGrupo, string horaIncio, string horaFinal,int codigo)
 {
 	this->lista_E = nullptr;
 	this->lista_N = nullptr;
@@ -14,6 +14,7 @@ grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, st
 	this->nombre_curso = nombre_curso;
 	this->id_profesor = id_profesor;
 	this->creditos = creditos;
+	this->codigo_carrera = codigo;
 }
 
 grupo::~grupo()
@@ -81,6 +82,10 @@ int grupo::getNRC()
 string grupo::getCodigo()
 {
 	return this->codigo_curso;
+}
+int grupo::getCodCarrera()
+{
+	return this->codigo_carrera;
 }
 
 string grupo::toString()

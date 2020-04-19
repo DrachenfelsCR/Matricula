@@ -25,7 +25,10 @@ public:
 	T* buscarCodigoCarrera(int );
 	T* buscarId(string);
 	T* buscarNRC(int);
+	T* buscarGrupo(int,int,int);
+	string buscarGrupoString(int, int, int);
 	string toStringGrupo();
+	string toStringIterador();
 	~lista();
 };
 //------------------------------------
@@ -281,8 +284,55 @@ string lista<T>::toStringGrupo()
 	}
 	return s.str();
 }
+template<class T>
+string lista<T>::toStringIterador()
+{
+	stringstream s;
+	nodo<T>* actual;
+	actual = primero;
+	while (actual->getSig() != nullptr)
+	{
+		if (actual->getInfo() != nullptr)
+		{
+			s << actual->getInfo() << endl;
+		}
+		actual = actual->getSig();
+	}
+	return s.str();
+}
 
+template<class T>
+T* lista<T>::buscarGrupo(int cod, int anio,int ciclo)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if (((actual->getInfo())->getCodCarrera() == cod) && ((actual->getInfo())->getCiclo()->getAnio() == anio) && ((actual->getInfo())->getCiclo()->getCiclo() == ciclo))
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return NULL;
+}
 
+template<class T>
+string lista<T>::buscarGrupoString(int cod, int anio, int ciclo)
+{
+	stringstream s;
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if (((actual->getInfo())->getCodCarrera() == cod) && ((actual->getInfo())->getCiclo()->getAnio() == anio) && ((actual->getInfo())->getCiclo()->getCiclo() == ciclo))
+		{
+			s << (actual->getInfo())->toString();
+		}
+		actual = actual->getSig();
+	}
+	return s.str();
+}
 
 #endif // !LISTA_H
 //

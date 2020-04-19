@@ -16,7 +16,7 @@ public:
 	void insertarCurso(curso*);
 	//void eliminarCurso(curso*);
 	string toString();
-	// falta implementacion
+	lista<curso>* getListaCurso();
 	~plan_estudios();
 
 };
