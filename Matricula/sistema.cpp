@@ -826,3 +826,13 @@ void sistema::procesodeMatricula()
 	}
 	
 }
+
+void sistema::consultaMatriculaEstudiante()
+{
+	if (this->usuarioLogeado->getRol()=="usuario-estudiante")
+	{
+		estudiante* aux = global_estudiantes->buscarId(this->usuarioLogeado->getId());
+		imprimirCadena("Digite el Ciclo electivo");
+
+	}
+}
