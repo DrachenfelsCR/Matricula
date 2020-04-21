@@ -309,7 +309,7 @@ string lista<T>::toStringIterador()
 	{
 		if (actual->getInfo() != nullptr)
 		{
-			s << actual->getInfo() << endl;
+			s << (actual->getInfo()) << endl;
 		}
 		actual = actual->getSig();
 	}

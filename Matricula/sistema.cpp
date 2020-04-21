@@ -565,16 +565,7 @@ void sistema::MostrarEmpadronados()
 	}
 }
 
-void sistema::ConsultaPlan()
-{
-	imprimirCadena("Digite el plan de estudios: ");
-	int a = leerEntero();
-	if (global_carrera->buscarElemento(a))
-	{
-		carrera* aux = global_carrera->buscarCodigoCarrera(a);
-		imprimirCadena(aux->getPlan().toString());
-	}
-}
+
 
 void sistema::agregarProfesores()
 {
@@ -724,10 +715,18 @@ void sistema::consultaPlan()
 	carrera* ca;
 	imprimirCadena("Digite el codigo de la carrera: ");
 	ca = global_carrera->buscarCodigoCarrera(leerEntero());
-	cout << "Carrera: " << ca->getNombre();
-	cout << "Tipo: " << ca->getGrado();
-	imprimirCadena("Plan de estudios: ");
-	ca->toStringPlan();
+	if (ca!=NULL)
+	{
+		cout << "Carrera: " << ca->getNombre() << endl;
+		cout << "Tipo: " << ca->getGrado() << endl;
+		imprimirCadena("Plan de estudios: ");
+		imprimirCadena(ca->toStringPlan());
+
+	}
+	else
+	{
+		imprimirCadena("No hay carreras disponibles o digito incorrectamente el numero de carrera");
+	}
 }
 
 void sistema::consultaGeneralMatricula()
