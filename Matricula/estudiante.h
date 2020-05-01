@@ -26,6 +26,7 @@ public:
 	string toString();
 	string toString2();
 	string toString3();
+	lista<curso_estudiante>* getListaCursos();
 };
 
 #endif // !ESTUDIANTE_H

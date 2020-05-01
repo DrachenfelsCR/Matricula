@@ -49,11 +49,10 @@ public:
 	void ConsultaPlan();
 	void agregarProfesores();
 	void MostrarProfesores();
-	void procesoMatricula();
 	void ingresoDeNotas();
 	void consultaPlan();
 	void consultaGeneralMatricula();
-	void procesodeMatricula();
+	void procesoMatricula();
 };
 
 

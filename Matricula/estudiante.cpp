@@ -40,6 +40,12 @@ int estudiante::getCodigo()
 {
 	return this->codigo_carrera;
 }
+
+lista<curso_estudiante>* estudiante::getListaCursos()
+{
+	return this->l1;
+}
+
 string estudiante::toString()
 {
 	stringstream s;

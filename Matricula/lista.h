@@ -43,7 +43,15 @@ lista<T>::lista() {
 
 template<class T>
 bool lista<T>::esVacia() {
-	return (primero == NULL);
+	if (primero == nullptr)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
 }
 
 
