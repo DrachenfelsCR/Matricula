@@ -446,8 +446,7 @@ void sistema::agregarCurso()
 		curso* Cursos = new curso(codigo,nombre,tipocurso,creditos,horasSemanales);
 //-----------------------------------------------------------------------------------------
 		global_cursos->insertarInicio(Cursos);
-		aux->getPlan().insertarCurso(Cursos);
-
+		aux->getPlan().getListaCurso()->insertarFinal(Cursos);
 	}
 	else {
 		imprimirCadena("Error al digitar carrera o el numero de carrera no existe");
@@ -540,7 +539,7 @@ void sistema::agregarGrupo()
 	dia = leerCadena();
 	imprimirCadena("Digite la hora Inicio(ejemplo= 8:00 Formato 24hrs)");
 	horaInicio = leerCadena();
-	imprimirCadena("Digite la hora Inicio(ejemplo= 10:00 Formato 24hrs)");
+	imprimirCadena("Digite la hora finalizacion(ejemplo= 10:00 Formato 24hrs)");
 	horaFinal = leerCadena();
 	grupo* Grupote = new grupo(NRC,codigo,"",0,id,cupo,numeroGrupo,horaInicio,horaFinal,a);
 	Grupote->setCiclo(cicloAux);
@@ -679,13 +678,17 @@ void sistema::procesoMatricula()
 				imprimirCadena("1.Si / 2.No");
 				opc = leerSeleccion(3);
 			}
+			else
+			{
+				opc = 2;
+			}
 		}	
 	}
 	else
 	{
 		imprimirCadena("No tiene el rol adecuado para acceder a esta opcion");
 	}
-	//---------------------------------------------------
+	//---------------------------------------------------------
 	if (datosCorrectos == true)
 	{
 		imprimirCadena("El periodo lectivo actual es: ");
@@ -697,7 +700,7 @@ void sistema::procesoMatricula()
 		{
 			cout << "Ciclo: " << actual->getCiclo() << endl;
 			cout << "Annio: " << actual->getAnio() << endl;
-			imprimirCadena("----------------------------");
+			imprimirCadena("----------------------------------------------------------------");
 			imprimirCadena("	Informe Matricula	");
 			cout << "Carrera: " << carr << endl;
 			cout << "Estudiante: " << aux->getNombreCompleto() << endl;
@@ -781,10 +784,10 @@ void sistema::consultaPlan()
 	}
 	else
 	{
-		cout << "Carrera: " << ca->getNombre();
-		cout << "Tipo: " << ca->getGrado();
+		cout << "Carrera: " << ca->getNombre() << endl;
+		cout << "Tipo: " << ca->getGrado() << endl;
 		imprimirCadena("Plan de estudios: ");
-		ca->toStringPlan();
+		imprimirCadena(ca->getPlan().toString());
 	}
 	
 }
@@ -795,6 +798,7 @@ void sistema::consultaGeneralMatricula()
 	int ciclo;
 	int anio;
 	char a;
+	float error = 0.0;
 	carrera* car;
 	imprimirCadena("Digite el codigo de la carrera: ");
 	codigoBusqueda = leerEntero();
@@ -825,9 +829,14 @@ void sistema::consultaGeneralMatricula()
 		grupoB = global_Grupos->buscarNRC(NRC);
 		if (grupoB == nullptr)
 		{
-			throw false;
+			error = NRC;
+			throw error;
 		}
-		imprimirCadena(grupoB->toStringEstudiantes());
+		else
+		{
+			imprimirCadena(grupoB->toStringEstudiantes());
+		}
+		
 	}
 	}
 	catch (int zcodigoBusqueda)
@@ -838,7 +847,7 @@ void sistema::consultaGeneralMatricula()
 	{
 		cout << "No existen grupos creados";
 	}
-	catch (bool NRC)
+	catch (float NRC)
 	{
 		cout << "El NRC " << NRC << " no se encuentra registrado";
 	}

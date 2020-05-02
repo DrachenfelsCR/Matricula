@@ -299,11 +299,18 @@ string lista<T>::toStringGrupo()
 	stringstream s;
 	nodo<T>* actual;
 	actual = primero;	
-		while (actual->getSig() != nullptr)
+		while (actual)
 		{
-			s << (actual->getInfo())->toString3() << endl;
-			s << "-------------------------" << endl;
-			actual = actual->getSig();
+			if (actual->getInfo() == nullptr)
+			{
+				s << "- - - - - - - - Vacio - - - - - - - - - -" << endl;
+			}
+			else
+			{
+				s << (actual->getInfo())->toString3() << endl;
+				s << "-------------------------" << endl;
+				actual = actual->getSig();
+			}
 		}
 	return s.str();
 }

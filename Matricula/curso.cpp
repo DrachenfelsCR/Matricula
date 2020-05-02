@@ -79,11 +79,11 @@ void curso::insertarRequisito(string* req)
 string curso::toString()
 {
 	stringstream s;
-	s << codigo_curso << endl;
-	s << nombre_curso << endl;
-	s << horas_semanales << endl;
-	s << creditos << endl;
-	s << tipo_curso << endl;
+	s <<"Codigo curso: "<< codigo_curso << endl;
+	s <<"Nombre de curso: "<< nombre_curso << endl;
+	s << "Horas semanales: " << horas_semanales << endl;
+	s << "Creditos: " <<creditos << endl;
+	s << "Tipo de curso: "<< tipo_curso << endl;
 	return s.str();
 }
 string curso::toString2()
