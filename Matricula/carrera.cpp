@@ -80,8 +80,8 @@ string carrera::getEscuela()
 string carrera::toString()
 {
 	stringstream s;
-	s << nombre_carrera << endl;
-	s << escuela << endl;
+	s << "Carrera: " << nombre_carrera << endl;
+	s << "Escuela: " << escuela << endl;
 	return s.str();
 }
 

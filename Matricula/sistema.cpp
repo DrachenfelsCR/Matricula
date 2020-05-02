@@ -167,7 +167,6 @@ void sistema::ManejoDeMantenimiento()
 		case 2:
 			agregarCiclo();
 			imprimirCadena("<Enter>");
-			cin.get();
 			break;
 		case 3:
 			agregarCarrera();
@@ -548,6 +547,10 @@ void sistema::agregarGrupo()
 	imprimirCadena("Grupo Creado Existosamente");
 }
 
+void sistema::ConsultaGeneralMatricula()
+{
+}
+
 void sistema::MostrarEmpadronados()
 {
 	imprimirCadena("Ingrese codigo de carrera ");
@@ -562,16 +565,7 @@ void sistema::MostrarEmpadronados()
 	}
 }
 
-void sistema::ConsultaPlan()
-{
-	imprimirCadena("Digite el plan de estudios: ");
-	int a = leerEntero();
-	if (global_carrera->buscarElemento(a))
-	{
-		carrera* aux = global_carrera->buscarCodigoCarrera(a);
-		imprimirCadena(aux->getPlan().toString());
-	}
-}
+
 
 void sistema::agregarProfesores()
 {
@@ -778,16 +772,16 @@ void sistema::consultaPlan()
 	carrera* ca;
 	imprimirCadena("Digite el codigo de la carrera: ");
 	ca = global_carrera->buscarCodigoCarrera(leerEntero());
-	if (ca == nullptr)
+	if (ca != nullptr)
 	{
-		imprimirCadena("El codigo ingresado es in correcto o la carrera no existe..");
+		cout << "Carrera: " << ca->getNombre();
+		cout << "Tipo: " << ca->getGrado();
+		imprimirCadena("Plan de estudios: ");
+		imprimirCadena(ca->getPlan().toString());
 	}
 	else
 	{
-		cout << "Carrera: " << ca->getNombre() << endl;
-		cout << "Tipo: " << ca->getGrado() << endl;
-		imprimirCadena("Plan de estudios: ");
-		imprimirCadena(ca->getPlan().toString());
+		cout << "No hay cursos agregados" << endl;
 	}
 	
 }
