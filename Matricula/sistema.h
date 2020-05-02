@@ -45,14 +45,14 @@ public:
 	void agregarCurso();
 	void agregarEstudiante();
 	void agregarGrupo();
+	void ConsultaGeneralMatricula();
 	void MostrarEmpadronados();
-	void ConsultaPlan();
 	void agregarProfesores();
 	void MostrarProfesores();
 	void ingresoDeNotas();
 	void consultaPlan();
 	void consultaGeneralMatricula();
-	void procesoMatricula();
+	void procesodeMatricula();
 };
 
 
