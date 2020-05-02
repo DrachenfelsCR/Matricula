@@ -24,7 +24,7 @@ string plan_estudios::toString()
 	s << this->l1->toString();
 	return s.str();
 }
-lista<curso>* plan_estudios::getListaCurso()
+lista<curso>*plan_estudios::getListaCurso()
 {
 	return this->l1;
 }
