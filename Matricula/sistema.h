@@ -52,7 +52,7 @@ public:
 	void ingresoDeNotas();
 	void consultaPlan();
 	void consultaGeneralMatricula();
-	void procesoMatricula();
+	void procesodeMatricula();
 };
 
 
