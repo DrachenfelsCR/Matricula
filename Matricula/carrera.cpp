@@ -1,8 +1,9 @@
 #include "carrera.h"
 
-carrera::carrera(int codigo_carrera, string grado, string nombre_carrera, string facultad)
+carrera::carrera(int codigo_carrera, string grado, string nombre_carrera, string facultad,string escuela)
 {
 	this->estado = true;
+	this->escuela = escuela;
 	this->codigo_carrera = codigo_carrera;
 	this->grado = grado;
 	this->nombre_carrera = nombre_carrera;
@@ -80,8 +81,8 @@ string carrera::getEscuela()
 string carrera::toString()
 {
 	stringstream s;
-	s << "Carrera: " << nombre_carrera << endl;
-	s << "Escuela: " << escuela << endl;
+	s << "Carrera: " << this->nombre_carrera << endl;
+	s << "Escuela: " << this->escuela << endl;
 	return s.str();
 }
 

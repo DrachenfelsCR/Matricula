@@ -353,7 +353,7 @@ void sistema::agregarUsuario(lista<usuario>* list)
 	}
 	else if (opc == 4)
 	{
-		estudiante* n_estudiante = new estudiante(id, nombre_usuario, nombre_completo, clave,0,0);
+		estudiante* n_estudiante = new estudiante(id, nombre_usuario, nombre_completo, clave,0,0,"","");
 		list->insertarInicio(n_estudiante);
 		imprimirCadena("Nuevo estudiante creado..");
 	}
@@ -407,13 +407,11 @@ void sistema::agregarCarrera()
 	nombre_carrera = leerCadena();
 	imprimirCadena("Grado: ");
 	grado = leerCadena();
-	carrera* career = new carrera(codigo_carrera, grado, nombre_carrera, facultad);
 	imprimirCadena("Ingrese Escuela: ");
 	escuela = leerCadena();
-	career->setEscuela(escuela);
 	imprimirCadena("Ingrese Facultad: ");
 	facultad = leerCadena();
-	career->setFacultad(facultad);
+	carrera* career = new carrera(codigo_carrera, grado, nombre_carrera, facultad,escuela);
 //------------------------------------------------------------
 	global_carrera->insertarInicio(career);
 }
@@ -454,24 +452,32 @@ void sistema::agregarCurso()
 
 void sistema::agregarEstudiante() {
 	string id;
+	int a;
 	string nombre;
+	
 	int telefono;
-	//int codigo;
-	imprimirCadena("Ingrese cedula del nuevo Estudiante");
+	imprimirCadena("Digite el numero cedula");
 	id = leerCadena();
-	imprimirCadena("Ingrese el nombre");
-	nombre = leerCadena();
-	imprimirCadena("Ingrese un Numero Telefonico");
+	imprimirCadena("Digite el numero de telefono");
 	telefono = leerEntero();
-	imprimirCadena("Ingrese el Numero de Carrera");
-	int a = leerEntero();
-	if (global_carrera->buscarElemento(a))
+	imprimirCadena("Digite el numero de carrera");
+	a = leerEntero();
+		if (global_carrera->buscarElemento(a))
 	{
-		estudiante* estedu = new estudiante(id,"",nombre,"",telefono,a);
-		global_estudiantes->insertarInicio(estedu);
-		global_carrera->buscarCodigoCarrera(a)->getPadron()->insertarInicio(estedu);
-		imprimirCadena(estedu->toString2());
-		imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
+			string carrera = global_carrera->buscarCodigoCarrera(a)->getNombre();
+			string escuela = global_carrera->buscarCodigoCarrera(a)->getEscuela();
+			while (!(lista_global->buscarID(id)))
+			{
+				imprimirCadena("Digito de  manera incorrecta el numero cedula o el numero de cedula no existe en el sistema");
+				imprimirCadena("Digite el numero cedula");
+				id = leerCadena();
+			}
+		
+			estudiante* estedu = new estudiante(lista_global->buscarId(id)->getId(), lista_global->buscarId(id)->getNombreUsuario(),lista_global->buscarId(id)->getNombreCompleto(), "", telefono, a,carrera,escuela);
+			global_estudiantes->insertarInicio(estedu);
+			global_carrera->buscarCodigoCarrera(a)->getPadron()->insertarInicio(estedu);
+			imprimirCadena(estedu->toString2());
+			imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
 
 		
 	}
@@ -479,6 +485,9 @@ void sistema::agregarEstudiante() {
 	{
 		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
 	}
+
+	
+	
 }
 
 void sistema::agregarGrupo()

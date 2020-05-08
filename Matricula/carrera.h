@@ -21,7 +21,7 @@ private:
 	string escuela;
 	lista<profesor>* l2;
 public:
-	carrera(int, string, string, string);
+	carrera(int, string, string, string,string);
 	void setCodigo(int);
 	void setGrado(string);
 	void activarCarrera();

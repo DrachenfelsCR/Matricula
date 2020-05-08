@@ -1,11 +1,13 @@
 #include "estudiante.h"
 
-estudiante::estudiante(string id, string nombre_usuario, string nombre_completo, string clave,int telefono,int codigo_carrera) : usuario(id, nombre_usuario, nombre_completo, clave)
+estudiante::estudiante(string id, string nombre_usuario, string nombre_completo, string clave,int telefono,int codigo_carrera,string carrera,string escuela) : usuario(id, nombre_usuario, nombre_completo, clave)
 {
 	usuario::rol = "usuario-estudiante";
 	this->telefono = telefono;
 	this->codigo_carrera = codigo_carrera;
 	this->l1 = new lista<curso_estudiante>;
+	this->carrera = carrera;
+	this->escuela = escuela;
 }
 
 estudiante::~estudiante()
@@ -61,7 +63,7 @@ string estudiante::toString()
 string estudiante::toString2()
 {
 	stringstream s;
-	s << "El Estudiante" << getNombreCompleto() << " fue empadronado en : " << endl;
+	s << "El Estudiante  " << getNombreCompleto() << " fue empadronado en : " << endl;
 	return s.str();
 }
 string estudiante::toString3()
