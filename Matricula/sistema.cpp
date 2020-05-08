@@ -241,6 +241,8 @@ void sistema::ManejoDeEscuelas()
 		case 1:
 			limpiaPantalla();
 			consultaPlan();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 2:
 			limpiaPantalla();
@@ -249,13 +251,22 @@ void sistema::ManejoDeEscuelas()
 			cin.get();
 			break;
 		case 3:
+			limpiaPantalla();
 			consultaGeneralMatricula();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 4:
+			limpiaPantalla();
 			agregarProfesores();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 5:
+			limpiaPantalla();
 			MostrarProfesores();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 6:
 			Principal();
@@ -282,12 +293,20 @@ void sistema::ManejoDeMatricula()
 		switch (opc)
 		{
 		case 1:
+			limpiaPantalla();
 			procesoMatricula();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 2:
+			limpiaPantalla();
 			consultaMatriculaPorEstudiante();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 3:
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 4:
 			Principal();
@@ -317,10 +336,14 @@ void sistema::ManejoDeRegistro()
 		case 1:
 			limpiaPantalla();
 			ingresoNotitas();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 2:
 			limpiaPantalla();
 			visualizarNotitas();
+			imprimirCadena("<Enter>");
+			cin.get();
 			break;
 		case 3:
 			Principal();

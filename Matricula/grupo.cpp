@@ -93,7 +93,7 @@ string grupo::toString()
 {
 	stringstream s;
 		s << " Curso" << " NCR" << "Grupo" << "Cupo" << "Horario" << endl;
-		s << codigo_curso << NRC << numeroGrupo << cupo << horaInicio << horaFinal << endl;
+		s << codigo_curso<<"      " << NRC<<"       " << numeroGrupo <<"    "<< cupo <<"     "<< horaInicio <<"      "<< horaFinal << endl;
 		return s.str();
 }
 
