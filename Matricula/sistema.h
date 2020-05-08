@@ -45,13 +45,13 @@ public:
 	void agregarCurso();
 	void agregarEstudiante();
 	void agregarGrupo();
-	void ConsultaGeneralMatricula();
+	void consultaGeneralMatricula();
 	void MostrarEmpadronados();
 	void agregarProfesores();
 	void MostrarProfesores();
 	void ingresoDeNotas();
 	void consultaPlan();
-	void consultaGeneralMatricula();
+	void consultaMatriculaPorEstudiante();
 	void procesoMatricula();
 };
 

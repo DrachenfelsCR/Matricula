@@ -36,5 +36,6 @@
     <ClInclude Include="sistema.h" />
     <ClInclude Include="usuario.h" />
     <ClInclude Include="utiles.h" />
+    <ClInclude Include="iterador.h" />
   </ItemGroup>
 </Project>

@@ -22,6 +22,7 @@ private:
 	int cupo;
 	string horarioDia;
 	int codigo_carrera;
+	int cantidad;
 public:
 	grupo(int, string, string, int, string,int,int,string,string,int);
 	//LISTA
@@ -45,12 +46,15 @@ public:
 	string toStringEstudiantes();
 	string toStringPorCiclo(ciclo_lectivo*);
 	string getNombre();
+	string getDias();
 	int getCodCarrera();
 	int getCreditos();
 	string getID();
 	ciclo_lectivo* getCiclo();
 	lista<estudiante>* getEstudiantes();
 	lista<nota>* getListaNotas();
+	int getCantidad();
+	void aumentar();
 	~grupo();
 
 

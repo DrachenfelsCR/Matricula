@@ -15,6 +15,7 @@ grupo::grupo(int NRC, string codigo_curso, string nombre_curso, int creditos, st
 	this->id_profesor = id_profesor;
 	this->creditos = creditos;
 	this->codigo_carrera = codigo;
+	this->cantidad = 0;
 }
 
 grupo::~grupo()
@@ -134,4 +135,19 @@ lista<nota>* grupo::getListaNotas()
 lista<estudiante>* grupo::getEstudiantes()
 {
 	return this->lista_E;
+}
+
+void grupo::aumentar()
+{
+	this->cantidad++;
+}
+
+int grupo::getCantidad()
+{
+	return this->cantidad;
+}
+
+string grupo::getDias()
+{
+	return this->horarioDia;
 }

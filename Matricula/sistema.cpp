@@ -263,6 +263,7 @@ void sistema::ManejoDeMatricula()
 			procesoMatricula();
 			break;
 		case 2:
+			consultaMatriculaPorEstudiante();
 			break;
 		case 3:
 			break;
@@ -556,10 +557,6 @@ void sistema::agregarGrupo()
 	imprimirCadena("Grupo Creado Existosamente");
 }
 
-void sistema::ConsultaGeneralMatricula()
-{
-}
-
 void sistema::MostrarEmpadronados()
 {
 	imprimirCadena("Ingrese codigo de carrera ");
@@ -713,8 +710,11 @@ void sistema::procesoMatricula()
 						}
 						else
 						{
+							string nomProfesor = global_profesores->buscarId(gAux->getID())->getNombreCompleto();
 							gAux->getEstudiantes()->insertarFinal(aux);
-							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0);
+							gAux->aumentar();
+							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0, gAux->getNRC(), gAux->getNumeroGrupo(), nomProfesor, gAux->getCupo(), gAux->getCantidad(), gAux->getHoraInicio(), gAux->getHoraFinal(), gAux->getDias());
+							nCurso->setCiclo(actual);
 							aux->getListaCursos()->insertarFinal(nCurso);
 							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
 							imprimirCadena(gAux->toString());
@@ -857,3 +857,59 @@ void sistema::consultaGeneralMatricula()
 	
 }
 
+void sistema::consultaMatriculaPorEstudiante()
+{
+	int opc = 1;
+	string id;
+	estudiante* aux = nullptr;
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	string carr;
+	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+	{
+		id = this->usuarioLogeado->getId();
+		aux = global_estudiantes->buscarId(id);
+		carr = aux->getCarrera();
+		if (aux == nullptr)
+		{
+			imprimirCadena("Error estudiante no se encuentra..");
+		}
+	}
+	else if (this->usuarioLogeado->getRol() == "usuario-registro" || this->usuarioLogeado->getRol() == "usuario-admin")
+	{
+		imprimirCadena("Digite el id del estudiante que quiere verificar");
+		id = leerCadena();
+		aux = global_estudiantes->buscarId(id);
+		while (opc == 1)
+		{
+			if (aux == nullptr)
+			{
+				imprimirCadena("El ID no ha sido encontrado");
+				imprimirCadena("Desea intentar ingresar de nuevo el id?");
+				imprimirCadena("1.Si / 2.No");
+				opc = leerSeleccion(3);
+			}
+			else
+			{
+				imprimirCadena("Digite el anio del periodo lectivo");
+				int anio = leerEntero();
+				imprimirCadena("Digite el ciclo del periodo lectivo(1,2 o 3)");
+				int ciclo = leerSeleccion(4);
+				ciclo_lectivo* ciclito = nullptr;
+				ciclito = global_ciclos->buscarCicloElectivo2(anio,ciclo);
+				if (ciclito == nullptr)
+				{
+					imprimirCadena("El ciclo ingreso no existe..");
+					imprimirCadena("Desea intentar de nuevo?");
+					imprimirCadena("1.Si / 2.No");
+					opc = leerSeleccion(3);
+				}
+				else
+				{
+					imprimirCadena(aux->getListaCursos()->toStringMateriasPorCiclo(ciclito->getAnio(), ciclito->getCiclo()));
+					opc = 2;
+				}
+			}
+		}
+		
+	}
+}
