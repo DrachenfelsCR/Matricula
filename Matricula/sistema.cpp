@@ -6,7 +6,17 @@ sistema::sistema()
 	//----------AGREGADO ADMIN ESTANDAR---------------------
 	lista_global = new lista<usuario>;
 	admin* administrador = new admin("admin", "admin", "admin", "admin101");
-	lista_global->insertarInicio(administrador);
+	lista_global->insertarFinal(administrador);
+
+	//------------------
+	estudiante* est = new estudiante("123" , "Fakercito", "Lee Sang-hyeok", "Una123", 0, 0, "", "");
+	profesor* prof = new profesor("124", "cloria", "Carlos Loria", "Una124");
+	ciclo_lectivo* cicloAct = new ciclo_lectivo(2020, 1);
+	cicloAct->setFechaInicio(5, 2, 2020);
+	cicloAct->setFechaFinal(5, 6, 2020);
+	carrera* career = new carrera(666, "Bachillerato", "Ing.Sistemas", "Ciencias Exactas", "Informatica");
+	
+	//------------------
 	this->usuarioLogeado = nullptr;
 	//------------------------------------------
 	this->logged_user = nullptr;
@@ -16,6 +26,13 @@ sistema::sistema()
 	this->global_estudiantes = new lista<estudiante>;
 	this->global_profesores = new lista<profesor>;
 	this->global_Grupos = new lista<grupo>;
+	//-----------------------------------------
+	lista_global->insertarFinal(est);
+	lista_global->insertarFinal(prof);
+	global_carrera->insertarInicio(career);
+	global_estudiantes->insertarFinal(est);
+	global_profesores->insertarFinal(prof);
+	global_ciclos->insertarFinal(cicloAct);
 }
 
 void sistema::Principal()
@@ -263,6 +280,7 @@ void sistema::ManejoDeMatricula()
 			procesoMatricula();
 			break;
 		case 2:
+			consultaMatriculaPorEstudiante();
 			break;
 		case 3:
 			break;
@@ -904,5 +922,62 @@ void sistema::consultaGeneralMatricula()
 		cout << "El NRC " << NRC << " no se encuentra registrado";
 	}
 	
+}
+
+void sistema::consultaMatriculaPorEstudiante()
+{
+	int opc = 1;
+	string id;
+	estudiante* aux = nullptr;
+	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	string carr;
+	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+	{
+		id = this->usuarioLogeado->getId();
+		aux = global_estudiantes->buscarId(id);
+		carr = aux->getCarrera();
+		if (aux == nullptr)
+		{
+			imprimirCadena("Error estudiante no se encuentra..");
+		}
+	}
+	else if (this->usuarioLogeado->getRol() == "usuario-registro" || this->usuarioLogeado->getRol() == "usuario-admin")
+	{
+		imprimirCadena("Digite el id del estudiante que quiere verificar");
+		id = leerCadena();
+		aux = global_estudiantes->buscarId(id);
+		while (opc == 1)
+		{
+			if (aux == nullptr)
+			{
+				imprimirCadena("El ID no ha sido encontrado");
+				imprimirCadena("Desea intentar ingresar de nuevo el id?");
+				imprimirCadena("1.Si / 2.No");
+				opc = leerSeleccion(3);
+			}
+			else
+			{
+				imprimirCadena("Digite el anio del periodo lectivo");
+				int anio = leerEntero();
+				imprimirCadena("Digite el ciclo del periodo lectivo(1,2 o 3)");
+				int ciclo = leerSeleccion(4);
+				ciclo_lectivo* ciclito = nullptr;
+				ciclito = global_ciclos->buscarCicloElectivo2(anio, ciclo);
+				if (ciclito == nullptr)
+				{
+					imprimirCadena("El ciclo ingreso no existe..");
+					imprimirCadena("Desea intentar de nuevo?");
+					imprimirCadena("1.Si / 2.No");
+					opc = leerSeleccion(3);
+				}
+				else
+				{
+					imprimirCadena(aux->getListaCursos()->toStringMateriasPorCiclo(ciclito->getAnio(), ciclito->getCiclo()));
+					opc = 2;
+				}
+			}
+		}
+
+	}
 }
 
