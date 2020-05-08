@@ -36,6 +36,7 @@ public:
 	void setCreditos(int);
 	void setID(string);
 	void setCiclo(ciclo_lectivo*);
+	void setCantidad(int);
 	int getNRC();
 	int getCupo();
 	string getHoraInicio();

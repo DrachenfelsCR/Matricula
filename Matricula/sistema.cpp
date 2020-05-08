@@ -7,7 +7,7 @@ sistema::sistema()
 	lista_global = new lista<usuario>;
 	admin* administrador = new admin("admin", "admin", "admin", "admin101");
 	lista_global->insertarFinal(administrador);
-
+	
 	//------------------
 	estudiante* est = new estudiante("123" , "Fakercito", "Lee Sang-hyeok", "Una123", 0, 0, "", "");
 	estudiante* est1 = new estudiante("125", "Dopacito", "Jeong Sang-gil", "Una124", 0, 0, "", "");
@@ -28,6 +28,7 @@ sistema::sistema()
 	this->global_estudiantes = new lista<estudiante>;
 	this->global_profesores = new lista<profesor>;
 	this->global_Grupos = new lista<grupo>;
+	this->global_admin = new lista<admin>;
 	//-----------------------------------------
 	lista_global->insertarFinal(est);
 	lista_global->insertarFinal(est1);
@@ -38,6 +39,7 @@ sistema::sistema()
 	global_profesores->insertarFinal(prof);
 	global_ciclos->insertarFinal(cicloAct);
 	global_cursos->insertarInicio(cursito);
+	global_admin->insertarFinal(administrador);
 }
 
 void sistema::Principal()

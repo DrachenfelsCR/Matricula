@@ -240,3 +240,10 @@ string LoginMenu() {
 	
 	return s.str();
 }
+
+int convertirInt(string s) {
+	stringstream r(s);
+	int v;
+	r >> v;
+	return v;
+}

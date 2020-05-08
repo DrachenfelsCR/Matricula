@@ -61,6 +61,12 @@ void grupo::setCiclo(ciclo_lectivo* ciclo)
 {
 	this->ciclo = ciclo;
 }
+
+void grupo::setCantidad(int cantidad)
+{
+	this->cantidad = cantidad;
+}
+
 int grupo::getCupo() {
 	return cupo;
 }

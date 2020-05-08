@@ -31,6 +31,7 @@ public:
 	void insertarRequisito(string*);
 	string toString();
 	string toString2();
+	lista<string>* getlistaReq();
 	~curso();
 
 

@@ -26,6 +26,5 @@ string menuRegistro();
 string LoginMenu();
 bool stringSix(string);
 bool stringUpperCase(string);
-
-
+int convertirInt(string);
 #endif // !UTILES_H
