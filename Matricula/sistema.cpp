@@ -663,7 +663,7 @@ void sistema::procesoMatricula()
 		while (opc == 1)
 		{
 			imprimirCadena("Digite el ID del usuario al que se matriculara: ");
-			id = leerCadenaNoVacia();
+			id = leerCadena();
 			aux = global_estudiantes->buscarId(id);
 			if (aux == nullptr)
 			{
@@ -675,6 +675,44 @@ void sistema::procesoMatricula()
 			else
 			{
 				opc = 2;
+				imprimirCadena("El periodo lectivo actual es: ");
+				if (actual == nullptr)
+				{
+					imprimirCadena("No hay ciclos lectivos agregados por lo cual no se puede matricular ningun curso..");
+				}
+				else
+				{
+					cout << "Ciclo: " << actual->getCiclo() << endl;
+					cout << "Annio: " << actual->getAnio() << endl;
+					imprimirCadena("----------------------------------------------------------------");
+					imprimirCadena("	Informe Matricula	");
+					cout << "Carrera: " << carr << endl;
+					cout << "Estudiante: " << aux->getNombreCompleto() << endl;
+					if (global_Grupos->esVacia())
+					{
+						imprimirCadena("No existen grupos creados");
+					}
+					else
+					{
+						imprimirCadena(global_Grupos->toStringIteradorCiclo(actual->getCiclo(), actual->getAnio()));
+						imprimirCadena("\nDigite el NRC del grupo en el que desea matricularse: ");
+						NRC = leerEntero();
+						grupo* gAux = global_Grupos->buscarNRC(NRC);
+						if (gAux == nullptr)
+						{
+							imprimirCadena("No existe un grupo con el NRC ingresado");
+						}
+						else
+						{
+							gAux->getEstudiantes()->insertarFinal(aux);
+							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0);
+							aux->getListaCursos()->insertarFinal(nCurso);
+							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
+							imprimirCadena(gAux->toString());
+						}
+					}
+				}
+
 			}
 		}	
 	}
@@ -683,44 +721,6 @@ void sistema::procesoMatricula()
 		imprimirCadena("No tiene el rol adecuado para acceder a esta opcion");
 	}
 	//---------------------------------------------------------
-	if (datosCorrectos == true)
-	{
-		imprimirCadena("El periodo lectivo actual es: ");
-		if (actual == nullptr)
-		{
-			imprimirCadena("No hay ciclos lectivos agregados por lo cual no se puede matricular ningun curso..");
-		}
-		else
-		{
-			cout << "Ciclo: " << actual->getCiclo() << endl;
-			cout << "Annio: " << actual->getAnio() << endl;
-			imprimirCadena("----------------------------------------------------------------");
-			imprimirCadena("	Informe Matricula	");
-			cout << "Carrera: " << carr << endl;
-			cout << "Estudiante: " << aux->getNombreCompleto() << endl;
-			if (global_Grupos->esVacia())
-			{
-				imprimirCadena("No existen grupos creados");
-			}
-			else
-			{
-				imprimirCadena(global_Grupos->toStringIteradorCiclo(actual->getCiclo(), actual->getAnio()));
-				imprimirCadena("\nDigite el NRC del grupo en el que desea matricularse: ");
-				NRC = leerEntero();
-				grupo* gAux = global_Grupos->buscarNRC(NRC);
-				if (gAux == nullptr)
-				{
-					imprimirCadena("No existe un grupo con el NRC ingresado");
-				}
-				else
-				{
-					gAux->getEstudiantes()->insertarFinal(aux);
-					curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0);
-					aux->getListaCursos()->insertarFinal(nCurso);
-				}
-			}
-		}
-	}
 	
 }
 
