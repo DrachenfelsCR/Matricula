@@ -13,7 +13,7 @@ protected:
 	string carrera;
 	lista<curso_estudiante>* l1;
 public:
-	estudiante(string, string, string, string,int,int);
+	estudiante(string, string, string, string,int,int,string,string);
 	~estudiante();
 	void setTelefono(int);
 	void setEscuela(string);
