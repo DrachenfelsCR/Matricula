@@ -6,9 +6,11 @@ template<class T>
 class lista
 {
 protected:
-	nodo<T>* primero;
 	int size;
+	ifstream input;
+	ofstream foutput;
 public:
+	nodo<T>* primero;
 	lista();
 	bool esVacia();
 	void insertarInicio(T*);
@@ -37,7 +39,7 @@ public:
 	string toStringProfesorCursos(int,int,string);
 	string toStringIteradorCiclo(int,int);
 	string toStringMateriasPorCiclo(int,int);
-	
+	void save(string);
 	T* buscarT(T* aux);
 	void cargarLista(lista<T>*, string);
 	~lista();
@@ -63,6 +65,22 @@ bool lista<T>::esVacia() {
 	
 }
 
+template<class T>
+void lista<T>::save(string fileName)
+{
+	foutput.open(fileName.c_str());
+	if (foutput.good())
+	{
+		nodo<T>* actual = primero;
+		while (actual != NULL)
+		{
+			(actual->getInfo())->save(foutput);
+			actual = actual->getSig();
+		}
+
+	}
+	foutput.close();
+}
 
 template<class T>
 void lista<T>::insertarInicio(T* dato) {

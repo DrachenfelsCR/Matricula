@@ -57,6 +57,7 @@ public:
 	lista<nota>* getListaNotas();
 	int getCantidad();
 	void aumentar();
+	void save(ofstream&);
 	~grupo();
 
 

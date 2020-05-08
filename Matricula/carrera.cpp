@@ -101,3 +101,21 @@ string carrera::toStringPlan()
 	return s.str();
 }
 
+void carrera::save(ofstream& outp)
+{
+	outp << this->codigo_carrera << '\t';
+	outp << this->nombre_carrera << '\t';
+	outp << this->grado << '\t';
+	if (this->estado == false)
+	{
+		outp << "false" << '\t';
+	}
+	else
+	{
+		outp << "true" << '\t';
+	}
+	outp << this->facultad << '\t';
+	outp << this->escuela << '\t';
+
+}
+

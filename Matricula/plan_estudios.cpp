@@ -28,3 +28,13 @@ lista<curso>*plan_estudios::getListaCurso()
 {
 	return this->l1;
 }
+
+void plan_estudios::save(ofstream& outp)
+{
+	nodo<curso>* actual = this->getListaCurso()->primero;
+	while (actual->getSig() != nullptr)
+	{
+
+	}
+}
+

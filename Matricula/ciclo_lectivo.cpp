@@ -64,6 +64,15 @@ bool ciclo_lectivo::operator ==(ciclo_lectivo* ciclo)
 	return false;
 }
 
+void  ciclo_lectivo::save(ofstream& outp)
+{
+	outp << this->anio << '\t';
+	outp << this->ciclo << '\t';
+	outp << this->fechaInicio << '\t';
+	outp << this->fechaFinal << '\n';
+}
+
+
 ciclo_lectivo::~ciclo_lectivo()
 {
 }

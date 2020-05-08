@@ -18,6 +18,7 @@ public:
 	string toString();
 	lista<curso>* getListaCurso();
 	~plan_estudios();
+	void save(ofstream&);
 
 };
 

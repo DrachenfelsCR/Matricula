@@ -91,7 +91,7 @@ void estudiante::save(ofstream& outp)
 	outp << getTelefono()<<'\t';
 	outp << getEscuela() << '\t';
 	outp << getCodigo() << '\t';
-	out << getCarrera() << '\n';
+	outp << getCarrera() << '\n';
 
 }
 

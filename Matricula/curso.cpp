@@ -7,7 +7,7 @@ curso::curso()
 	this->creditos = 0;
 	this->horas_semanales = 0;
 	this->estado = true;
-	this->listaReq = new lista<string>;
+	this->listaReq = new lista<curso>;
 }
 
 curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int creditos, int horas)
@@ -18,7 +18,7 @@ curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int cr
 	this->creditos = creditos;
 	this->horas_semanales = horas;
 	this->estado = true;
-	this->listaReq = new lista<string>;
+	this->listaReq = new lista<curso>;
 }
 void curso::setCodigo(string codigo_curso)
 {
@@ -71,12 +71,12 @@ bool curso::getEstado()
 {
 	return this->estado;
 }
-void curso::insertarRequisito(string* req)
+void curso::insertarRequisito(curso* req)
 {
 	this->listaReq->insertarInicio(req);
 }
 
-lista<string>* curso::getlistaReq()
+lista<curso>* curso::getlistaReq()
 {
 	return this->listaReq;
 }
@@ -96,6 +96,24 @@ string curso::toString2()
 	stringstream s;
 	s << codigo_curso << "		" << nombre_curso << "		" << creditos << this->listaReq->toStringIterador() << endl;
 	return s.str();
+}
+
+void curso::save(ofstream& outp)
+{
+	outp << this->codigo_curso << '\t';
+	outp << this->nombre_curso << '\t';
+	outp << this->tipo_curso << '\t';
+	outp << this->creditos << '\t';
+	outp << this->horas_semanales << '\t';
+	if (this->estado == false)
+	{
+		outp << "false" << '\t';
+	}
+	else
+	{
+		outp << "true" << '\t';
+	}
+	
 }
 
 curso::~curso()

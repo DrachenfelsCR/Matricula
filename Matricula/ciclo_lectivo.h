@@ -2,6 +2,7 @@
 #define CICLO_LECTIVO_H
 #include <iostream>
 #include <sstream>
+#include <fstream>
 using namespace std;
 class ciclo_lectivo
 {
@@ -23,7 +24,7 @@ public:
 	string toString();
 	~ciclo_lectivo();
 	bool operator ==(ciclo_lectivo*);
-
+	void save(ofstream&);
 
 };
 

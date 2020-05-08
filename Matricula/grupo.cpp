@@ -165,3 +165,22 @@ string grupo::getDias()
 {
 	return this->horarioDia;
 }
+
+
+void  grupo::save(ofstream& outp)
+{
+	outp << this->NRC << '\t';
+	outp << this->numeroGrupo << '\t';
+	outp << this->codigo_curso << '\t';
+	outp << this->nombre_curso << '\t';
+	outp << this->creditos << '\t';
+	outp << this->horaInicio << '\t';
+	outp << this->horaFinal << '\t';
+	outp << this->id_profesor << '\t';
+	outp << this->ciclo->getAnio() << '\t';
+	outp << this->ciclo->getCiclo() << '\t';
+	outp << this->cupo << '\t';
+	outp << this->horarioDia << '\t';
+	outp << this->codigo_carrera << '\t';
+	outp << this->cantidad << '\n';
+}
