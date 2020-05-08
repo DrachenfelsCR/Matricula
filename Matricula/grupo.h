@@ -45,6 +45,7 @@ public:
 	string toString();
 	string toStringEstudiantes();
 	string toStringPorCiclo(ciclo_lectivo*);
+	string toStringProfesorCurso();
 	string getNombre();
 	string getDias();
 	int getCodCarrera();
