@@ -76,6 +76,11 @@ void curso::insertarRequisito(string* req)
 	this->listaReq->insertarInicio(req);
 }
 
+lista<string>* curso::getlistaReq()
+{
+	return this->listaReq;
+}
+
 string curso::toString()
 {
 	stringstream s;

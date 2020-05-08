@@ -48,6 +48,12 @@ void usuario::setClave(string clave)
 {
 	this->clave = clave;
 }
+
+void usuario::setRol(string rol)
+{
+	this->rol = rol;
+}
+
 string usuario::getId()
 {
 	return this->id;
