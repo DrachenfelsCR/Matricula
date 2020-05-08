@@ -1,7 +1,7 @@
 #ifndef NOTA_H
 #define NOTA_H
 #include <iostream>
-
+#include <sstream>
 using namespace std;
 
 class nota
@@ -17,6 +17,7 @@ public:
 	string getId();
 	void setNota(float);
 	void setID(string);
+	string toString();
 	
 
 };

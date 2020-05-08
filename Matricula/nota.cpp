@@ -17,6 +17,13 @@ void nota::setID(string id)
 	this->id = id;
 }
 
+string nota::toString()
+{
+	stringstream s;
+	s<< id << "      " << nombre << "    " << calificacion << "    " << endl;
+	return s.str();
+}
+
 float nota::getNota()
 {
 	return this->calificacion;
