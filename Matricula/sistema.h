@@ -55,6 +55,7 @@ public:
 	void consultaPlan();
 	void consultaMatriculaPorEstudiante();
 	void procesoMatricula();
+	void visualizarNotitas();
 };
 
 

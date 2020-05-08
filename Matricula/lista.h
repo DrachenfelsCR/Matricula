@@ -23,6 +23,7 @@ public:
 	T* buscarCicloElectivo2(int, int);
 	bool eliminarEspecifico(T*);
 	bool buscarID(string);
+	bool buscarNRCD(int);
 	bool buscarCodigoCurso(string);
 	T* buscaElCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
@@ -35,6 +36,7 @@ public:
 	string toStringProfesorCursos(int,int,string);
 	string toStringIteradorCiclo(int,int);
 	string toStringMateriasPorCiclo(int,int);
+	
 	T* buscarT(T* aux);
 	void cargarLista(lista<T>*, string);
 	~lista();
@@ -150,6 +152,22 @@ template<class T>
 	 }
 	 return false;
 }
+
+ template<class T>
+ inline bool lista<T>::buscarNRCD(int nrc)
+ {
+	 nodo<T>* actual;
+	 actual = primero;
+	 while (actual)
+	 {
+		 if ((actual->getInfo())->getNRC() == nrc)
+		 {
+			 return true;
+		 }
+		 actual = actual->getSig();
+	 }
+	 return false;
+ }
 
 template<class T>
  bool lista<T>::buscarCodigoCurso(string curso)
@@ -304,6 +322,7 @@ string lista<T>::toStringMateriasPorCiclo(int anio, int ciclo)
 	}
 	return s.str();
 }
+
 template<class T>
 T* lista<T>::buscarId(string id )
 {
