@@ -1,5 +1,5 @@
 #ifndef CARRERA_H
-#define CARRERA_h
+#define CARRERA_H
 #include <iostream>
 #include <sstream>
 #include "plan_estudios.h"

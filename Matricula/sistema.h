@@ -11,6 +11,7 @@
 #include "ciclo_lectivo.h"
 #include "carrera.h"
 #include "grupo.h"
+#include "iterador.h"
 using namespace std;
 
 class sistema {
@@ -56,6 +57,8 @@ public:
 	void consultaMatriculaPorEstudiante();
 	void procesoMatricula();
 	void visualizarNotitas();
+	void guardar();
+	void recuperar();
 };
 
 

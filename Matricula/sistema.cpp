@@ -30,7 +30,7 @@ sistema::sistema()
 	this->global_Grupos = new lista<grupo>;
 	this->global_admin = new lista<admin>;
 	//-----------------------------------------
-	lista_global->insertarFinal(est);
+	/*lista_global->insertarFinal(est);
 	lista_global->insertarFinal(est1);
 	lista_global->insertarFinal(prof);
 	global_carrera->insertarInicio(career);
@@ -39,7 +39,8 @@ sistema::sistema()
 	global_profesores->insertarFinal(prof);
 	global_ciclos->insertarFinal(cicloAct);
 	global_cursos->insertarInicio(cursito);
-	global_admin->insertarFinal(administrador);
+	global_admin->insertarFinal(administrador);*/
+	recuperar();
 }
 
 void sistema::Principal()
@@ -76,6 +77,7 @@ void sistema::Principal()
 			ManejoDeRegistro();
 			break;
 		case 6:
+			guardar();
 			exit(0);
 			break;
 		}
@@ -157,6 +159,7 @@ void sistema::ManejoSeguridadYAdministracion()
 			break;
 		case 2:
 			limpiaPantalla();
+			guardar();
 			imprimirCadena(lista_global->toString());
 			break;
 		case 3:
@@ -1070,3 +1073,17 @@ void sistema::consultaMatriculaPorEstudiante()
 	}
 }
 
+void sistema::guardar()
+{
+	global_estudiantes->save("Estudiantes.txt");
+	lista_global->save("Usuarios.txt");
+}
+
+void sistema::recuperar()
+{
+	iterador<usuario>* iterador1 = new iterador<usuario>();
+	iterador1->recuperarUser(lista_global,"Usuarios.txt" );
+	//-----------------
+	iterador<estudiante>* iterador2 = new iterador<estudiante>();
+	iterador2->recuperarEst(global_estudiantes, "Estudiantes.txt");
+}

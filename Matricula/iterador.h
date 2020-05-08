@@ -16,9 +16,9 @@ template <class T>
 class  iterador : public lista<T>
 {
 private:
-	nodo<T>* primero;
+	//nodo<T>* primero;
 public:
-	iterador(nodo<T>*);
+	iterador();
 	void recuperarUser(lista<usuario>*, string);
 	void recuperarEst(lista<estudiante>*, string);
 	void recuperarMan(lista<mantenimiento>*, string);
@@ -33,9 +33,9 @@ public:
 };
 
 template <class T>
-iterador<T>::iterador(nodo<T>* primero)
+iterador<T>::iterador()
 {
-	this->primero = primero;
+	//this->primero = primero;
 }
 
 template<class T>
@@ -64,7 +64,7 @@ void iterador<T>::recuperarUser(lista<usuario>* list1, string archivo)
 			list1->insertarFinal(usuarioRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 template<class T>
@@ -93,7 +93,7 @@ void iterador<T>::recuperarAdmin(lista<admin>* list1, string archivo)
 			list1->insertarFinal(adminRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 template<class T>
@@ -122,7 +122,7 @@ void iterador<T>::recuperarPro(lista<profesor>* list1, string archivo)
 			list1->insertarFinal(profeRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 
@@ -152,7 +152,7 @@ void iterador<T>::recuperarRegis(lista<registro>* list1, string archivo)
 			list1->insertarFinal(regisRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 template<class T>
@@ -181,7 +181,7 @@ void iterador<T>::recuperarMan(lista<mantenimiento>* list1, string archivo)
 			list1->insertarFinal(manRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 
@@ -228,11 +228,11 @@ void iterador<T>::recuperarEst(lista<estudiante>* list1, string archivo)
 		}
 		if (!input.eof())
 		{
-			estudiante* estudianteRecuperado = new usuario(id, nombre_usuario, nombre_completo, clave, telefonoR, codigo_carreraR, carrera, escuela);
+			estudiante* estudianteRecuperado = new estudiante(id, nombre_usuario, nombre_completo, clave, telefonoR, codigo_carreraR, carrera, escuela);
 			list1->insertarFinal(estudianteRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -267,7 +267,7 @@ void iterador<T>::recuperaCiclos(lista<ciclo_lectivo>* list1, string archivo)
 			list1->insertarFinal(cicloRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 template<class T>
@@ -293,7 +293,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 	input.open(archivo.c_str());
 	while (input.good())
 	{
-		getline(input, codigo_carrera '\t');
+		getline(input, codigo_carrera,'\t');
 		getline(input, nombre_carrera, '\t');
 		getline(input, grado, '\t');
 		getline(input, estado, '\t');
@@ -324,7 +324,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 			list1->insertarFinal(carreraRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 
@@ -368,7 +368,7 @@ void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string arc
 			list1->insertarFinal(cursoRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 
@@ -408,7 +408,7 @@ void iterador<T>::recuperarReqs(lista<curso>* list1, string archivo)
 			list1->insertarFinal(cursoRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 template<class T>
@@ -471,7 +471,7 @@ void iterador<T>::recuperarGrupo(lista<grupo>* list1, string archivo)
 			list1->insertarFinal(grupoRecuperado);
 		}
 	}
-	finput.close();
+	input.close();
 }
 
 #endif // !ITERADOR_H
