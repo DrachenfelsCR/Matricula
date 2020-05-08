@@ -126,6 +126,14 @@ string grupo::toStringPorCiclo(ciclo_lectivo*)
 	s << this->lista_E->toStringGrupo() << endl;
 	return s.str();
 }
+
+string grupo::toStringProfesorCurso()
+{
+	stringstream s;
+	s << NRC <<"       "<< codigo_curso <<"     "<< nombre_curso << endl;
+	return s.str();
+}
+
 lista<nota>* grupo::getListaNotas()
 {
 	return this->lista_N;

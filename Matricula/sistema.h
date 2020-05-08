@@ -50,6 +50,7 @@ public:
 	void agregarProfesores();
 	void MostrarProfesores();
 	void ingresoDeNotas();
+	void ingresoNotitas();
 	void consultaPlan();
 	void consultaGeneralMatricula();
 	void procesoMatricula();
