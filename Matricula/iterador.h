@@ -16,7 +16,7 @@ private:
 	nodo<T>* primero;
 public:
 	iterador(nodo<T>*);
-	void recuperarEst(lista<estudiante>*, string);
+	void recuperarUser(lista<usuario>*, string);
 };
 
 template <class T>
@@ -26,7 +26,7 @@ iterador<T>::iterador(nodo<T>* primero)
 }
 
 template<class T>
-void iterador<T>::recuperarEst(lista<estudiante>* list1, string archivo)
+void iterador<T>::recuperarUser(lista<usuario>* list1, string archivo)
 {
 	string id;
 	string nombre_usuario;
@@ -34,11 +34,7 @@ void iterador<T>::recuperarEst(lista<estudiante>* list1, string archivo)
 	string clave;
 	string estado;
 	string rol;
-	int telefono;
-	string escuela;
-	int codigo_carrera;
-	string carrera;
-	ifstream input;
+	
 	input.open(archivo.c_str());
 	while (input.good())
 	{
@@ -50,8 +46,8 @@ void iterador<T>::recuperarEst(lista<estudiante>* list1, string archivo)
 		getline(input, rol, '\n');
 		if (!input.eof())
 		{
+			usuario* usuarioRecuperado = 
 			
-
 		}
 	}
 

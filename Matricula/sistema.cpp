@@ -718,6 +718,7 @@ void sistema::procesoMatricula()
 							aux->getListaCursos()->insertarFinal(nCurso);
 							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
 							imprimirCadena(gAux->toString());
+							//----------------------------------------------------------
 						}
 					}
 				}
