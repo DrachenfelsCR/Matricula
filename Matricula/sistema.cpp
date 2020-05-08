@@ -714,25 +714,27 @@ void sistema::procesoMatricula()
 						}
 						else
 						{
+							string nomProfesor = global_profesores->buscarId(gAux->getID())->getNombreCompleto();
 							gAux->getEstudiantes()->insertarFinal(aux);
-							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0);
+							gAux->aumentar();
+							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0, gAux->getNRC(), gAux->getNumeroGrupo(), nomProfesor, gAux->getCupo(), gAux->getCantidad(), gAux->getHoraInicio(), gAux->getHoraFinal(), gAux->getDias());
+							nCurso->setCiclo(actual);
 							aux->getListaCursos()->insertarFinal(nCurso);
 							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
 							imprimirCadena(gAux->toString());
-							//----------------------------------------------------------
 						}
 					}
 				}
 
 			}
-		}	
+		}
 	}
 	else
 	{
 		imprimirCadena("No tiene el rol adecuado para acceder a esta opcion");
 	}
 	//---------------------------------------------------------
-	
+
 }
 
 void sistema::ingresoDeNotas()
