@@ -7,6 +7,7 @@ class admin: public usuario
 public:
 	admin(string, string, string, string);
 	~admin();
+	void save(ofstream&);
 };
 
 

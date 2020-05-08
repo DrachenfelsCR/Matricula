@@ -3,6 +3,7 @@
 #include "usuario.h"
 #include "curso.h"
 #include "curso_estudiante.h"
+#include <fstream>
 class estudiante : public usuario
 {
 
@@ -26,6 +27,7 @@ public:
 	string toString();
 	string toString2();
 	string toString3();
+	void save(ofstream&);
 	lista<curso_estudiante>* getListaCursos();
 };
 

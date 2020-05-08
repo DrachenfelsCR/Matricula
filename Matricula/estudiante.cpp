@@ -73,6 +73,28 @@ string estudiante::toString3()
 	return s.str();
 }
 
+void estudiante::save(ofstream& outp)
+{
+	outp << getId() << '\t';
+	outp << getNombreUsuario() << '\t';
+	outp << getNombreCompleto() << '\t';
+	outp << getClave() << '\t';
+	if (getEstado() == false)
+	{
+		outp << "false" << '\t';
+	}
+	else
+	{
+		outp << "true" << '\t';
+	}
+	outp << getRol() << '\t';
+	outp << getTelefono()<<'\t';
+	outp << getEscuela() << '\t';
+	outp << getCodigo() << '\t';
+	out << getCarrera() << '\n';
+
+}
+
 string estudiante::getCarrera()
 {
 	return this->carrera;

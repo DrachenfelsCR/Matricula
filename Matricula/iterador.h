@@ -106,7 +106,7 @@ void iterador<T>::recuperarPro(lista<profesor>* list1, string archivo)
 	string clave;
 	string estado;
 	string rol;
-
+	
 	input.open(archivo.c_str());
 	while (input.good())
 	{

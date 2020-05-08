@@ -24,7 +24,7 @@ public:
 	string toString();
 	string getCarrera();
 	~profesor();
-
+	void save(ofstream&);
 
 
 };

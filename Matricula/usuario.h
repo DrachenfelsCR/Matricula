@@ -1,12 +1,6 @@
-
-
-
-
-
-
-
 #include <iostream>
 #include <sstream>
+#include <fstream>
 #ifndef USUARIO_H
 #define USUARIO_H
 
@@ -35,6 +29,7 @@ public:
 	bool getEstado();
 	string getRol();
 	string toString();
+	void save(ofstream&);
 	void setRol(string);
 	//bool operator == (usuario&);
 	~usuario();

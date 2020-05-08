@@ -58,3 +58,8 @@ string profesor::toString()
 profesor::~profesor()
 {
 }
+
+void profesor::save(ofstream&)
+{
+
+}

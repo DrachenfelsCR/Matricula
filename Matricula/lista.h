@@ -24,6 +24,7 @@ public:
 	bool eliminarEspecifico(T*);
 	bool buscarID(string);
 	bool buscarNRCD(int);
+	
 	bool buscarCodigoCurso(string);
 	T* buscaElCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
@@ -168,6 +169,8 @@ template<class T>
 	 }
 	 return false;
  }
+
+ 
 
 template<class T>
  bool lista<T>::buscarCodigoCurso(string curso)
