@@ -145,6 +145,7 @@
     <ClInclude Include="curso_estudiante.h" />
     <ClInclude Include="estudiante.h" />
     <ClInclude Include="grupo.h" />
+    <ClInclude Include="iterador.h" />
     <ClInclude Include="lista.h" />
     <ClInclude Include="mantenimiento.h" />
     <ClInclude Include="nodo.h" />

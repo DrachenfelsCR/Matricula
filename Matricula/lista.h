@@ -1,6 +1,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 #include "nodo.h"
+#include <fstream>
 template<class T>
 class lista
 {
@@ -23,17 +24,17 @@ public:
 	bool eliminarEspecifico(T*);
 	bool buscarID(string);
 	bool buscarCodigoCurso(string);
-	T* buscaElCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
 	T* buscarId(string);
 	T* buscarNRC(int);
 	T* buscarGrupo(int,int,int);
-	T* buscarGrupoProfesor(int,int,string);
 	string buscarGrupoString(int, int, int);
 	string toStringGrupo();
 	string toStringIterador();
 	string toStringIteradorCiclo(int,int);
-	string toStringProfesorCursos(int,int,string);
+	string toStringMateriasPorCiclo(int,int);
+	T* buscarT(T* aux);
+	void cargarLista(lista<T>*, string);
 	~lista();
 };
 //------------------------------------
@@ -164,22 +165,6 @@ template<class T>
 	 return false;
 }
 
- template<class T>
-  T* lista<T>::buscaElCodigoCurso(string cod)
- {
-	  nodo<T>* actual;
-	  actual = primero;
-	  while (actual)
-	  {
-		  if ((actual->getInfo())->getCodigo() == cod)
-		  {
-			  return actual->getInfo();
-		  }
-		  actual = actual->getSig();
-	  }
-	  return NULL;
- }
-
 template<class T>
 T* lista<T>::buscarCodigoCarrera(int cod)
 {
@@ -210,6 +195,22 @@ bool lista<T>::buscar(T* aux)
 		actual = actual->getSig();
 	}
 	return false;
+}
+
+template<class T>
+T* lista<T>::buscarT(T* aux)
+{
+	nodo<T>* actual;
+	actual = primero;
+	while (actual)
+	{
+		if ((*actual->getInfo()) == (*aux))
+		{
+			return actual->getInfo();
+		}
+		actual = actual->getSig();
+	}
+	return nullptr;
 }
 
 template<class T>
@@ -246,6 +247,7 @@ T* lista<T>::buscarCredenciales(string usuario, string pass)
 	}
 	return nullptr;
 }
+
 template<class T>
 string lista<T>::toString()
 {
@@ -254,7 +256,7 @@ string lista<T>::toString()
 	{
 		nodo<T>* actual;
 		actual = primero;
-		while(actual != NULL)
+		while (actual != NULL)
 		{
 			s << actual->getInfo()->toString() << endl;
 			s << "-------------------------" << endl;
@@ -264,6 +266,26 @@ string lista<T>::toString()
 	return s.str();
 }
 
+template<class T>
+string lista<T>::toStringMateriasPorCiclo(int anio, int ciclo)
+{
+	stringstream s;
+	if (primero != NULL)
+	{
+		nodo<T>* actual;
+		actual = primero;
+		while (actual != NULL)
+		{
+			if (((actual->getInfo())->getCicloCurso()->getAnio()) == anio && ((actual->getInfo())->getCicloCurso()->getCiclo() == ciclo ))
+			{
+				s << actual->getInfo()->toString() << endl;
+				s << "-------------------------" << endl;
+			}
+			actual = actual->getSig();
+		}
+	}
+	return s.str();
+}
 template<class T>
 T* lista<T>::buscarId(string id )
 {
@@ -361,26 +383,6 @@ string lista<T>::toStringIteradorCiclo(int ciclo, int anio)
 		if ((actual->getInfo())->getCiclo()->getCiclo() == ciclo && (actual->getInfo())->getCiclo()->getAnio() == anio)
 		{
 			s << (actual->getInfo())->toString() << endl;
-		}
-		actual = actual->getSig();
-	}
-	return s.str();
-}
-
-
-
-template<class T>
-string lista<T>::toStringProfesorCursos(int a, int c, string p)
-{
-	stringstream s;
-	nodo<T>* actual = primero;
-	actual = primero;
-	while (actual)
-	{
-		s << "NRC" << "   " << "Codigo Curso" << "   " << "NombreCurso" << endl;
-		if (actual->getInfo()->getCiclo()->getAnio() ==a && actual->getInfo()->getCiclo()->getCiclo()==c && actual->getInfo()->getID()== p)
-		{
-			s << actual->getInfo()->toStringProfesorCurso() << endl;
 		}
 		actual = actual->getSig();
 	}
