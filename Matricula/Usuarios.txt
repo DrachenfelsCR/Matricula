@@ -1,5 +1,0 @@
-admin	admin	admin	admin101	true	usuario-admin
-125	jqwa	Jose	Una123	true	usuario-profesor
-admin	admin	admin	admin101	true	usuario-admin
-123	djqr	David Quesada	Una123	true	usuario-estudiante
-admin	admin	admin	admin101	true	usuario-admin

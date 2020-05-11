@@ -35,7 +35,7 @@ public:
 template <class T>
 iterador<T>::iterador()
 {
-	//this->primero = primero;
+	
 }
 
 template<class T>
