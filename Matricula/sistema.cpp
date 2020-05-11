@@ -6,15 +6,6 @@ sistema::sistema()
 	//----------AGREGADO ADMIN ESTANDAR---------------------
 	lista_global = new lista<usuario>;
 	//------------------
-	/*estudiante* est = new estudiante("123" , "Fakercito", "Lee Sang-hyeok", "Una123", 0, 0, "", "");
-	estudiante* est1 = new estudiante("125", "Dopacito", "Jeong Sang-gil", "Una124", 0, 0, "", "");
-	profesor* prof = new profesor("124", "cloria", "Carlos Loria", "Una124");
-	ciclo_lectivo* cicloAct = new ciclo_lectivo(2020, 1);
-	cicloAct->setFechaInicio(5, 2, 2020);
-	cicloAct->setFechaFinal(5, 6, 2020);
-	carrera* career = new carrera(666, "Bachillerato", "Ing.Sistemas", "Ciencias Exactas", "Informatica");*/
-	
-	//------------------
 	this->usuarioLogeado = nullptr;
 	//------------------------------------------
 	this->logged_user = nullptr;
@@ -27,22 +18,11 @@ sistema::sistema()
 	this->global_admin = new lista<admin>;
 	this->global_planes = new lista<plan_estudios>;
 	//-----------------------------------------
-	/*lista_global->insertarFinal(est);
-	lista_global->insertarFinal(est1);
-	lista_global->insertarFinal(prof);
-	global_carrera->insertarInicio(career);
-	global_estudiantes->insertarFinal(est);
-	global_estudiantes->insertarFinal(est1);
-	global_profesores->insertarFinal(prof);
-	//global_ciclos->insertarFinal(cicloAct);*/
 	recuperar();
 }
 
 void sistema::Principal()
 {
-	//admin* administrador = new admin("admin", "admin", "admin", "admin101");
-	//lista_global->insertarFinal(administrador);
-	//global_admin->insertarFinal(administrador);
 	if (logged_user == nullptr)
 	{
 		ManejoLogeo();
@@ -60,19 +40,55 @@ void sistema::Principal()
 		switch (opc)
 		{
 		case 1:
-			ManejoSeguridadYAdministracion();
+			if (this->usuarioLogeado->getRol() == "usuario-admin")
+			{
+				ManejoSeguridadYAdministracion();
+			}
+			else
+			{
+				imprimirCadena("Esta opcion solo la pueden acceder los admin");		
+			}
 			break;
 		case 2:
-			ManejoDeMantenimiento();
+			if (this->usuarioLogeado->getRol() == "usuario-admin" || this->usuarioLogeado->getRol() == "usuario-registro")
+			{
+				ManejoDeMantenimiento();
+			}
+			else
+			{
+				imprimirCadena("Esta opcion solo la pueden acceder los admin o usuarios de registro");
+			}	
 			break;
 		case 3:
-			ManejoDeEscuelas();
+			if (this->usuarioLogeado->getRol() == "usuario-admin" || this->usuarioLogeado->getRol() == "usuario-mantenimiento")
+			{
+				ManejoDeEscuelas();
+			}
+			else
+			{
+				imprimirCadena("Esta opcion solo la pueden acceder los admin o usuarios de mantenimiento");
+			}
 			break;
 		case 4:
-			ManejoDeMatricula();
+			if (this->usuarioLogeado->getRol() == "usuario-admin" || this->usuarioLogeado->getRol() == "usuario-estudiante")
+			{
+				ManejoDeMatricula();
+			}
+			else
+			{
+				imprimirCadena("Esta opcion solo la pueden acceder los admin o usuarios estudiante");
+			}
 			break;
 		case 5:
-			ManejoDeRegistro();
+			if (this->usuarioLogeado->getRol() == "usuario-admin" || this->usuarioLogeado->getRol() == "usuario-profesor")
+			{
+				ManejoDeRegistro();
+				
+			}
+			else
+			{
+				imprimirCadena("Esta opcion solo la pueden acceder los admin o usuarios profesor");
+			}
 			break;
 		case 6:
 			guardar();
@@ -121,7 +137,6 @@ void sistema::ManejoLogeo()
 void sistema::ManejoSeguridadYAdministracion()
 {
 	limpiaPantalla();
-	
 	opc = 0;
 	int cont = 1;
 	do
