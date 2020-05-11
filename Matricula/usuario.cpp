@@ -7,7 +7,6 @@ usuario::usuario()
 	this->nombre_usuario = "";
 	this->clave = "";
 	this->estado = true;
-	this->rol = "";
 }
 
 usuario::usuario(string id, string nombre_usuario, string nombre_completo,string clave)
@@ -17,7 +16,6 @@ usuario::usuario(string id, string nombre_usuario, string nombre_completo,string
 	this->nombre_completo = nombre_completo;
 	this->clave = clave;
 	this->estado = true;
-	this->rol = "";
 }
 
 

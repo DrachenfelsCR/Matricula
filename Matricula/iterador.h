@@ -61,6 +61,7 @@ void iterador<T>::recuperarUser(lista<usuario>* list1, string archivo)
 		if (!input.eof())
 		{
 			usuario* usuarioRecuperado = new usuario(id, nombre_usuario, nombre_completo, clave);
+			usuarioRecuperado->setRol(rol);
 			list1->insertarFinal(usuarioRecuperado);
 		}
 	}
