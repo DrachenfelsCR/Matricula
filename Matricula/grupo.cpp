@@ -154,6 +154,7 @@ lista<estudiante>* grupo::getEstudiantes()
 void grupo::aumentar()
 {
 	this->cantidad++;
+	this->cupo--;
 }
 
 int grupo::getCantidad()

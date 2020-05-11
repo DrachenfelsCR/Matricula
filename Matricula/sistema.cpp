@@ -4,6 +4,7 @@ sistema::sistema()
 {
 	opc = 0;
 	//----------AGREGADO ADMIN ESTANDAR---------------------
+	//LISTO
 	lista_global = new lista<usuario>;
 	//------------------
 	this->usuarioLogeado = nullptr;
@@ -364,50 +365,57 @@ void sistema::agregarUsuario(lista<usuario>* list)
 	nombre_completo = leerCadena();
 	imprimirCadena("Ingrese nickname o nombre de usuario: ");
 	nombre_usuario = leerCadena();
-	imprimirCadena("Digite la clave de acceso para el nuevo usuario: ");
-	clave =leerCadena();
-	while ((stringSix(clave) == false) || (stringUpperCase(clave) == false))
+	if (lista_global->buscarID(id))
 	{
-		imprimirCadena("Por favor, utilice una combinacion de al menos una mayuscula y sea de un largo de 6 caracteres minimos");
+		imprimirCadena("Ya existe un usuario con ese ID ");
+	}
+	else
+	{
+		imprimirCadena("Digite la clave de acceso para el nuevo usuario: ");
 		clave = leerCadena();
-	}
-	limpiaPantalla();
-	imprimirCadena("Elija el rol del usuario");
-	imprimirCadena("1-Usuario-Administrador");
-	imprimirCadena("2-Usuario-Mantenimiento");
-	imprimirCadena("3-Usuario-Registro");
-	imprimirCadena("4-Usuario-Estudiante");
-	imprimirCadena("5-Usuario-Profesor");
-	opc = leerSeleccion(5);
-	if (opc == 1)
-	{
-		admin* n_admin = new admin(id, nombre_usuario, nombre_completo, clave);
-		list->insertarInicio(n_admin);
-		imprimirCadena("Nuevo administrador creado..");
-	}
-	else if (opc == 2)
-	{
-		mantenimiento* n_mantenimiento = new mantenimiento(id, nombre_usuario, nombre_completo, clave);
-		list->insertarInicio(n_mantenimiento);
-		imprimirCadena("Nuevo usuario de mantenimiento creado..");
-	}
-	else if (opc == 3)
-	{
-		registro* n_registro = new registro(id, nombre_usuario, nombre_completo, clave);
-		list->insertarInicio(n_registro);
-		imprimirCadena("Nuevo usuario de registro creado..");
-	}
-	else if (opc == 4)
-	{
-		estudiante* n_estudiante = new estudiante(id, nombre_usuario, nombre_completo, clave,0,0,"","");
-		list->insertarInicio(n_estudiante);
-		imprimirCadena("Nuevo estudiante creado..");
-	}
-	else if (opc == 5)
-	{
-		profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
-		list->insertarInicio(n_profesor);
-		imprimirCadena("Nuevo profesor creado..");
+		while ((stringSix(clave) == false) || (stringUpperCase(clave) == false))
+		{
+			imprimirCadena("Por favor, utilice una combinacion de al menos una mayuscula y sea de un largo de 6 caracteres minimos");
+			clave = leerCadena();
+		}
+		limpiaPantalla();
+		imprimirCadena("Elija el rol del usuario");
+		imprimirCadena("1-Usuario-Administrador");
+		imprimirCadena("2-Usuario-Mantenimiento");
+		imprimirCadena("3-Usuario-Registro");
+		imprimirCadena("4-Usuario-Estudiante");
+		imprimirCadena("5-Usuario-Profesor");
+		opc = leerSeleccion(5);
+		if (opc == 1)
+		{
+			admin* n_admin = new admin(id, nombre_usuario, nombre_completo, clave);
+			list->insertarInicio(n_admin);
+			imprimirCadena("Nuevo administrador creado..");
+		}
+		else if (opc == 2)
+		{
+			mantenimiento* n_mantenimiento = new mantenimiento(id, nombre_usuario, nombre_completo, clave);
+			list->insertarInicio(n_mantenimiento);
+			imprimirCadena("Nuevo usuario de mantenimiento creado..");
+		}
+		else if (opc == 3)
+		{
+			registro* n_registro = new registro(id, nombre_usuario, nombre_completo, clave);
+			list->insertarInicio(n_registro);
+			imprimirCadena("Nuevo usuario de registro creado..");
+		}
+		else if (opc == 4)
+		{
+			estudiante* n_estudiante = new estudiante(id, nombre_usuario, nombre_completo, clave, 0, 0, "", "");
+			list->insertarInicio(n_estudiante);
+			imprimirCadena("Nuevo estudiante creado..");
+		}
+		else if (opc == 5)
+		{
+			profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
+			list->insertarInicio(n_profesor);
+			imprimirCadena("Nuevo profesor creado..");
+		}
 	}	
 }
 
@@ -599,32 +607,35 @@ void sistema::agregarEstudiante() {
 	telefono = leerEntero();
 	imprimirCadena("Digite el numero de carrera:");
 	a = leerEntero();
-		if (global_carrera->buscarElemento(a))
+	if (global_carrera->buscarElemento(a))
 	{
 			string carrera = global_carrera->buscarCodigoCarrera(a)->getNombre();
 			string escuela = global_carrera->buscarCodigoCarrera(a)->getEscuela();
-			while (!(lista_global->buscarID(id)))
+			usuario* userAux = lista_global->buscarId(id);
+			while (userAux == nullptr)
 			{
 				imprimirCadena("\nDigito de  manera incorrecta el numero cedula o el numero de cedula no existe en el sistema");
 				imprimirCadena("\nDigite el numero cedula");
 				id = leerCadena();
+				usuario* userAux = lista_global->buscarId(id);
 			}
-		
-			estudiante* estedu = new estudiante(lista_global->buscarId(id)->getId(), lista_global->buscarId(id)->getNombreUsuario(),lista_global->buscarId(id)->getNombreCompleto(), "", telefono, a,carrera,escuela);
-			global_estudiantes->insertarInicio(estedu);
-			global_carrera->buscarCodigoCarrera(a)->getPadron()->insertarInicio(estedu);
-			imprimirCadena(estedu->toString2());
-			imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
-
-		
+			if (userAux->getRol() != "usuario-estudiante")
+			{
+				imprimirCadena("\nDigito un usuario que no es un estudiante, intente de nuevo");
+			}
+			else
+			{
+				estudiante* estedu = new estudiante(lista_global->buscarId(id)->getId(), lista_global->buscarId(id)->getNombreUsuario(), lista_global->buscarId(id)->getNombreCompleto(), "", telefono, a, carrera, escuela);
+				global_estudiantes->insertarInicio(estedu);
+				global_carrera->buscarCodigoCarrera(a)->getPadron()->insertarInicio(estedu);
+				imprimirCadena(estedu->toString2());
+				imprimirCadena(global_carrera->buscarCodigoCarrera(a)->toString());
+			}	
 	}
 	else
 	{
 		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
 	}
-
-	
-	
 }
 
 void sistema::agregarGrupo()
@@ -851,6 +862,90 @@ void sistema::procesoMatricula()
 		if (aux == nullptr)
 		{
 			datosCorrectos = false;
+		}
+		else
+		{
+			imprimirCadena("El periodo lectivo actual es: ");
+			if (actual == nullptr)
+			{
+				imprimirCadena("No hay ciclos lectivos agregados por lo cual no se puede matricular ningun curso..");
+			}
+			else
+			{
+				cout << "Ciclo: " << actual->getCiclo() << endl;
+				cout << "Annio: " << actual->getAnio() << endl;
+				imprimirCadena("----------------------------------------------------------------");
+				imprimirCadena("	Informe Matricula	");
+				cout << "Carrera: " << carr << endl;
+				cout << "Estudiante: " << aux->getNombreCompleto() << endl;
+				if (global_Grupos->esVacia())
+				{
+					imprimirCadena("\nNo existen grupos creados");
+				}
+				else
+				{
+					imprimirCadena(global_Grupos->toStringIteradorCiclo(actual->getCiclo(), actual->getAnio()));
+					imprimirCadena("\nDigite el NRC del grupo en el que desea matricularse: ");
+					NRC = leerEntero();
+					grupo* gAux = global_Grupos->buscarNRC(NRC);
+					if (gAux == nullptr)
+					{
+						imprimirCadena("No existe un grupo con el NRC ingresado");
+					}
+					else if ((gAux->getCiclo()->getAnio() != actual->getAnio()) || (gAux->getCiclo()->getCiclo() != actual->getCiclo()))
+					{
+						imprimirCadena("Esta intentado matricular en un grupo de un ciclo que no es el actual");
+					}
+					else
+					{
+						string nomProfesor = global_profesores->buscarId(gAux->getID())->getNombreCompleto();
+						cursoAux = global_cursos->buscaElCodigoCurso(gAux->getCodigo());
+						if (cursoAux->getCantidad() > 0)
+						{
+							for (int i = 0; i < (cursoAux->getCantidad()); i++)
+							{
+								if (aux->getListaCursos()->buscarCodigoCurso(cursoAux->vec[i]) == false)
+								{
+									imprimirCadena("El estudiante no cuenta con los curso requisito de esta materia");
+									requisitos = false;
+									break;
+								}
+								else if (aux->getListaCursos()->buscaElCodigoCurso(cursoAux->vec[i])->getAprobado() == false)
+								{
+									imprimirCadena("El estudiante no ha los requisitos para esta materia");
+									requisitos = false;
+									break;
+								}
+								else
+								{
+									requisitos = true;
+								}
+							}
+
+						}
+						else if (aux->getListaCursos()->buscarAprobado(gAux->getCodigo()))
+						{
+							imprimirCadena("El estudiante ya aprobo este curso");
+							requisitos = false;
+						}
+						else if (aux->getListaCursos()->buscarMatriculado(gAux->getCodigo()))
+						{
+							imprimirCadena("El estudiante ya matriculo este curso");
+							requisitos = false;
+						}
+						if (requisitos == true)
+						{
+							gAux->getEstudiantes()->insertarFinal(aux);
+							gAux->aumentar();
+							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0, gAux->getNRC(), gAux->getNumeroGrupo(), nomProfesor, gAux->getCupo(), gAux->getCantidad(), gAux->getHoraInicio(), gAux->getHoraFinal(), gAux->getDias());
+							nCurso->setCiclo(actual);
+							aux->getListaCursos()->insertarFinal(nCurso);
+							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
+							imprimirCadena(gAux->toString());
+						}
+					}
+				}
+			}
 		}
 	}
 	else if (this->usuarioLogeado->getRol() == "usuario-registro" || this->usuarioLogeado->getRol() == "usuario-admin")
