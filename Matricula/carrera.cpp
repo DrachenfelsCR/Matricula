@@ -10,6 +10,7 @@ carrera::carrera(int codigo_carrera, string grado, string nombre_carrera, string
 	this->facultad = facultad;
 	this->l1 = new lista<estudiante>;
 	this->l2 = new lista<profesor>;
+	this->plan_carrera = new plan_estudios();
 }
 void carrera::setCodigo(int codigo_carrera)
 {
@@ -56,12 +57,12 @@ string carrera::getFacultad()
 	return this->facultad;
 }
 
-void carrera::setPlan(plan_estudios plan)
+void carrera::setPlan(plan_estudios* plan)
 {
 	this->plan_carrera = plan;
 }
 
-plan_estudios carrera::getPlan()
+plan_estudios* carrera::getPlan()
 {
 	return this->plan_carrera;
 }
@@ -97,7 +98,7 @@ carrera::~carrera()
 string carrera::toStringPlan()
 {
 	stringstream s;
-	s << this->plan_carrera.getListaCurso()->toStringIterador();
+	s << this->plan_carrera->getListaCurso()->toStringIterador();
 	return s.str();
 }
 
@@ -116,6 +117,6 @@ void carrera::saveC(ofstream& outp, ofstream& outp2)
 	}
 	outp << this->facultad << '\t';
 	outp << this->escuela << '\n';
-	this->plan_carrera.save(outp2);
+	this->plan_carrera->save(outp2);
 }
 

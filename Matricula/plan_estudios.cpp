@@ -31,8 +31,8 @@ lista<curso>*plan_estudios::getListaCurso()
 
 void plan_estudios::save(ofstream& outp)
 {
-	nodo<curso>* actual = this->getListaCurso()->primero;
-	while (actual->getSig() != nullptr)
+	nodo<curso>* actual = this->l1->primero;
+	while (actual != nullptr)
 	{
 		outp << this->nombre_carrera << '\t';
 		outp << actual->getInfo()->getCodigo() << '\t';
@@ -48,7 +48,7 @@ void plan_estudios::save(ofstream& outp)
 		{
 		outp << "Inactivo" << '\n';
 		}
-		
+		actual = actual->getSig();
 	}
 }
 

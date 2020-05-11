@@ -138,7 +138,6 @@ void sistema::ManejoSeguridadYAdministracion()
 			break;
 		case 2:
 			limpiaPantalla();
-			guardar();
 			imprimirCadena(lista_global->toString());
 			break;
 		case 3:
@@ -395,7 +394,6 @@ void sistema::agregarUsuario(lista<usuario>* list)
 	{
 		profesor* n_profesor = new profesor(id, nombre_usuario, nombre_completo, clave);
 		list->insertarInicio(n_profesor);
-		global_profesores->insertarFinal(n_profesor);
 		imprimirCadena("Nuevo profesor creado..");
 	}	
 }
@@ -483,10 +481,10 @@ void sistema::agregarCurso()
 		{
 			for (int i = 0; i <= canReqs; i++)
 			{
-				imprimirCadena(aux->getPlan().toString());
+				imprimirCadena(aux->getPlan()->toString());
 				imprimirCadena("Digite el codigo del curso que desea agregar como requisito");
 				string codigoReq = leerCadena();
-				if (aux->getPlan().getListaCurso()->buscarCodigoCurso(codigoReq) == false)
+				if (aux->getPlan()->getListaCurso()->buscarCodigoCurso(codigoReq) == false)
 				{
 					imprimirCadena("Este codigo no existe en el plan de estudios de esta carrera");
 				}
@@ -499,7 +497,9 @@ void sistema::agregarCurso()
 		
 //-----------------------------------------------------------------------------------------
 		global_cursos->insertarInicio(Cursos);
-		aux->getPlan().getListaCurso()->insertarFinal(Cursos);
+		aux->getPlan()->setNombreCarrera(aux->getNombre());
+		aux->getPlan()->getListaCurso()->insertarFinal(Cursos);
+	
 	}
 	else {
 		imprimirCadena("Error al digitar carrera o el numero de carrera no existe");
@@ -634,6 +634,7 @@ void sistema::MostrarEmpadronados()
 void sistema::agregarProfesores()
 {
 	profesor* docente;
+	usuario* docentito;
 	string id;
 	carrera* aux = nullptr;
 	try
@@ -649,15 +650,17 @@ void sistema::agregarProfesores()
 		imprimirCadena(aux->toString());
 		imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
 		id = leerCadena();
-		docente = global_profesores->buscarId(id);
-		if (docente == nullptr)
+		docentito = lista_global->buscarId(id);
+		if (docentito == nullptr)
 		{
 			throw id;
 		}
 		else
 		{
+			docente = new profesor(docentito->getId(),docentito->getNombreUsuario(), docentito->getNombreCompleto(), docentito->getClave());
 			docente->setCarrera(aux->getNombre());
 			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(docente);
+			global_profesores->insertarFinal(docente);
 			imprimirCadena("Digite el grado academico del profesor: ");
 			imprimirCadena("(1-Lic, 2-Maestria, 3-Doctorado)");
 			int seleccion = leerSeleccion(4);
@@ -945,7 +948,7 @@ void sistema::consultaPlan()
 		cout << "Carrera: " << ca->getNombre();
 		cout << "Tipo: " << ca->getGrado();
 		imprimirCadena("Plan de estudios: ");
-		imprimirCadena(ca->getPlan().toString());
+		imprimirCadena(ca->getPlan()->toString());
 	}
 	else
 	{
@@ -1075,8 +1078,8 @@ void sistema::consultaMatriculaPorEstudiante()
 
 void sistema::guardar()
 {
-	global_estudiantes->save("Estudiantes.txt");
 	lista_global->save("Usuarios.txt");
+	global_estudiantes->save("Estudiantes.txt");
 	global_profesores->save("Profesores.txt");
 	global_ciclos->save("Ciclos.txt");
 	global_carrera->saveC("Carreras.txt", "Plan_carreras.txt");

@@ -59,7 +59,20 @@ profesor::~profesor()
 {
 }
 
-void profesor::save(ofstream&)
+void profesor::save(ofstream& outp)
 {
+	outp << this->id << '\t';
+	outp << this->nombre_usuario << '\t';
+	outp << this->nombre_completo << '\t';
+	outp << this->clave << '\t';
+	if (this->estado == false)
+	{
+	outp << "false" << '\t';
+	}
+	else
+	{
+	outp << "true" << '\t';
+	}
 
+	outp << this->rol << '\n';
 }

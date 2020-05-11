@@ -300,7 +300,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 		getline(input, grado, '\t');
 		getline(input, estado, '\t');
 		getline(input, facultad, '\t');
-		getline(input, escuela, '\t');
+		getline(input, escuela, '\n');
 		//----
 		codigo_carreraR = convertirInt(codigo_carrera);
 		if (!input.eof())
@@ -314,6 +314,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 				{
 					carreraRecuperado->getPadron()->insertarFinal(actual->getInfo());
 				}	
+				actual = actual->getSig();
 			}
 			while (actual2->getSig() != nullptr)
 			{
@@ -321,9 +322,10 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 				{
 					carreraRecuperado->getProfesores()->insertarFinal(actual2->getInfo());
 				}
+				actual2 = actual2->getSig();
 			}
+			carreraRecuperado->getPlan()->setNombreCarrera(nombre_carrera);
 			recuperarPlan(carreraRecuperado,archivo2);
-			carreraRecuperado->getPlan().setNombreCarrera(nombre_carrera);
 			list1->insertarFinal(carreraRecuperado);
 		}
 	}
@@ -430,7 +432,7 @@ void iterador<T>::recuperarPlan(carrera* car, string archivo)
 			{
 				curso* cursoRecuperado = new curso(codigo, nombre, tipo, creditosR, horas_semanalesR);
 				cursoRecuperado->setEstado(estadoR);
-				car->getPlan().getListaCurso()->insertarFinal(cursoRecuperado);
+				car->getPlan()->getListaCurso()->insertarFinal(cursoRecuperado);
 			}
 			
 		}

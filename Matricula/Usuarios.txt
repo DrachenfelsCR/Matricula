@@ -1,0 +1,11 @@
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+admin	admin	admin	admin101	true	usuario-admin
+777	Vegeta777	Vegetta	Una782	true	usuario-profesor
+888	Willyrex	Willy	uAS123	true	usuario-estudiante
+admin	admin	admin	admin101	true	usuario-admin

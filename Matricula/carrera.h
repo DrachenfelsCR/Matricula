@@ -16,7 +16,7 @@ private:
 	string grado;
 	bool estado;
 	string facultad;
-	plan_estudios plan_carrera;
+	plan_estudios* plan_carrera;
 	lista<estudiante>* l1;
 	string escuela;
 	lista<profesor>* l2;
@@ -28,13 +28,13 @@ public:
 	void desactivarCarrera();
 	void setFacultad(string);
 	void setNombreCarrera(string);
-	void setPlan(plan_estudios);
+	void setPlan(plan_estudios*);
 	int getCodigo();
 	string getNombre();
 	string getGrado();
 	bool getEstado();
 	string getFacultad();
-	plan_estudios getPlan();
+	plan_estudios* getPlan();
 	lista<estudiante>* getPadron();
 	lista<profesor>* getProfesores();
 	~carrera();

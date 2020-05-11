@@ -89,7 +89,7 @@ void lista<T>::saveC(string fileName, string fileName2)
 {
 	foutput.open(fileName.c_str());
 	foutput2.open(fileName2.c_str());
-	if (foutput.good() && foutput2.good())
+	if (foutput.good())
 	{
 		nodo<T>* actual = primero;
 		while (actual != NULL)

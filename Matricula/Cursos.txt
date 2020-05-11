@@ -1,0 +1,6 @@
+555	cUALQUIERCOSA	Lab	3	5	0	true
+777	nOSELAVERDAD	Lab	3	5	0	true
+555	YorHa	Lab	3	5	0	true
+555	YorHa	Lab	3	5	0	true
+444	YorHa	Lab	4	5	0	true
+111	2B	Lab	3	5	0	true
