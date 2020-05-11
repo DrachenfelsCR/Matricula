@@ -90,28 +90,6 @@ void sistema::controlSistema()
 {
 	opc = 0;
 	Principal();
-	switch (opc)
-	{
-	case 1:
-		ManejoSeguridadYAdministracion();
-		break;
-	case 2:
-		ManejoDeMantenimiento();
-		break;
-	case 3:
-		ManejoDeEscuelas();
-		break;
-	case 4:
-		ManejoDeMatricula();
-		break;
-	case 5:
-		ManejoDeRegistro();
-		break;
-	case 6:
-		exit(0);
-		break;
-	}
-
 }
 void sistema::ManejoLogeo()
 {
