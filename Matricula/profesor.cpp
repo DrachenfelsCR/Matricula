@@ -49,6 +49,7 @@ string profesor::toString()
 {
 	stringstream s;
 	s << usuario::toString();
+	s << endl;
 	s << "Telefono: " << this->telefono << endl;
 	s << "Escuela: " << this->escuela << endl;
 	s << "Grado Academico: " << this->gradoAcademico << endl;
@@ -74,5 +75,9 @@ void profesor::save(ofstream& outp)
 	outp << "true" << '\t';
 	}
 
-	outp << this->rol << '\n';
+	outp << this->rol << '\t';
+	outp << this->telefono << '\t';
+	outp << this->escuela << '\t';
+	outp << this->gradoAcademico << '\t';
+	outp << this->carrera << '\n';
 }

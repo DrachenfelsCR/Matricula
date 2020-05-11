@@ -12,9 +12,9 @@ private:
 	int creditos;
 	int horas_semanales;
 	bool estado;
-	string vec[20];
 	int cantidad;
 public:
+	string vec[20];
 	curso();
 	curso(string, string, string, int, int);
 	void setCodigo(string);
@@ -28,6 +28,7 @@ public:
 	string getTipo();
 	int getCreditos();
 	int getHoras();
+	int getCantidad();
 	bool getEstado();
 	void insertarRequisito(string);
 	string toString();

@@ -55,8 +55,25 @@ int leerEntero() {
 			cin.ignore(1024, '\n');
 		}
 	}
-
 }
+
+float leerFlotante() {
+	float n;
+	while (true) {
+		cout << "\t";
+		if (cin >> n) {
+			cin.clear();
+			cin.ignore(1024, '\n');
+			return n;
+		}
+		else {
+			cerr << "\t Valor incorrecto.. " << endl;
+			cin.clear();
+			cin.ignore(1024, '\n');
+		}
+	}
+}
+
 char leerCaracter() {
 	string line;
 	char x;

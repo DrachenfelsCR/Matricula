@@ -98,8 +98,8 @@ int grupo::getCodCarrera()
 string grupo::toString()
 {
 	stringstream s;
-		s << " Curso" << " NCR" << "Grupo" << "Cupo" << "Horario" << endl;
-		s << codigo_curso<<"      " << NRC<<"       " << numeroGrupo <<"    "<< cupo <<"     "<< horaInicio <<"      "<< horaFinal << endl;
+		s << setw(5) << " Curso " << setw(10) << " NCR " << setw(8) << " Grupo " << setw(5) << " Cupo " << setw(13) << " Horario " <<endl;
+		s <<  setw(5) <<nombre_curso << setw(5) << NRC << setw(5) << numeroGrupo << setw(8) << cupo << setw(8) << horaInicio << "-" << horaFinal << endl;
 		return s.str();
 }
 

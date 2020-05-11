@@ -15,6 +15,7 @@ curso_estudiante::curso_estudiante(string codigo_curso, string nombre_curso, int
 	this->horarioInicio = horarioInicio;
 	this->horarioFinalizacion = horarioFinalizacion;
 	this->dias = dias;
+	this->aprobado = false;
 }
 void curso_estudiante::setCodigo(string codigo_curso)
 {
@@ -31,6 +32,10 @@ void curso_estudiante::setCreditos(int creditos)
 void curso_estudiante::setNota(float nota)
 {
 	this->nota = nota;
+	if (nota >= 70)
+	{
+		this->aprobado = true;
+	}
 }
 
 void curso_estudiante::setCiclo(ciclo_lectivo* cicloCurso)
@@ -57,6 +62,15 @@ float curso_estudiante::getNota()
 {
 	return this->nota;
 }
+int curso_estudiante::getNRC()
+{
+	return this->NRC;
+}
+
+bool curso_estudiante::getAprobado()
+{
+	return this->aprobado;
+}
 
 curso_estudiante::~curso_estudiante()
 {
@@ -65,7 +79,15 @@ curso_estudiante::~curso_estudiante()
 string curso_estudiante::toString()
 {
 	stringstream s;
-	s << fixed << setprecision(7) <<  "NCR" << "Grupo" << "Curso" << "Profesor" << "Cupo" << "Can" << "Horario" << endl;
-	s << fixed << setprecision(7) << this->NRC << this->grupo << this->nombre_curso << this->profesor << this->cupo << this->cantidad << this->dias << " " << this->horarioInicio << " " <<this->horarioFinalizacion << endl;
+	s << "NCR  " << " Grupo " << "  Curso  " << "  Profesor  " << "  Cupo  " << "  Can  " << "  Horario  " << " Nota "<< endl;
+	s << this->NRC << setw(5) << this->grupo << setw(11) << this->nombre_curso << "     " << this->profesor << setw(5) << this->cupo << setw(5) << this->cantidad << setw(5) << this->dias << " " << this->horarioInicio << "-" <<this->horarioFinalizacion <<"  "<<this->nota;
+	if (this->aprobado == true)
+	{
+		s << "	" << "Aprobado";
+	}
+	else
+	{
+		s << "	" << "Reprobado";
+	}
 	return s.str();
 }

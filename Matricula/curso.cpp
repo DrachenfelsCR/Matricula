@@ -56,6 +56,11 @@ string curso::getCodigo()
 {
 	return this->codigo_curso;
 }
+
+int curso::getCantidad()
+{
+	return this->cantidad;
+}
 string curso::getNombre()
 {
 	return this->nombre_curso;

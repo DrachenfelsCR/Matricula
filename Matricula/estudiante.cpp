@@ -52,7 +52,7 @@ string estudiante::toString()
 {
 	stringstream s;
 	s << usuario::toString();
-	s << "Telefono: " << this->telefono << endl;
+	s << "\nTelefono: " << this->telefono << endl;
 	s << "Escuela: " << this->escuela << endl;
 	s << "Carrera: " << this->carrera << endl;
 	s << "Codigo de la carrera: " << this->codigo_carrera << endl;

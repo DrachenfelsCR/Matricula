@@ -1,3 +1,0 @@
-LastOfUs2	555	cUALQUIERCOSA	Lab	3	5	Activo
-LastOfUs2	666	Yaaaa	lab	3	5	Activo
-LastOfUs2	667	PaProbar	Lab	4	5	Activo

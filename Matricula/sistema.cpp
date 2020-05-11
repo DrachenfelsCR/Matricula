@@ -5,18 +5,14 @@ sistema::sistema()
 	opc = 0;
 	//----------AGREGADO ADMIN ESTANDAR---------------------
 	lista_global = new lista<usuario>;
-	admin* administrador = new admin("admin", "admin", "admin", "admin101");
-	lista_global->insertarFinal(administrador);
-	
 	//------------------
-	estudiante* est = new estudiante("123" , "Fakercito", "Lee Sang-hyeok", "Una123", 0, 0, "", "");
+	/*estudiante* est = new estudiante("123" , "Fakercito", "Lee Sang-hyeok", "Una123", 0, 0, "", "");
 	estudiante* est1 = new estudiante("125", "Dopacito", "Jeong Sang-gil", "Una124", 0, 0, "", "");
 	profesor* prof = new profesor("124", "cloria", "Carlos Loria", "Una124");
 	ciclo_lectivo* cicloAct = new ciclo_lectivo(2020, 1);
 	cicloAct->setFechaInicio(5, 2, 2020);
 	cicloAct->setFechaFinal(5, 6, 2020);
-	carrera* career = new carrera(666, "Bachillerato", "Ing.Sistemas", "Ciencias Exactas", "Informatica");
-	curso* cursito = new curso("888","Minecraft","LAB",3,5);
+	carrera* career = new carrera(666, "Bachillerato", "Ing.Sistemas", "Ciencias Exactas", "Informatica");*/
 	
 	//------------------
 	this->usuarioLogeado = nullptr;
@@ -38,14 +34,15 @@ sistema::sistema()
 	global_estudiantes->insertarFinal(est);
 	global_estudiantes->insertarFinal(est1);
 	global_profesores->insertarFinal(prof);
-	global_ciclos->insertarFinal(cicloAct);
-	global_cursos->insertarInicio(cursito);
-	global_admin->insertarFinal(administrador);*/
+	//global_ciclos->insertarFinal(cicloAct);*/
 	recuperar();
 }
 
 void sistema::Principal()
 {
+	//admin* administrador = new admin("admin", "admin", "admin", "admin101");
+	//lista_global->insertarFinal(administrador);
+	//global_admin->insertarFinal(administrador);
 	if (logged_user == nullptr)
 	{
 		ManejoLogeo();
@@ -93,13 +90,13 @@ void sistema::controlSistema()
 }
 void sistema::ManejoLogeo()
 {
-	string user_aux = "admin";
-	string password = "admin101";
-	/*imprimirCadena(LoginMenu());
+	string user_aux;
+	string password;
+	imprimirCadena(LoginMenu());
 	imprimirCadena("	Digite el nombre de su usuario");
 	user_aux = leerCadena();
 	imprimirCadena("	Digite su contrasena");
-	password = leerCadena();*/
+	password = leerCadena();
 	usuarioLogeado = lista_global->buscarCredenciales(user_aux, password);
 	try
 	{
@@ -407,22 +404,58 @@ void sistema::agregarCiclo()
 	imprimirCadena("Digite numeracion( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
 	numCiclo = leerSeleccion(3);
 	ciclo_lectivo* cicloAct = new ciclo_lectivo(anio, numCiclo);
-	imprimirCadena("Ingrese la fecha de inicio: ");
-	imprimirCadena(" Digite dia de inicio(numero entero): ");
-	dia = leerEntero();
-	imprimirCadena(" Digite mes de inicio(numero entero): ");
-	mes = leerSeleccion(12);
-	cicloAct->setFechaInicio(dia, mes, anio);
-	//-------------------------------------------------------
-	imprimirCadena("-------------------------------------------------");
-	imprimirCadena("Ingrese la fecha de finalizacion: ");
-	imprimirCadena(" Digite dia de finalizacion(numero entero): ");
-	dia = leerEntero();
-	imprimirCadena(" Digite mes de finalizacion(numero entero): ");
-	mes = leerSeleccion(12);
-	cicloAct->setFechaFinal(dia, mes, anio);
-	this->global_ciclos->insertarFinal(cicloAct);
-	imprimirCadena("<Enter>");
+	ciclo_lectivo* cicloAnterior = global_ciclos->getUltimo();
+	if (cicloAnterior == nullptr)
+	{
+		imprimirCadena("Ingrese la fecha de inicio: ");
+		imprimirCadena(" Digite dia de inicio(numero entero): ");
+		dia = leerEntero();
+		imprimirCadena(" Digite mes de inicio(numero entero): ");
+		mes = leerSeleccion(12);
+		cicloAct->setFechaInicio(dia, mes, anio);
+		//-------------------------------------------------------
+		imprimirCadena("-------------------------------------------------");
+		imprimirCadena("Ingrese la fecha de finalizacion: ");
+		imprimirCadena(" Digite dia de finalizacion(numero entero): ");
+		dia = leerEntero();
+		imprimirCadena(" Digite mes de finalizacion(numero entero): ");
+		mes = leerSeleccion(12);
+		cicloAct->setFechaFinal(dia, mes, anio);
+		this->global_ciclos->insertarFinal(cicloAct);
+		imprimirCadena("<Enter>");
+	}
+	else if (global_ciclos->buscarCicloElectivo(anio,numCiclo))
+	{
+		imprimirCadena("Ya existe un ciclo lectivo igual a este [Enter]");
+	}
+	else if (cicloAnterior->getAnio() == anio && cicloAnterior->getCiclo() > numCiclo)
+	{
+			imprimirCadena("Si ingresa un ciclo nuevo en el mismo anio que el ciclo anterior, el ciclo debe ser mayor");
+	}
+	else if (cicloAnterior->getAnio() > anio)
+	{
+		imprimirCadena("Debe ingresar un anio que concuerde cronologicamente con los ciclos");
+	}
+	else
+	{
+		imprimirCadena("Ingrese la fecha de inicio: ");
+		imprimirCadena(" Digite dia de inicio(numero entero): ");
+		dia = leerEntero();
+		imprimirCadena(" Digite mes de inicio(numero entero): ");
+		mes = leerSeleccion(12);
+		cicloAct->setFechaInicio(dia, mes, anio);
+		//-------------------------------------------------------
+		imprimirCadena("-------------------------------------------------");
+		imprimirCadena("Ingrese la fecha de finalizacion: ");
+		imprimirCadena(" Digite dia de finalizacion(numero entero): ");
+		dia = leerEntero();
+		imprimirCadena(" Digite mes de finalizacion(numero entero): ");
+		mes = leerSeleccion(12);
+		cicloAct->setFechaFinal(dia, mes, anio);
+		this->global_ciclos->insertarFinal(cicloAct);
+		imprimirCadena("<Enter>");
+	}
+	
 	cin.get();
 }
 
@@ -437,8 +470,18 @@ void sistema::agregarCarrera()
 //------------------------------------------------------------
 	imprimirCadena("Ingrese codigo de carrera: ");
 	codigo_carrera = leerEntero();
+	while (global_carrera->buscarCodigoCarrera(codigo_carrera) != NULL)
+	{
+		imprimirCadena("El codigo de carrera ingresado ya existe, por favor ingrese otro:");
+		codigo_carrera = leerEntero();
+	}
 	imprimirCadena("Ingrese nombre de carrera: ");
 	nombre_carrera = leerCadena();
+	while (global_carrera->buscarNombreCarrera(nombre_carrera) != NULL)
+	{
+		imprimirCadena("El nombre de carrera ingresado ya existe, por favor ingrese otro:");
+		nombre_carrera = leerCadena();
+	}
 	imprimirCadena("Grado: ");
 	grado = leerCadena();
 	imprimirCadena("Ingrese Escuela: ");
@@ -452,9 +495,11 @@ void sistema::agregarCarrera()
 
 void sistema::agregarCurso()
 {
+	imprimirCadena(global_carrera->toString());
 	string codigo;
 	string nombre;
 	string tipocurso;
+	bool correcto = true;
 	int creditos;
 	int horasSemanales;
 	int canReqs = 0;
@@ -465,10 +510,20 @@ void sistema::agregarCurso()
 	{
 		carrera* aux = global_carrera->buscarCodigoCarrera(a);
 		imprimirCadena(aux->toString());
-		imprimirCadena("Ingrese el codigo del curso");
+		imprimirCadena("Ingrese el codigo que se le asignara al curso");
 		codigo = leerCadena();
-		imprimirCadena("Ingrese el nombre del Curso");
+		while ((global_cursos->buscarCodigoCurso(codigo)))
+		{
+			imprimirCadena("El codigo del curso ya existe, intente con otro codigo:");
+			codigo = leerCadena();
+		}
+		imprimirCadena("Ingrese el nombre que se le asignara al Curso");
 		nombre = leerCadena();
+		while ((global_cursos->buscarNombreCurso(nombre)))
+		{
+			imprimirCadena("El nombre del curso ya existe, intente con otro nombre:");
+			nombre = leerCadena();
+		}
 		imprimirCadena("Ingrese el Tipo de Curso(LAB,CUR,SEM,PRA,TEST)");
 		tipocurso = leerCadena();
 		imprimirCadena("Ingrese la Cantidad de Creditos");
@@ -478,9 +533,10 @@ void sistema::agregarCurso()
 		curso* Cursos = new curso(codigo,nombre,tipocurso,creditos,horasSemanales);
 		imprimirCadena("Cuantos cursos requisitos tiene: ");
 		canReqs = leerEntero();
+		imprimirCadena("-------------Cursos de la carrera---------------");
 		if (canReqs > 0)
 		{
-			for (int i = 0; i <= canReqs; i++)
+			for (int i = 0; i < canReqs; i++)
 			{
 				imprimirCadena(aux->getPlan()->toString());
 				imprimirCadena("Digite el codigo del curso que desea agregar como requisito");
@@ -488,18 +544,27 @@ void sistema::agregarCurso()
 				if (aux->getPlan()->getListaCurso()->buscarCodigoCurso(codigoReq) == false)
 				{
 					imprimirCadena("Este codigo no existe en el plan de estudios de esta carrera");
+					cout << "Se continuara con el requisito " << i + 1;
+					correcto = false;
 				}
 				else
 				{
 					Cursos->insertarRequisito(codigoReq);
+					imprimirCadena("Requisito agregado exitosamente!");
+					correcto = true;
 				}
 			}
 		}
 		
 //-----------------------------------------------------------------------------------------
-		global_cursos->insertarInicio(Cursos);
-		aux->getPlan()->setNombreCarrera(aux->getNombre());
-		aux->getPlan()->getListaCurso()->insertarFinal(Cursos);
+		if (correcto == true)
+		{
+			global_cursos->insertarInicio(Cursos);
+			aux->getPlan()->getListaCurso()->insertarFinal(Cursos);
+			aux->getPlan()->setNombreCarrera(aux->getNombre());
+		}
+		
+		
 	
 	}
 	else {
@@ -513,11 +578,11 @@ void sistema::agregarEstudiante() {
 	string nombre;
 	
 	int telefono;
-	imprimirCadena("Digite el numero cedula");
+	imprimirCadena("Digite el numero cedula del Estudiante:");
 	id = leerCadena();
-	imprimirCadena("Digite el numero de telefono");
+	imprimirCadena("Digite el numero de telefono:");
 	telefono = leerEntero();
-	imprimirCadena("Digite el numero de carrera");
+	imprimirCadena("Digite el numero de carrera:");
 	a = leerEntero();
 		if (global_carrera->buscarElemento(a))
 	{
@@ -525,8 +590,8 @@ void sistema::agregarEstudiante() {
 			string escuela = global_carrera->buscarCodigoCarrera(a)->getEscuela();
 			while (!(lista_global->buscarID(id)))
 			{
-				imprimirCadena("Digito de  manera incorrecta el numero cedula o el numero de cedula no existe en el sistema");
-				imprimirCadena("Digite el numero cedula");
+				imprimirCadena("\nDigito de  manera incorrecta el numero cedula o el numero de cedula no existe en el sistema");
+				imprimirCadena("\nDigite el numero cedula");
 				id = leerCadena();
 			}
 		
@@ -555,70 +620,105 @@ void sistema::agregarGrupo()
 	string horaInicio;
 	string horaFinal;
 	int numeroGrupo;
+	int salir = 2;
+	imprimirCadena(global_carrera->toString());
 	imprimirCadena("Digite el numero De carrera");
 	int a = leerEntero();
-	while (!(global_carrera->buscarElemento(a)))
-	{
-		imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
-		imprimirCadena("Digite el numero De carrera");
-		a = leerEntero();
-		
-	}
-	imprimirCadena("Digite El  Anio");
-	int anno = leerEntero();
-	imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
-	int ciclo = leerEntero();
-	ciclo_lectivo* cicloAux = global_ciclos->buscarCicloElectivo2(anno, ciclo);
-	while (cicloAux == nullptr)
-	{
-		imprimirCadena("Ingreso incorrectamente el ciclo y annio lectivo o el ciclo ingresado no existe");
-		imprimirCadena("Digite El  Anio");
-		int anno = leerEntero();
-		imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
-		int ciclo = leerEntero();
-	}
-	imprimirCadena("Digite Codigo del Curso");
-	string codigo=leerCadena();
+	carrera* auxCarrera = global_carrera->buscarCodigoCarrera(a);
+	ciclo_lectivo* cicl = global_ciclos->getUltimo();
+	//while (!(global_carrera->buscarElemento(a)))
+		if (global_profesores->esVacia())
+		{
+			imprimirCadena("No puede crear grupos si no existen profesores asignados a una carrera");
+		}
+		else if (global_cursos->esVacia())
+		{
+			imprimirCadena("No existen cursos creados!");
+		}
+		else if (global_ciclos->esVacia())
+		{
+			imprimirCadena("No existen ciclos creados!");
+		}
+		else
+		{
+			while (auxCarrera == nullptr)
+			{
+				imprimirCadena("Ingreso incorrectamente el numero de carrera o numero ingresado no existe");
+				imprimirCadena("Digite el numero De carrera");
+				a = leerEntero();
+				auxCarrera = global_carrera->buscarCodigoCarrera(a);
+			}
+			imprimirCadena("Digite El  Anio");
+			int anno = leerEntero();
+			imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
+			int ciclo = leerEntero();
+			ciclo_lectivo* cicloAux = global_ciclos->buscarCicloElectivo2(anno, ciclo);
+			if (cicl != nullptr)
+			{
+				while (cicloAux == nullptr )
+				{
+					imprimirCadena("Ingreso incorrectamente el ciclo y annio lectivo o el ciclo ingresado no existe");
+					imprimirCadena("Digite El  Anio");
+					int anno = leerEntero();
+					imprimirCadena("Digite El ciclo( 1. I ciclo, 2. II Ciclo, 3. III Ciclo )");
+					int ciclo = leerEntero();
+					cicloAux = global_ciclos->buscarCicloElectivo2(anno, ciclo);
+				}
+			}
+			
+			imprimirCadena(auxCarrera->getPlan()->toString());
+			imprimirCadena("Digite Codigo del Curso");
+			string codigo = leerCadena();
 
-	while (!(global_cursos->buscarCodigoCurso(codigo)))
-	{
-		imprimirCadena("Ingreso incorrectamente el numero del curso o el codigo ingresado no existe");
-		codigo = leerCadena();
-	}
+			while (!(global_cursos->buscarCodigoCurso(codigo)))
+			{
+				imprimirCadena("Ingreso incorrectamente el numero del curso o el codigo ingresado no existe");
+				codigo = leerCadena();
+			}
 
-	imprimirCadena("Digite El NRC");
-	NRC = leerEntero();
-	imprimirCadena("Digite el numero del Grupo");
-	numeroGrupo = leerEntero();
-	imprimirCadena("Digite el numero de Cedula del profesor");
-	string id = leerCadena();
-	while (!(global_profesores->buscarID(id)))
-	{
-		imprimirCadena("Ingreso incorrectamente el numero de cedula del profesor o el profesor ingresado no existe");
-		id = leerCadena();
+			imprimirCadena("Digite El NRC");
+			NRC = leerEntero();
+			while (global_Grupos->buscarNRCD(NRC) == true)
+			{
+				imprimirCadena("Este NRC ya existe!, trate con otro numero: ");
+				NRC = leerEntero();
+			}
+			imprimirCadena("Digite el numero del Grupo");
+			numeroGrupo = leerEntero();
+			imprimirCadena("\n--------------------------------");
+			imprimirCadena(global_profesores->toString());
+			imprimirCadena("Digite el numero de Cedula del profesor");
+			string id = leerCadena();
+			while (!(global_profesores->buscarID(id)))
+			{
+				imprimirCadena("Ingreso incorrectamente el numero de cedula del profesor o el profesor ingresado no existe");
+				imprimirCadena("Digite el numero de Cedula del profesor");
+				id = leerCadena();
 
-	}
-	imprimirCadena("Digite el Numero de Cupos");
-	cupo = leerEntero();
-	imprimirCadena("Digite el Dia(ejmeplo:M-V)");
-	dia = leerCadena();
-	imprimirCadena("Digite la hora Inicio(ejemplo= 8:00 Formato 24hrs)");
-	horaInicio = leerCadena();
-	imprimirCadena("Digite la hora finalizacion(ejemplo= 10:00 Formato 24hrs)");
-	horaFinal = leerCadena();
-	string nombre = global_cursos->buscaElCodigoCurso(codigo)->getNombre();
-	curso* cursoAux = global_cursos->buscaElCodigoCurso(codigo);
-	grupo* Grupote = new grupo(NRC,codigo,nombre,cursoAux->getCreditos(),id,cupo,numeroGrupo,horaInicio,horaFinal,a);
-	Grupote->setCiclo(cicloAux);
-	global_Grupos->insertarInicio(Grupote);
-	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
-	imprimirCadena("Grupo Creado Existosamente");
+			}
+			imprimirCadena("Digite el Numero de Cupos");
+			cupo = leerEntero();
+			imprimirCadena("Digite el Dia(ejmeplo:M-V)");
+			dia = leerCadena();
+			imprimirCadena("Digite la hora Inicio(ejemplo= 8:00 Formato 24hrs)");
+			horaInicio = leerCadena();
+			imprimirCadena("Digite la hora finalizacion(ejemplo= 10:00 Formato 24hrs)");
+			horaFinal = leerCadena();
+			string nombre = global_cursos->buscaElCodigoCurso(codigo)->getNombre();
+			curso* cursoAux = global_cursos->buscaElCodigoCurso(codigo);
+			grupo* Grupote = new grupo(NRC, codigo, nombre, cursoAux->getCreditos(), id, cupo, numeroGrupo, horaInicio, horaFinal, a);
+			Grupote->setCiclo(cicloAux);
+			global_Grupos->insertarInicio(Grupote);
+			global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
+			imprimirCadena("Grupo Creado Existosamente");
+		}
 }
 
 
 
 void sistema::MostrarEmpadronados()
 {
+	imprimirCadena(global_carrera->toString());
 	imprimirCadena("Ingrese codigo de carrera ");
 	int a = leerEntero();
 	if (global_carrera->buscarElemento(a))
@@ -641,6 +741,8 @@ void sistema::agregarProfesores()
 	carrera* aux = nullptr;
 	try
 	{
+		imprimirCadena(global_carrera->toString());
+		imprimirCadena("--------------");
 		imprimirCadena("Digite el codigo carrera: ");
 		int a = leerEntero();
 		if (!(global_carrera->buscarElemento(a)))
@@ -650,10 +752,13 @@ void sistema::agregarProfesores()
 		else
 		aux = global_carrera->buscarCodigoCarrera(a);
 		imprimirCadena(aux->toString());
+		imprimirCadena("------------------------------");
+		imprimirCadena(lista_global->toString());
 		imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
 		id = leerCadena();
 		docentito = lista_global->buscarId(id);
-		if (docentito == nullptr)
+	
+		if (docentito == nullptr || (docentito->getRol() != "usuario-profesor"))
 		{
 			throw id;
 		}
@@ -662,7 +767,6 @@ void sistema::agregarProfesores()
 			docente = new profesor(docentito->getId(),docentito->getNombreUsuario(), docentito->getNombreCompleto(), docentito->getClave());
 			docente->setCarrera(aux->getNombre());
 			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(docente);
-			global_profesores->insertarFinal(docente);
 			imprimirCadena("Digite el grado academico del profesor: ");
 			imprimirCadena("(1-Lic, 2-Maestria, 3-Doctorado)");
 			int seleccion = leerSeleccion(4);
@@ -670,22 +774,26 @@ void sistema::agregarProfesores()
 			{
 			case 1:
 				docente->setGradoA("Licenciatura");
+				docente->setEscuela(aux->getEscuela());
 				break;
 			case 2:
 				docente->setGradoA("Maestria");
+				docente->setEscuela(aux->getEscuela());
 				break;
 			case 3:
 				docente->setGradoA("Doctorado");
+				docente->setEscuela(aux->getEscuela());
 				break;
 			default:
 				break;
 			}
+			global_profesores->insertarFinal(docente);
 			imprimirCadena("Profesor asignado correctamente a carrera");
 		}
 	}
 	catch (...)
 	{
-		cout << "La cedula " << id << "no existe en el sistema, intente de nuevo.." << endl;
+		cout << "La cedula " << id << "no existe en el sistema o ingreso una cedula que no es de un profesor, intente de nuevo.." << endl;
 	}
 	
 
@@ -693,6 +801,7 @@ void sistema::agregarProfesores()
 
 void sistema::MostrarProfesores()
 {
+	imprimirCadena(global_carrera->toString());
 	imprimirCadena("Digite el codigo de la carrera que desea mostrar");
 	int code = leerEntero();
 	carrera* nier = global_carrera->buscarCodigoCarrera(code);
@@ -710,11 +819,13 @@ void sistema::MostrarProfesores()
 void sistema::procesoMatricula()
 {
 	int NRC;
+	bool requisitos = true;
 	bool datosCorrectos = false;
 	int opc = 1;
 	string id;
 	estudiante* aux = nullptr;
 	ciclo_lectivo* actual = global_ciclos->getUltimo();
+	curso* cursoAux = nullptr;
 	string carr;
 	//------------------------------------------------------------------
 	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
@@ -734,7 +845,6 @@ void sistema::procesoMatricula()
 			imprimirCadena("Digite el ID del usuario al que se matriculara: ");
 			id = leerCadena();
 			aux = global_estudiantes->buscarId(id);
-			carr = aux->getCarrera();
 			if (aux == nullptr)
 			{
 				imprimirCadena("El id digitado no se encuentra registrado");
@@ -744,6 +854,7 @@ void sistema::procesoMatricula()
 			}
 			else
 			{
+				carr = aux->getCarrera();
 				opc = 2;
 				imprimirCadena("El periodo lectivo actual es: ");
 				if (actual == nullptr)
@@ -760,7 +871,7 @@ void sistema::procesoMatricula()
 					cout << "Estudiante: " << aux->getNombreCompleto() << endl;
 					if (global_Grupos->esVacia())
 					{
-						imprimirCadena("No existen grupos creados");
+						imprimirCadena("\nNo existen grupos creados");
 					}
 					else
 					{
@@ -772,16 +883,57 @@ void sistema::procesoMatricula()
 						{
 							imprimirCadena("No existe un grupo con el NRC ingresado");
 						}
+						else if ( (gAux->getCiclo()->getAnio() != actual->getAnio()) || (gAux->getCiclo()->getCiclo() != actual->getCiclo()) )
+						{
+							imprimirCadena("Esta intentado matricular en un grupo de un ciclo que no es el actual");
+						}
 						else
 						{
 							string nomProfesor = global_profesores->buscarId(gAux->getID())->getNombreCompleto();
-							gAux->getEstudiantes()->insertarFinal(aux);
-							gAux->aumentar();
-							curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0, gAux->getNRC(), gAux->getNumeroGrupo(), nomProfesor, gAux->getCupo(), gAux->getCantidad(), gAux->getHoraInicio(), gAux->getHoraFinal(), gAux->getDias());
-							nCurso->setCiclo(actual);
-							aux->getListaCursos()->insertarFinal(nCurso);
-							imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
-							imprimirCadena(gAux->toString());
+							cursoAux = global_cursos->buscaElCodigoCurso(gAux->getCodigo());
+							if (cursoAux->getCantidad() > 0)
+							{
+								for (int i = 0; i < (cursoAux->getCantidad()); i++)
+								{
+									if (aux->getListaCursos()->buscarCodigoCurso(cursoAux->vec[i]) == false)
+									{
+										imprimirCadena("El estudiante no cuenta con los curso requisito de esta materia");
+										requisitos = false;
+										break;
+									}
+									else if (aux->getListaCursos()->buscaElCodigoCurso(cursoAux->vec[i])->getAprobado() == false)
+									{
+										imprimirCadena("El estudiante no ha los requisitos para esta materia");
+										requisitos = false;
+										break;
+									}
+									else
+									{
+										requisitos = true;
+									}
+								}
+
+							}
+							else if (aux->getListaCursos()->buscarAprobado(gAux->getCodigo()))
+							{
+								imprimirCadena("El estudiante ya aprobo este curso");
+								requisitos = false;
+							}
+							else if (aux->getListaCursos()->buscarMatriculado(gAux->getCodigo()))
+							{
+								imprimirCadena("El estudiante ya matriculo este curso");
+								requisitos = false;
+							}
+							if (requisitos == true)
+							{
+								gAux->getEstudiantes()->insertarFinal(aux);
+								gAux->aumentar();
+								curso_estudiante* nCurso = new curso_estudiante(gAux->getCodigo(), gAux->getNombre(), gAux->getCreditos(), 0, gAux->getNRC(), gAux->getNumeroGrupo(), nomProfesor, gAux->getCupo(), gAux->getCantidad(), gAux->getHoraInicio(), gAux->getHoraFinal(), gAux->getDias());
+								nCurso->setCiclo(actual);
+								aux->getListaCursos()->insertarFinal(nCurso);
+								imprimirCadena("Matriculado exitosamente, informacion de la matricula: ");
+								imprimirCadena(gAux->toString());
+							}							
 						}
 					}
 				}
@@ -800,42 +952,70 @@ void sistema::procesoMatricula()
 void sistema::visualizarNotitas()
 {
 	int NRC;
+	int opc = 0;
 	string id;
 	if (usuarioLogeado->getRol()== "Usuario-Profesor")
 	{
 		string id = usuarioLogeado->getId();
 		profesor* docente = global_profesores->buscarId(id);
 		grupo* elgrupo = nullptr;
+		imprimirCadena(global_Grupos->toString());
+		imprimirCadena("----------------------------------");
 		imprimirCadena("Digite el numero de NRC");
 		NRC = leerEntero();
 		while (!(docente->getGrupo()->buscarNRCD(NRC)))
 		{
-
 			imprimirCadena("Escribio de manera incorrecta el numero de NRC");
+			int opc;
+			imprimirCadena("Desea salir?");
+			opc = leerEntero();
+			if (opc = 1)
+			{
+				break;
+			}
 			imprimirCadena("Digite el numero de NRC");
 			NRC = leerEntero();
 		}
-		imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+		if (opc != 1)
+		{
+			imprimirCadena("Notas del grupo:");
+			imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+		}
 	}
-	imprimirCadena("Digite el numero de cedula del profesor");
-	id = leerCadena();
-	profesor* docente = global_profesores->buscarId(id);
-	while (!(global_profesores->buscarID(id)))
+	else
 	{
-		imprimirCadena("Escribio de manera incorrecta el numero de cedula profesor ");
+		imprimirCadena(global_profesores->toString());
+		imprimirCadena("----------------------------------");
+		imprimirCadena("Digite el numero de cedula del profesor");
 		id = leerCadena();
-	}
-	imprimirCadena("Digite el numero de NRC");
-	NRC = leerEntero();
-	while (!(docente->getGrupo()->buscarNRCD(NRC)))
-	{
+		profesor* docente = global_profesores->buscarId(id);
+		while (!(global_profesores->buscarID(id)))
+		{
+			imprimirCadena("Escribio de manera incorrecta el numero de cedula profesor ");
+			id = leerCadena();
+		}
+		imprimirCadena("----------------------------------");
+		if (global_Grupos->esVacia())
+		{
+			imprimirCadena("No hay grupos");
+		}
+		else
+		{
+			imprimirCadena(global_Grupos->toString());
+			imprimirCadena("----------------------------------");
+			imprimirCadena("Digite el numero de NRC");
+			NRC = leerEntero();
+			while (!(docente->getGrupo()->buscarNRCD(NRC)))
+			{
 
-		imprimirCadena("Escribio de manera incorrecta el numero de NRC");
-		imprimirCadena("Digite el numero de NRC");
-		NRC = leerEntero();
+				imprimirCadena("Escribio de manera incorrecta el numero de NRC");
+				imprimirCadena("Digite el numero de NRC");
+				NRC = leerEntero();
+			}
+			imprimirCadena("Notas del grupo:");
+			imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+		}	
 	}
-	imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
-	
 	
 }
 
@@ -929,9 +1109,10 @@ void sistema::ingresoNotitas()
 					idEst = leerCadena();
 				}
 				imprimirCadena("Digite la nota que desea asignarle al Estudiante");
-				notota = leerEntero();
+				notota = leerFlotante();
 				nota* superNota = new nota(notota,idEst,lista_global->buscarId(idEst)->getNombreCompleto());
 				elgrupo->getListaNotas()->insertarFinal(superNota);
+				elgrupo->getEstudiantes()->buscarId(idEst)->getListaCursos()->buscarNRC(NRC)->setNota(notota);
 				imprimirCadena(elgrupo->getListaNotas()->toString());
 				imprimirCadena("Nota Ingresada Correctamente");
 			}
@@ -944,16 +1125,15 @@ void sistema::ingresoNotitas()
 void sistema::consultaPlan()
 {
 	carrera* ca;
+	imprimirCadena(global_carrera->toString());
 	imprimirCadena("Digite el codigo de la carrera: ");
 	ca = global_carrera->buscarCodigoCarrera(leerEntero());
 	if (ca != nullptr)
 	{
 		cout << "Carrera: " << ca->getNombre();
-		cout << "Tipo: " << ca->getGrado();
-		imprimirCadena("Plan de estudios: ");
+		cout << "| Tipo: " << ca->getGrado() << endl;;
+		imprimirCadena("\nPlan de estudios: ");
 		imprimirCadena(ca->getPlan()->toString());
-		imprimirCadena("-------------------------");
-		imprimirCadena(global_cursos->buscaElCodigoCurso("666")->toString2());
 	}
 	else
 	{

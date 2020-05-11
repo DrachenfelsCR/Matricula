@@ -107,6 +107,12 @@ void iterador<T>::recuperarPro(lista<profesor>* list1, string archivo)
 	string clave;
 	string estado;
 	string rol;
+	//----
+	string telefono;
+	string escuela;
+	string gradoAcademico;
+	string carrera;
+	int telefonoR;
 	
 	input.open(archivo.c_str());
 	while (input.good())
@@ -116,10 +122,19 @@ void iterador<T>::recuperarPro(lista<profesor>* list1, string archivo)
 		getline(input, nombre_completo, '\t');
 		getline(input, clave, '\t');
 		getline(input, estado, '\t');
-		getline(input, rol, '\n');
+		getline(input, rol, '\t');
+		getline(input, telefono, '\t');
+		getline(input, escuela, '\t');
+		getline(input, gradoAcademico, '\t');
+		getline(input, carrera, '\n');
+		telefonoR = convertirInt(telefono);
 		if (!input.eof())
 		{
 			profesor* profeRecuperado = new profesor(id, nombre_usuario, nombre_completo, clave);
+			profeRecuperado->setTelefono(telefonoR);
+			profeRecuperado->setEscuela(escuela);
+			profeRecuperado->setGradoA(gradoAcademico);
+			profeRecuperado->setCarrera(carrera);
 			list1->insertarFinal(profeRecuperado);
 		}
 	}
@@ -308,7 +323,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 			carrera* carreraRecuperado = new carrera(codigo_carreraR, grado, nombre_carrera,  facultad, escuela);
 			nodo<estudiante>* actual = list2->primero;
 			nodo<profesor>* actual2 = list3->primero;
-			while (actual->getSig() != nullptr)
+			while (actual != nullptr)
 			{
 				if (actual->getInfo()->getCodigo() == codigo_carreraR)
 				{
@@ -316,9 +331,9 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 				}	
 				actual = actual->getSig();
 			}
-			while (actual2->getSig() != nullptr)
+			while (actual2 != nullptr)
 			{
-				if (actual->getInfo()->getCarrera() == nombre_carrera)
+				if (actual2->getInfo()->getCarrera() == nombre_carrera)
 				{
 					carreraRecuperado->getProfesores()->insertarFinal(actual2->getInfo());
 				}
@@ -495,6 +510,8 @@ void iterador<T>::recuperarGrupo(lista<grupo>* list1, string archivo)
 		{
 			grupo* grupoRecuperado = new grupo(NRC, codigo_curso, nombre_curso, creditos, id_profesor, cupo, numeroGrupo, horaInicio, horaFinal, codigo_carrera);
 			grupoRecuperado->setCantidad(cantidad);
+			ciclo_lectivo* cicloR = new ciclo_lectivo(anio,ciclo);
+			grupoRecuperado->setCiclo(cicloR);
 			list1->insertarFinal(grupoRecuperado);
 		}
 	}

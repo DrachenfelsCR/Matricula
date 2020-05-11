@@ -4,6 +4,7 @@
 #include "ciclo_lectivo.h"
 #include "estudiante.h"
 #include "nota.h"
+#include <iomanip>
 
 class grupo
 {

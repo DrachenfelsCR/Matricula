@@ -84,6 +84,7 @@ string carrera::toString()
 	stringstream s;
 	s << "Carrera: " << this->nombre_carrera << endl;
 	s << "Escuela: " << this->escuela << endl;
+	s << "Codigo: " << this->codigo_carrera << endl;
 	return s.str();
 }
 

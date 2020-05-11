@@ -10,6 +10,7 @@ using namespace std;
 void imprimirCadena(string);
 void limpiaPantalla();
 int leerEntero();
+float leerFlotante();
 char leerCaracter();
 int leerSeleccion(int);
 int letraCodigo(string);

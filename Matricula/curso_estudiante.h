@@ -20,6 +20,7 @@ private:
 	string horarioInicio;
 	string horarioFinalizacion;
 	string dias;
+	bool aprobado;
 public:
 	void setCodigo(string);
 	void setNombre(string);
@@ -31,7 +32,9 @@ public:
 	string getNombre();
 	string toString();
 	int getCreditos();
+	int getNRC();
 	float getNota();
+	bool getAprobado();
 	curso_estudiante(string, string, int, float, int, int, string , int ,int, string, string, string);
 	~curso_estudiante();
 	//
