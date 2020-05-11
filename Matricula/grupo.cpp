@@ -180,7 +180,6 @@ void  grupo::save(ofstream& outp)
 	outp << this->ciclo->getAnio() << '\t';
 	outp << this->ciclo->getCiclo() << '\t';
 	outp << this->cupo << '\t';
-	outp << this->horarioDia << '\t';
 	outp << this->codigo_carrera << '\t';
 	outp << this->cantidad << '\n';
 }

@@ -480,9 +480,7 @@ void iterador<T>::recuperarGrupo(lista<grupo>* list1, string archivo)
 		getline(input, id_profesor, '\t');
 		getline(input, anioF, '\t');
 		getline(input, cicloF, '\t');
-		getline(input, horaInicio, '\t');
 		getline(input, cupoF, '\t');
-		getline(input, horarioDia, '\t');
 		getline(input, codigo_carreraFl, '\t');
 		getline(input, cantidadF, '\n');
 		NRC = convertirInt(NRCf);

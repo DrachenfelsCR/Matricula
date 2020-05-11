@@ -606,7 +606,8 @@ void sistema::agregarGrupo()
 	imprimirCadena("Digite la hora finalizacion(ejemplo= 10:00 Formato 24hrs)");
 	horaFinal = leerCadena();
 	string nombre = global_cursos->buscaElCodigoCurso(codigo)->getNombre();
-	grupo* Grupote = new grupo(NRC,codigo,nombre,0,id,cupo,numeroGrupo,horaInicio,horaFinal,a);
+	curso* cursoAux = global_cursos->buscaElCodigoCurso(codigo);
+	grupo* Grupote = new grupo(NRC,codigo,nombre,cursoAux->getCreditos(),id,cupo,numeroGrupo,horaInicio,horaFinal,a);
 	Grupote->setCiclo(cicloAux);
 	global_Grupos->insertarInicio(Grupote);
 	global_profesores->buscarId(id)->getGrupo()->insertarInicio(Grupote);
@@ -732,6 +733,7 @@ void sistema::procesoMatricula()
 			imprimirCadena("Digite el ID del usuario al que se matriculara: ");
 			id = leerCadena();
 			aux = global_estudiantes->buscarId(id);
+			carr = aux->getCarrera();
 			if (aux == nullptr)
 			{
 				imprimirCadena("El id digitado no se encuentra registrado");
@@ -1109,4 +1111,6 @@ void sistema::recuperar()
 	iterador<carrera>* iterador6 = new iterador<carrera>();
 	iterador6->recuperaCarrera(global_carrera,global_estudiantes, global_profesores,global_cursos,"Carreras.txt", "Plan_carreras.txt");
 	//-----------------
+	iterador<grupo>* iterador7 = new iterador<grupo>();
+	iterador7->recuperarGrupo(global_Grupos, "Grupos.txt");
 }
