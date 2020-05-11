@@ -29,6 +29,7 @@ sistema::sistema()
 	this->global_profesores = new lista<profesor>;
 	this->global_Grupos = new lista<grupo>;
 	this->global_admin = new lista<admin>;
+	this->global_planes = new lista<plan_estudios>;
 	//-----------------------------------------
 	/*lista_global->insertarFinal(est);
 	lista_global->insertarFinal(est1);
@@ -479,7 +480,8 @@ void sistema::agregarCurso()
 	string tipocurso;
 	int creditos;
 	int horasSemanales;
-	
+	int canReqs = 0;
+	carrera* ca;
 	imprimirCadena("Ingrese el codigo de la carrera");
 	int a = leerEntero();
 	if (global_carrera->buscarElemento(a))
@@ -497,6 +499,26 @@ void sistema::agregarCurso()
 		imprimirCadena("Ingrese las Horas Lectivas Semanales");
 		horasSemanales = leerSeleccion(10);
 		curso* Cursos = new curso(codigo,nombre,tipocurso,creditos,horasSemanales);
+		imprimirCadena("Cuantos cursos requisitos tiene: ");
+		canReqs = leerEntero();
+		if (canReqs > 0)
+		{
+			for (int i = 0; i <= canReqs; i++)
+			{
+				imprimirCadena(aux->getPlan().toString());
+				imprimirCadena("Digite el codigo del curso que desea agregar como requisito");
+				string codigoReq = leerCadena();
+				if (aux->getPlan().getListaCurso()->buscarCodigoCurso(codigoReq) == false)
+				{
+					imprimirCadena("Este codigo no existe en el plan de estudios de esta carrera");
+				}
+				else
+				{
+					Cursos->insertarRequisito(codigoReq);
+				}
+			}
+		}
+		
 //-----------------------------------------------------------------------------------------
 		global_cursos->insertarInicio(Cursos);
 		aux->getPlan().getListaCurso()->insertarFinal(Cursos);
@@ -1077,6 +1099,13 @@ void sistema::guardar()
 {
 	global_estudiantes->save("Estudiantes.txt");
 	lista_global->save("Usuarios.txt");
+	global_profesores->save("Profesores.txt");
+	global_ciclos->save("Ciclos.txt");
+	global_carrera->saveC("Carreras.txt", "Plan_carreras.txt");
+	global_admin->save("Admins.txt");
+	global_cursos->save("Cursos.txt");
+	global_Grupos->save("Grupos.txt");
+
 }
 
 void sistema::recuperar()
@@ -1086,4 +1115,17 @@ void sistema::recuperar()
 	//-----------------
 	iterador<estudiante>* iterador2 = new iterador<estudiante>();
 	iterador2->recuperarEst(global_estudiantes, "Estudiantes.txt");
+	//-----------------
+	iterador<profesor>* iterador3 = new iterador<profesor>();
+	iterador3->recuperarPro(global_profesores, "Profesores.txt");
+	//-----------------
+	iterador<ciclo_lectivo>* iterador4 = new iterador<ciclo_lectivo>();
+	iterador4->recuperaCiclos(global_ciclos, "Ciclos.txt");
+	//-----------------
+	iterador<curso>* iterador5 = new iterador<curso>();
+	iterador5->recuperaCursos(global_cursos, "Cursos.txt");
+	//-----------------
+	iterador<carrera>* iterador6 = new iterador<carrera>();
+	iterador6->recuperaCarrera(global_carrera,global_estudiantes, global_profesores,global_cursos,"Carreras.txt", "Plan_carreras.txt");
+	//-----------------
 }

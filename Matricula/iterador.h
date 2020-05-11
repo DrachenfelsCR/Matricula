@@ -26,9 +26,9 @@ public:
 	void recuperarRegis(lista<registro>*, string);
 	void recuperarAdmin(lista<admin>*, string);
 	void recuperaCiclos(lista<ciclo_lectivo>*, string);
-	void recuperaCarrera(lista<carrera>*, lista<estudiante>*, lista<profesor>*, string, string ,string);
-	void recuperaCursos(lista<curso>*, string, string);
-	void recuperarReqs(lista<curso>*, string);
+	void recuperaCarrera(lista<carrera>*, lista<estudiante>*, lista<profesor>*, lista<curso>*, string, string);
+	void recuperaCursos(lista<curso>*, string);
+	void recuperarPlan(carrera*, string);
 	void recuperarGrupo(lista<grupo>*, string);
 };
 
@@ -262,8 +262,8 @@ void iterador<T>::recuperaCiclos(lista<ciclo_lectivo>* list1, string archivo)
 		if (!input.eof())
 		{
 			ciclo_lectivo* cicloRecuperado = new ciclo_lectivo(anioR, cicloR);
-			cicloRecuperado->setFechaInicio(fechaInicio);
-			cicloRecuperado->setFechaFinal(fechaFinal);
+			cicloRecuperado->setFechaInicioStr(fechaInicio);
+			cicloRecuperado->setFechaFinalStr(fechaFinal);
 			list1->insertarFinal(cicloRecuperado);
 		}
 	}
@@ -271,7 +271,7 @@ void iterador<T>::recuperaCiclos(lista<ciclo_lectivo>* list1, string archivo)
 }
 
 template<class T>
-void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list2, lista<profesor>* list3, string archivo, string archivo1, string archivo2)
+void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list2, lista<profesor>* list3, lista<curso>* list4, string archivo, string archivo2)
 {
 	ifstream input;
 	string id;
@@ -280,15 +280,16 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 	string clave;
 	string estado;
 	string rol;
-	//----
+	//---------------
 	string codigo_carrera;
 	int codigo_carreraR;
 	string nombre_carrera;
 	string grado;
-	bool estado;
+	bool estado2;
 	string facultad;
 	plan_estudios plan_carrera;
 	string escuela;
+	//---------------
 
 	input.open(archivo.c_str());
 	while (input.good())
@@ -298,7 +299,8 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 		getline(input, grado, '\t');
 		getline(input, estado, '\t');
 		getline(input, facultad, '\t');
-		getline(input, escuela, '\n');
+		getline(input, escuela, '\t');
+		//----
 		codigo_carreraR = convertirInt(codigo_carrera);
 		if (!input.eof())
 		{
@@ -316,10 +318,10 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 			{
 				if (actual->getInfo()->getCarrera() == nombre_carrera)
 				{
-					carreraRecuperado->getProfesores()->insertarFinal(actual->getInfo());
+					carreraRecuperado->getProfesores()->insertarFinal(actual2->getInfo());
 				}
 			}
-			recuperaCursos(carreraRecuperado->getPlan().getListaCurso(),archivo1, archivo2 );
+			recuperarPlan(carreraRecuperado,archivo2);
 			carreraRecuperado->getPlan().setNombreCarrera(nombre_carrera);
 			list1->insertarFinal(carreraRecuperado);
 		}
@@ -332,7 +334,7 @@ void iterador<T>::recuperaCarrera(lista<carrera>* list1, lista<estudiante>* list
 
 
 template<class T>
-void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string archivo2)
+void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo)
 {
 	ifstream input;
 	ifstream input2;
@@ -342,6 +344,11 @@ void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string arc
 	string creditos;
 	string horas_semanales;
 	string estado;
+	string cantidad;
+	string vector[20];
+	
+	//---------------------
+	int cantidadR;
 	int creditosR;
 	int horas_semanalesR;
 	bool estadoR = true;
@@ -349,11 +356,21 @@ void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string arc
 	input.open(archivo.c_str());
 	while (input.good())
 	{
+		for (int i = 0; i < 20; i++)
+		{
+			vector[i] = "";
+		}
 		getline(input, codigo_curso, '\t');
 		getline(input, nombre_curso, '\t');
 		getline(input, tipo_curso, '\t');
 		getline(input, creditos, '\t');
 		getline(input, horas_semanales, '\t');
+		getline(input, cantidad, '\t');
+		cantidadR = convertirInt(cantidad);
+		for (int i = 0; i < cantidadR; i++)
+		{
+			getline(input, vector[i], '\t');
+		}
 		getline(input, estado, '\n');
 		creditosR = convertirInt(creditos);
 		horas_semanalesR = convertirInt(horas_semanales);
@@ -364,7 +381,10 @@ void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string arc
 		if (!input.eof())
 		{
 			curso* cursoRecuperado = new curso(codigo_curso, nombre_curso, tipo_curso, creditosR, horas_semanalesR);
-			recuperarReqs(cursoRecuperado->getlistaReq(), archivo2);
+			for (int i = 0; i < cantidadR; i++)
+			{
+				cursoRecuperado->insertarRequisito(vector[i]);
+			}
 			list1->insertarFinal(cursoRecuperado);
 		}
 	}
@@ -373,39 +393,45 @@ void iterador<T>::recuperaCursos(lista<curso>* list1, string archivo, string arc
 
 
 template<class T>
-void iterador<T>::recuperarReqs(lista<curso>* list1, string archivo)
+void iterador<T>::recuperarPlan(carrera* car, string archivo)
 {
 	ifstream input;
-	ifstream input2;
-	string codigo_curso;
-	string nombre_curso;
-	string tipo_curso;
+	string nomCarrera;
+	string codigo;
+	string nombre;
+	string tipo;
 	string creditos;
-	string horas_semanales;
+	string horas;
 	string estado;
+	//----
 	int creditosR;
 	int horas_semanalesR;
 	bool estadoR = true;
-
 	input.open(archivo.c_str());
 	while (input.good())
 	{
-		getline(input, codigo_curso, '\t');
-		getline(input, nombre_curso, '\t');
-		getline(input, tipo_curso, '\t');
+		getline(input, nomCarrera, '\t');
+		getline(input, codigo, '\t');
+		getline(input, nombre, '\t');
+		getline(input, tipo, '\t');
 		getline(input, creditos, '\t');
-		getline(input, horas_semanales, '\t');
+		getline(input, horas, '\t');
 		getline(input, estado, '\n');
 		creditosR = convertirInt(creditos);
-		horas_semanalesR = convertirInt(horas_semanales);
+		horas_semanalesR = convertirInt(horas);
 		if (estado == "false")
 		{
 			estadoR = false;
 		}
 		if (!input.eof())
 		{
-			curso* cursoRecuperado = new curso(codigo_curso, nombre_curso, tipo_curso, creditosR, horas_semanalesR);
-			list1->insertarFinal(cursoRecuperado);
+			if (nomCarrera == car->getNombre())
+			{
+				curso* cursoRecuperado = new curso(codigo, nombre, tipo, creditosR, horas_semanalesR);
+				cursoRecuperado->setEstado(estadoR);
+				car->getPlan().getListaCurso()->insertarFinal(cursoRecuperado);
+			}
+			
 		}
 	}
 	input.close();

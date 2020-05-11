@@ -29,6 +29,19 @@ void ciclo_lectivo::setFechaFinal(int dia, int mes, int anio)
 	this->fechaFinal = s.str();
 }
 
+void ciclo_lectivo::setFechaInicioStr(string fechaInicial)
+{
+	this->fechaInicio = fechaInicial;
+}
+
+
+void ciclo_lectivo::setFechaFinalStr(string fechaFinal)
+{
+	this->fechaFinal = fechaFinal;
+}
+
+
+
 int ciclo_lectivo::getAnio()
 {
 	return this->anio;

@@ -34,7 +34,21 @@ void plan_estudios::save(ofstream& outp)
 	nodo<curso>* actual = this->getListaCurso()->primero;
 	while (actual->getSig() != nullptr)
 	{
-
+		outp << this->nombre_carrera << '\t';
+		outp << actual->getInfo()->getCodigo() << '\t';
+		outp << actual->getInfo()->getNombre() << '\t';
+		outp << actual->getInfo()->getTipo() << '\t';
+		outp << actual->getInfo()->getCreditos() << '\t';
+		outp << actual->getInfo()->getHoras() << '\t';
+		if (actual->getInfo()->getEstado())
+		{
+		outp << "Activo" << '\n';
+		}
+		else
+		{
+		outp << "Inactivo" << '\n';
+		}
+		
 	}
 }
 

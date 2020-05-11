@@ -42,7 +42,7 @@ public:
 	string getEscuela();
 	string toString();
 	string toStringPlan();
-	void save(ofstream&);
+	void saveC(ofstream&, ofstream&);
 };
 
 

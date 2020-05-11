@@ -16,7 +16,9 @@ public:
 	void setAnio(int);
 	void setCiclo(int);
 	void setFechaInicio(int,int,int);
+	void setFechaInicioStr(string);
 	void setFechaFinal(int,int,int);
+	void setFechaFinalStr(string);
 	int getAnio();
 	int getCiclo();
 	string getFechaInicio();

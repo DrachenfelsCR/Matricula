@@ -101,7 +101,7 @@ string carrera::toStringPlan()
 	return s.str();
 }
 
-void carrera::save(ofstream& outp)
+void carrera::saveC(ofstream& outp, ofstream& outp2)
 {
 	outp << this->codigo_carrera << '\t';
 	outp << this->nombre_carrera << '\t';
@@ -115,7 +115,7 @@ void carrera::save(ofstream& outp)
 		outp << "true" << '\t';
 	}
 	outp << this->facultad << '\t';
-	outp << this->escuela << '\t';
-
+	outp << this->escuela << '\n';
+	this->plan_carrera.save(outp2);
 }
 

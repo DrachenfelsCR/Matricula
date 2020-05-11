@@ -12,7 +12,8 @@ private:
 	int creditos;
 	int horas_semanales;
 	bool estado;
-	lista<curso>* listaReq;
+	string vec[20];
+	int cantidad;
 public:
 	curso();
 	curso(string, string, string, int, int);
@@ -28,10 +29,9 @@ public:
 	int getCreditos();
 	int getHoras();
 	bool getEstado();
-	void insertarRequisito(curso*);
+	void insertarRequisito(string);
 	string toString();
 	string toString2();
-	lista<curso>* getlistaReq();
 	void save(ofstream&);
 	~curso();
 

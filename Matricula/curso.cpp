@@ -7,7 +7,11 @@ curso::curso()
 	this->creditos = 0;
 	this->horas_semanales = 0;
 	this->estado = true;
-	this->listaReq = new lista<curso>;
+	cantidad = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		vec[i] = "";
+	}
 }
 
 curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int creditos, int horas)
@@ -18,7 +22,11 @@ curso::curso(string codigo_curso, string nombre_curso, string tipo_curso, int cr
 	this->creditos = creditos;
 	this->horas_semanales = horas;
 	this->estado = true;
-	this->listaReq = new lista<curso>;
+	cantidad = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		vec[i] = "";
+	}
 }
 void curso::setCodigo(string codigo_curso)
 {
@@ -71,14 +79,9 @@ bool curso::getEstado()
 {
 	return this->estado;
 }
-void curso::insertarRequisito(curso* req)
+void curso::insertarRequisito(string req)
 {
-	this->listaReq->insertarInicio(req);
-}
-
-lista<curso>* curso::getlistaReq()
-{
-	return this->listaReq;
+	vec[cantidad++] = req;
 }
 
 string curso::toString()
@@ -94,7 +97,11 @@ string curso::toString()
 string curso::toString2()
 {
 	stringstream s;
-	s << codigo_curso << "		" << nombre_curso << "		" << creditos << this->listaReq->toStringIterador() << endl;
+	s << codigo_curso << "		" << nombre_curso << "		" << creditos;
+	for (int i = 0; i < cantidad; i++)
+	{
+		s << vec[i] << endl;
+	}
 	return s.str();
 }
 
@@ -105,18 +112,24 @@ void curso::save(ofstream& outp)
 	outp << this->tipo_curso << '\t';
 	outp << this->creditos << '\t';
 	outp << this->horas_semanales << '\t';
+	outp << cantidad << '\t';
+	for (int i = 0; i < cantidad; i++)
+	{
+		outp << vec[i] << '\t';
+	}
+	//-------------
 	if (this->estado == false)
 	{
-		outp << "false" << '\t';
+		outp << "false" << '\n';
 	}
 	else
 	{
-		outp << "true" << '\t';
+		outp << "true" << '\n';
 	}
-	
 }
 
 curso::~curso()
 {
+
 }
 

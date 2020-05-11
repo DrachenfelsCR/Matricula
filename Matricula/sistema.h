@@ -28,6 +28,7 @@ private:
 	lista<profesor>* global_profesores;
 	lista<grupo>* global_Grupos;
 	lista<admin>* global_admin;
+	lista<plan_estudios>* global_planes;
 public:
 	//--------------------------------------
 	sistema();

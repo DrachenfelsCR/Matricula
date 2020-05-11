@@ -9,12 +9,14 @@ protected:
 	int size;
 	ifstream input;
 	ofstream foutput;
+	ofstream foutput2;
 public:
 	nodo<T>* primero;
 	lista();
 	bool esVacia();
 	void insertarInicio(T*);
 	void insertarFinal(T*);
+	void insertarFinal(T);
 	T* getUltimo();
 	string toString();
 	T* buscarCredenciales(string,string);
@@ -26,7 +28,6 @@ public:
 	bool eliminarEspecifico(T*);
 	bool buscarID(string);
 	bool buscarNRCD(int);
-	
 	bool buscarCodigoCurso(string);
 	T* buscaElCodigoCurso(string);
 	T* buscarCodigoCarrera(int );
@@ -40,6 +41,7 @@ public:
 	string toStringIteradorCiclo(int,int);
 	string toStringMateriasPorCiclo(int,int);
 	void save(string);
+	void saveC(string,string);
 	T* buscarT(T* aux);
 	void cargarLista(lista<T>*, string);
 	~lista();
@@ -81,6 +83,27 @@ void lista<T>::save(string fileName)
 	}
 	foutput.close();
 }
+
+template<class T>
+void lista<T>::saveC(string fileName, string fileName2)
+{
+	foutput.open(fileName.c_str());
+	foutput2.open(fileName2.c_str());
+	if (foutput.good() && foutput2.good())
+	{
+		nodo<T>* actual = primero;
+		while (actual != NULL)
+		{
+			(actual->getInfo())->saveC(foutput, foutput2);
+			actual = actual->getSig();
+		}
+
+	}
+	foutput.close();
+	foutput2.close();
+}
+
+
 
 template<class T>
 void lista<T>::insertarInicio(T* dato) {
