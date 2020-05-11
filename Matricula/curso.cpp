@@ -97,10 +97,10 @@ string curso::toString()
 string curso::toString2()
 {
 	stringstream s;
-	s << codigo_curso << "		" << nombre_curso << "		" << creditos;
+	s <<"Codigos requisitos: " << codigo_curso << endl;;
 	for (int i = 0; i < cantidad; i++)
 	{
-		s << vec[i] << endl;
+		s << "   " << vec[i] << endl;
 	}
 	return s.str();
 }

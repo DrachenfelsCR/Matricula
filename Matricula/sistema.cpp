@@ -288,6 +288,7 @@ void sistema::ManejoDeMatricula()
 			cin.get();
 			break;
 		case 3:
+			visualizarHistorial();
 			imprimirCadena("<Enter>");
 			cin.get();
 			break;
@@ -951,6 +952,8 @@ void sistema::consultaPlan()
 		cout << "Tipo: " << ca->getGrado();
 		imprimirCadena("Plan de estudios: ");
 		imprimirCadena(ca->getPlan()->toString());
+		imprimirCadena("-------------------------");
+		imprimirCadena(global_cursos->buscaElCodigoCurso("666")->toString2());
 	}
 	else
 	{
@@ -1075,6 +1078,43 @@ void sistema::consultaMatriculaPorEstudiante()
 			}
 		}
 
+	}
+}
+
+void sistema::visualizarHistorial()
+{
+	int opc = 1;
+	string id;
+	estudiante* aux = nullptr;
+	if (this->usuarioLogeado->getRol() == "usuario-estudiante")
+	{
+		id = this->usuarioLogeado->getId();
+		aux = global_estudiantes->buscarId(id);
+		if (aux == nullptr)
+		{
+			imprimirCadena("Error estudiante no se encuentra..");
+		}
+	}
+	else if (this->usuarioLogeado->getRol() == "usuario-registro" || this->usuarioLogeado->getRol() == "usuario-admin")
+	{
+		imprimirCadena("Digite el id del estudiante que quiere verificar");
+		id = leerCadena();
+		aux = global_estudiantes->buscarId(id);
+		while (opc == 1)
+		{
+			if (aux == nullptr)
+			{
+				imprimirCadena("El ID no ha sido encontrado");
+				imprimirCadena("Desea intentar ingresar de nuevo el id?");
+				imprimirCadena("1.Si / 2.No");
+				opc = leerSeleccion(3);
+			}
+			else
+			{
+				imprimirCadena(aux->getListaCursos()->toString());
+				opc = 2;
+			}
+		}
 	}
 }
 

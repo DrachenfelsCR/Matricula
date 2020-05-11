@@ -58,6 +58,7 @@ public:
 	void consultaMatriculaPorEstudiante();
 	void procesoMatricula();
 	void visualizarNotitas();
+	void visualizarHistorial();
 	void guardar();
 	void recuperar();
 };

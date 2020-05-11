@@ -32,6 +32,7 @@ public:
 	void insertarRequisito(string);
 	string toString();
 	string toString2();
+	bool comprobarRequisitos();
 	void save(ofstream&);
 	~curso();
 
