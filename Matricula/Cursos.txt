@@ -1,2 +1,0 @@
-112	Programacion I	LAB	3	5	1	111	true
-111	Fundamentos	Lab	3	5	0	true
