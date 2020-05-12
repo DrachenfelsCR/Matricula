@@ -771,50 +771,58 @@ void sistema::agregarProfesores()
 		imprimirCadena("--------------");
 		imprimirCadena("Digite el codigo carrera: ");
 		int a = leerEntero();
-		if (!(global_carrera->buscarElemento(a)))
+		aux = global_carrera->buscarCodigoCarrera(a);
+		if (aux == nullptr)
 		{
 			throw a;
 		}
 		else
-		aux = global_carrera->buscarCodigoCarrera(a);
-		imprimirCadena(aux->toString());
-		imprimirCadena("------------------------------");
-		imprimirCadena(lista_global->toString());
-		imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
-		id = leerCadena();
-		docentito = lista_global->buscarId(id);
-	
+		{
+			imprimirCadena(aux->toString());
+			imprimirCadena("------------------------------");
+			imprimirCadena(lista_global->toString());
+			imprimirCadena("Digite el id del profesor que desea asignar a una carrera: ");
+			id = leerCadena();
+			docentito = lista_global->buscarId(id);
+		}
 		if (docentito == nullptr || (docentito->getRol() != "usuario-profesor"))
 		{
 			throw id;
 		}
 		else
 		{
-			docente = new profesor(docentito->getId(),docentito->getNombreUsuario(), docentito->getNombreCompleto(), docentito->getClave());
-			docente->setCarrera(aux->getNombre());
-			global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(docente);
-			imprimirCadena("Digite el grado academico del profesor: ");
-			imprimirCadena("(1-Lic, 2-Maestria, 3-Doctorado)");
-			int seleccion = leerSeleccion(4);
-			switch (seleccion)
+			if (aux->getProfesores()->buscarId(id) != nullptr)
 			{
-			case 1:
-				docente->setGradoA("Licenciatura");
-				docente->setEscuela(aux->getEscuela());
-				break;
-			case 2:
-				docente->setGradoA("Maestria");
-				docente->setEscuela(aux->getEscuela());
-				break;
-			case 3:
-				docente->setGradoA("Doctorado");
-				docente->setEscuela(aux->getEscuela());
-				break;
-			default:
-				break;
+				imprimirCadena("Este profesor ya se ingreso a esta carrera");
 			}
-			global_profesores->insertarFinal(docente);
-			imprimirCadena("Profesor asignado correctamente a carrera");
+			else
+			{
+				docente = new profesor(docentito->getId(), docentito->getNombreUsuario(), docentito->getNombreCompleto(), docentito->getClave());
+				docente->setCarrera(aux->getNombre());
+				global_carrera->buscarCodigoCarrera(a)->getProfesores()->insertarFinal(docente);
+				imprimirCadena("Digite el grado academico del profesor: ");
+				imprimirCadena("(1-Lic, 2-Maestria, 3-Doctorado)");
+				int seleccion = leerSeleccion(4);
+				switch (seleccion)
+				{
+				case 1:
+					docente->setGradoA("Licenciatura");
+					docente->setEscuela(aux->getEscuela());
+					break;
+				case 2:
+					docente->setGradoA("Maestria");
+					docente->setEscuela(aux->getEscuela());
+					break;
+				case 3:
+					docente->setGradoA("Doctorado");
+					docente->setEscuela(aux->getEscuela());
+					break;
+				default:
+					break;
+				}
+				global_profesores->insertarFinal(docente);
+				imprimirCadena("Profesor asignado correctamente a carrera");
+			}
 		}
 	}
 	catch (...)
@@ -1079,7 +1087,7 @@ void sistema::visualizarNotitas()
 			int opc;
 			imprimirCadena("Desea salir?");
 			opc = leerEntero();
-			if (opc = 1)
+			if (opc == 1)
 			{
 				break;
 			}
