@@ -1,5 +1,1 @@
-126	dante	Dante Feo	Una126	true	usuario-mantenimiento
-125	paes	Pablo Escobar	Una125	true	usuario-registro
-124	kleiton	Karol Leiton	Una124	true	usuario-profesor
-123	djqr	David Quesada	Una123	true	usuario-estudiante
 admin	admin	admin	admin101	true	usuario-admin

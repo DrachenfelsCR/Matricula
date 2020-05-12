@@ -4,7 +4,7 @@ sistema::sistema()
 {
 	opc = 0;
 	//----------AGREGADO ADMIN ESTANDAR---------------------
-	//LISTO
+	//LISTO!
 	lista_global = new lista<usuario>;
 	//------------------
 	this->usuarioLogeado = nullptr;
@@ -617,7 +617,7 @@ void sistema::agregarEstudiante() {
 				imprimirCadena("\nDigito de  manera incorrecta el numero cedula o el numero de cedula no existe en el sistema");
 				imprimirCadena("\nDigite el numero cedula");
 				id = leerCadena();
-				usuario* userAux = lista_global->buscarId(id);
+				userAux = lista_global->buscarId(id);
 			}
 			if (userAux->getRol() != "usuario-estudiante")
 			{
@@ -1089,7 +1089,18 @@ void sistema::visualizarNotitas()
 		if (opc != 1)
 		{
 			imprimirCadena("Notas del grupo:");
-			imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+			if (docente->getGrupo() == nullptr)
+			{
+				imprimirCadena("Grupo Vacio");
+			}
+			else if (docente->getGrupo()->buscarNRC(NRC) == nullptr)
+			{
+				imprimirCadena("Grupo Vacio");
+			}
+			else
+			{
+				imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+			}
 		}
 	}
 	else
@@ -1123,55 +1134,22 @@ void sistema::visualizarNotitas()
 				NRC = leerEntero();
 			}
 			imprimirCadena("Notas del grupo:");
-			imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+			if (docente->getGrupo() == nullptr )
+			{
+				imprimirCadena("Grupo Vacio");
+			}
+			else if (docente->getGrupo()->buscarNRC(NRC) == nullptr)
+			{
+				imprimirCadena("Grupo Vacio");
+			}
+			else
+			{
+				imprimirCadena(docente->getGrupo()->buscarNRC(NRC)->getListaNotas()->toString());
+			}
+			
 		}	
 	}
 	
-}
-
-void sistema::ingresoDeNotas()
-{
-	string id;
-	string idEst;
-	int NRC;
-	profesor* docente = nullptr;
-	grupo* elgrupo = nullptr;
-	if (this->usuarioLogeado->getRol() == "usuario-profesor")
-	{
-		id = this->usuarioLogeado->getId();
-		docente = global_profesores->buscarId(id);
-	}
-	ciclo_lectivo* actual = global_ciclos->getUltimo();
-	if (actual == nullptr)
-	{
-		imprimirCadena("No hay ciclos lectivos agregados por lo cual no se pueden ingresar notas..");
-	}
-	else
-	{
-		cout << "Profesor: " << docente->getNombreCompleto();
-		imprimirCadena("Sus cursos para este periodo son: ");
-		docente->getGrupo()->toString();
-		imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
-		NRC = leerEntero();
-		elgrupo = docente->getGrupo()->buscarNRC(NRC);
-		if (elgrupo == nullptr)
-		{
-			imprimirCadena("Digito un NRC que no se encuentra en el sistema..");
-		}
-		else
-		{
-			elgrupo->toStringEstudiantes();
-			imprimirCadena("Digite el id del estudiante que desea ingresar su nota: ");
-			idEst = leerCadena();
-				elgrupo->getListaNotas()->buscarId(leerCadena());
-				imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
-				NRC = leerEntero();
-				
-		}
-		
-
-
-	}
 }
 
 void sistema::ingresoNotitas()
@@ -1183,15 +1161,16 @@ void sistema::ingresoNotitas()
 	estudiante* estu = nullptr;
 	string id;
 	grupo* elgrupo = nullptr;
-	imprimirCadena("Digite el numero de cedula del profesor");
-	id = leerCadena();
-	profesor* docente = global_profesores->buscarId(id);
-	if (docente==nullptr)
+	profesor* docente = nullptr;
+	if (this->usuarioLogeado->getRol() == "usuario-profesor")
 	{
-		imprimirCadena("El profesor digitado no existe ");
-	}
-	else
-	{
+		docente = global_profesores->buscarId(this->usuarioLogeado->getId());
+		if (docente == nullptr)
+		{
+			imprimirCadena("No se ha agregado este profesor a una carrera");
+		}
+		else
+		{
 			imprimirCadena("Sus cursos para este periodo son: ");
 			imprimirCadena(lista_global->buscarId(id)->getNombreCompleto());
 			imprimirCadena(global_Grupos->toStringProfesorCursos(global_ciclos->getUltimo()->getAnio(), global_ciclos->getUltimo()->getCiclo(), id));
@@ -1211,25 +1190,74 @@ void sistema::ingresoNotitas()
 				imprimirCadena(elgrupo->toStringEstudiantes());
 				imprimirCadena("Digite el id del estudiante que desea ingresar su nota: ");
 				idEst = leerCadena();
-			
-				while (!(elgrupo->getEstudiantes()->buscarID(idEst)))
+
+				if (!(elgrupo->getEstudiantes()->buscarID(idEst)))
 				{
 					imprimirCadena("Digito de manera incorrecta el numero de cedula");
-					imprimirCadena("Digite el numero de cedula");
-					idEst = leerCadena();
 				}
-				imprimirCadena("Digite la nota que desea asignarle al Estudiante");
-				notota = leerFlotante();
-				nota* superNota = new nota(notota,idEst,lista_global->buscarId(idEst)->getNombreCompleto());
-				elgrupo->getListaNotas()->insertarFinal(superNota);
-				elgrupo->getEstudiantes()->buscarId(idEst)->getListaCursos()->buscarNRC(NRC)->setNota(notota);
-				imprimirCadena(elgrupo->getListaNotas()->toString());
-				imprimirCadena("Nota Ingresada Correctamente");
+				else
+				{
+					imprimirCadena("Digite la nota que desea asignarle al Estudiante");
+					notota = leerFlotante();
+					nota* superNota = new nota(notota, idEst, lista_global->buscarId(idEst)->getNombreCompleto());
+					elgrupo->getListaNotas()->insertarFinal(superNota);
+					elgrupo->getEstudiantes()->buscarId(idEst)->getListaCursos()->buscarNRC(NRC)->setNota(notota);
+					imprimirCadena(elgrupo->getListaNotas()->toString());
+					imprimirCadena("Nota Ingresada Correctamente");
+				}	
 			}
-			
+		}
 		
 	}
-	
+	else
+	{
+		imprimirCadena("Digite el numero de cedula del profesor");
+		id = leerCadena();
+		profesor* docente = global_profesores->buscarId(id);
+		if (docente == nullptr)
+		{
+			imprimirCadena("El profesor digitado no existe ");
+		}
+		else
+		{
+			imprimirCadena("Sus cursos para este periodo son: ");
+			imprimirCadena(lista_global->buscarId(id)->getNombreCompleto());
+			imprimirCadena(global_Grupos->toStringProfesorCursos(global_ciclos->getUltimo()->getAnio(), global_ciclos->getUltimo()->getCiclo(), id));
+			imprimirCadena("Ingrese NCR del grupo a ingresar notas: ");
+			NRC = leerEntero();
+			elgrupo = docente->getGrupo()->buscarNRC(NRC);
+			if (elgrupo == nullptr)
+			{
+				imprimirCadena("Digito un NRC que no se encuentra en el sistema..");
+				cin.get();
+				limpiaPantalla();
+				menuRegistro();
+
+			}
+			else
+			{
+				imprimirCadena(elgrupo->toStringEstudiantes());
+				imprimirCadena("Digite el id del estudiante que desea ingresar su nota: ");
+				idEst = leerCadena();
+
+				if (!(elgrupo->getEstudiantes()->buscarID(idEst)))
+				{
+					imprimirCadena("Digito de manera incorrecta el numero de cedula");
+				}
+				else
+				{
+					imprimirCadena("Digite la nota que desea asignarle al Estudiante");
+					notota = leerFlotante();
+					nota* superNota = new nota(notota, idEst, lista_global->buscarId(idEst)->getNombreCompleto());
+					elgrupo->getListaNotas()->insertarFinal(superNota);
+					elgrupo->getEstudiantes()->buscarId(idEst)->getListaCursos()->buscarNRC(NRC)->setNota(notota);
+					imprimirCadena(elgrupo->getListaNotas()->toString());
+					imprimirCadena("Nota Ingresada Correctamente");
+				}
+				
+			}
+		}
+	}
 }
 
 void sistema::consultaPlan()
